@@ -26,6 +26,7 @@ To access the vagrant environment from the terminal, change to the vagrant direc
 
 ### Use composer to install PHP dependencies:
 
+    cd /vagrant
     composer install
 
 
