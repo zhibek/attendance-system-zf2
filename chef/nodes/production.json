@@ -1,0 +1,17 @@
+{
+  "site": {
+    "name": "attendance",
+    "environment": "production",
+    "host": "attendance.camelcasetech.com",
+    "root_path": "/var/www",
+    "public_path": "/var/www/public"
+  },
+  "user": {
+    "name": "root"
+  },
+  "nginx": {},
+  "php-fpm": {},
+  "run_list": [
+    "role[web]"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "name": "web",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "",
+  "default_attributes": {
+    "site": {
+      "name": "attendance",
+      "environment": "vagrant",
+      "host": "attendance.localhost",
+      "root_path": "/var/www",
+      "public_path": "/var/www/public"
+    },
+    "user": {
+      "name": "vagrant"
+    },
+	"db": {
+	  "dbname": "attendance",
+	  "dbpassword": "ilikerandompasswords"
+  	},
+    "nginx": {},
+    "php-fpm": {}
+  },
+  "run_list": [
+    "recipe[apt]",
+    "recipe[build-essential]",
+    "recipe[runit]",
+    "recipe[openssl]",
+    "recipe[nginx]",
+    "recipe[redis2]",
+    "recipe[php-fpm]",
+    "recipe[composer]",
+    "recipe[nodejs]",
+    "recipe[mysql::server]",
+    "recipe[site]"
+  ]
+}

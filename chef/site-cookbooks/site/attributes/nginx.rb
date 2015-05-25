@@ -1,0 +1,1 @@
+override['nginx']['pid'] = '/run/nginx.pid'
