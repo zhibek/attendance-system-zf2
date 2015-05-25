@@ -1,0 +1,42 @@
+base:
+  phpSettings:
+    display_startup_errors: 1
+    display_errors: 1
+    html_errors: 1
+    date:
+      timezone: Africa/Cairo
+  bootstrap:
+    path: APPLICATION_PATH/Bootstrap.php
+    class: Bootstrap
+  appnamespace: Application
+  resources:
+    frontController:
+      moduleDirectory: APPLICATION_PATH/modules
+      params:
+        displayExceptions: 1
+        prefixDefaultModule: 1
+    layout:
+      layoutPath: APPLICATION_PATH/layouts/scripts
+    db:
+      adapter: pdo_mysql
+      isDefaultTableAdapter: true
+      params:
+        host: localhost
+        username: attendance
+        password: attendance
+        dbname: attendance
+
+production:
+  _extends: base
+
+staging:
+  _extends: base
+
+testing:
+  _extends: base
+
+development:
+  _extends: base
+
+local:
+  _extends: base
