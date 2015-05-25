@@ -1,0 +1,14 @@
+{
+    "name": "camelcasetech/attendance",
+    "description": "attendance system application",
+    "require": {
+        "zendframework/zendframework1": "1.*"
+    },
+    "authors": [
+        {
+            "name": "ahmedelbougha",
+            "email": "ahmed.elbougha@camelcasetech.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
