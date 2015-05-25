@@ -4,13 +4,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.box = "ubuntu/trusty64"
   config.vm.synced_folder "./", "/var/www", id: "web-root"
-  config.ssh.port = 2250
-  config.vm.network "forwarded_port", guest: 22, host: 2250
-  config.vm.network "private_network", ip: "192.168.33.50"
+  config.ssh.port = 2251
+  config.vm.network "forwarded_port", guest: 22, host: 2251
+  config.vm.network "private_network", ip: "192.168.33.51"
   #config.ssh.forward_agent = true
   
   config.vm.provider "virtualbox" do |vb|
-    vb.customize ["modifyvm", :id, "--name", "crisispreparedness"]
+    vb.customize ["modifyvm", :id, "--name", "attendance-system"]
     vb.customize ["modifyvm", :id, "--memory", "1024"]
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
