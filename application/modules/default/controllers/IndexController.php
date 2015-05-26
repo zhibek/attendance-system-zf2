@@ -12,19 +12,21 @@ class Default_IndexController extends Zend_Controller_Action
     {
         // Sample code for maniupulating Doctrine below...
 
-        /*
+        
         $em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
-
-        $entity = new Attendance\Entity\User;
-        $entity->name = 'TEST';
-        $em->persist($entity);
-        $em->flush();
-        var_dump('CREATE', $entity);
-
+//
+//        $entity = new Attendance\Entity\User;
+//        $entity->name = 'TEST';
+//        $em->persist($entity);
+//        $em->flush();
+//        var_dump('CREATE', $entity);
+//        
         $repository = $em->getRepository('Attendance\Entity\User');
         $entities = $repository->findAll();
-        var_dump('LIST', $entities);
-        */
+        
+        $this->view->list = $entities;
+//        var_dump('LIST', $entities);
+        
     }
 
 
