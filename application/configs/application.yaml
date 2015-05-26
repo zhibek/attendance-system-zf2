@@ -9,14 +9,20 @@ base:
     path: APPLICATION_PATH/Bootstrap.php
     class: Bootstrap
   appnamespace: Application
+  autoloaderNamespaces:
+    - CamelCaseTech
+  includePaths:
+    library: APPLICATION_PATH/../library
+  pluginpaths:
+    CamelCaseTech_Resource: CamelCaseTech/Resource
   resources:
     frontController:
       moduleDirectory: APPLICATION_PATH/modules
       params:
         displayExceptions: 1
         prefixDefaultModule: 1
-    layout:
-      layoutPath: APPLICATION_PATH/layouts/scripts
+    view:
+    # No contents - "view" block required to instantiate "CamelCaseTech_Resource_View" resource
     db:
       adapter: pdo_mysql
       isDefaultTableAdapter: true
