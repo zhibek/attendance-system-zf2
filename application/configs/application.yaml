@@ -11,6 +11,7 @@ base:
   appnamespace: Application
   autoloaderNamespaces:
     - CamelCaseTech
+    - Attendance
   includePaths:
     library: APPLICATION_PATH/../library
   pluginpaths:
@@ -23,14 +24,19 @@ base:
         prefixDefaultModule: 1
     view:
     # No contents - "view" block required to instantiate "CamelCaseTech_Resource_View" resource
-    db:
-      adapter: pdo_mysql
-      isDefaultTableAdapter: true
-      params:
+    entityManager:
+      schemaDir: APPLICATION_PATH/../library/Attendance/Entity
+      proxyDir: APPLICATION_PATH/data/doctrine/proxies
+      proxyNamespace: Proxy
+      autoGenerateProxyClasses: 0
+    dbal:
+      master:
+        default: true
+        driver: pdo_mysql
         host: localhost
-        username: attendance
-        password: attendance
         dbname: attendance
+        user: root
+        password: ilikerandompasswords
 
 production:
   _extends: base

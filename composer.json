@@ -3,7 +3,8 @@
     "description": "attendance system application",
     "require": {
         "zendframework/zendframework1": "1.*",
-        "phly/mustache": "dev-master"
+        "phly/mustache": "dev-master",
+        "doctrine/orm": "2.*"
     },
     "authors": [
         {
