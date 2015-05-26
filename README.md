@@ -31,7 +31,7 @@ To access the vagrant environment from the terminal, change to the vagrant direc
 
 
 ### Install later database schema
-
+    cd /vagrant
     vendor/bin/doctrine orm:schema-tool:update --force
 
 
