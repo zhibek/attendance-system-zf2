@@ -2,9 +2,7 @@
     "name": "camelcasetech/attendance",
     "description": "attendance system application",
     "require": {
-        "zendframework/zendframework1": "1.*",
-        "phly/mustache": "dev-master",
-        "doctrine/orm": "2.*"
+        "zendframework/zendframework1": "1.*"
     },
     "authors": [
         {

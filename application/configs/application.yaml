@@ -9,22 +9,34 @@ base:
     path: APPLICATION_PATH/Bootstrap.php
     class: Bootstrap
   appnamespace: Application
+  autoloaderNamespaces:
+    - CamelCaseTech
+    - Attendance
+  includePaths:
+    library: APPLICATION_PATH/../library
+  pluginpaths:
+    CamelCaseTech_Resource: CamelCaseTech/Resource
   resources:
     frontController:
       moduleDirectory: APPLICATION_PATH/modules
       params:
         displayExceptions: 1
         prefixDefaultModule: 1
-    layout:
-      layoutPath: APPLICATION_PATH/layouts/scripts
-    db:
-      adapter: pdo_mysql
-      isDefaultTableAdapter: true
-      params:
+    view:
+    # No contents - "view" block required to instantiate "CamelCaseTech_Resource_View" resource
+    entityManager:
+      schemaDir: APPLICATION_PATH/../library/Attendance/Entity
+      proxyDir: APPLICATION_PATH/data/doctrine/proxies
+      proxyNamespace: Proxy
+      autoGenerateProxyClasses: 0
+    dbal:
+      master:
+        default: true
+        driver: pdo_mysql
         host: localhost
-        username: attendance
-        password: attendance
         dbname: attendance
+        user: root
+        password: ilikerandompasswords
 
 production:
   _extends: base

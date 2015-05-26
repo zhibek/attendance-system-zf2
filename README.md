@@ -14,7 +14,7 @@ Installation
 
 ### Add the IP to your hosts file:
 
-    192.168.33.51     attendance.localhost
+    10.1.1.33     attendance.localhost
 
 
 ### Access the box:
@@ -27,7 +27,12 @@ To access the vagrant environment from the terminal, change to the vagrant direc
 ### Use composer to install PHP dependencies:
 
     cd /vagrant
-    composer install
+    composer install --prefer-dist
+
+
+### Install later database schema
+
+    vendor/bin/doctrine orm:schema-tool:update --force
 
 
 ### View the site:

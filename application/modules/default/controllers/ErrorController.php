@@ -38,9 +38,12 @@ class Default_ErrorController extends Zend_Controller_Action
         // conditionally display exceptions
         if ($this->getInvokeArg('displayExceptions') == true) {
             $this->view->exception = $errors->exception;
+            $this->view->exceptionmessage = $this->view->exception->getMessage();
+            $this->view->stacktrace = $this->view->exception->getTraceAsString();
         }
         
         $this->view->request   = $errors->request;
+        $this->view->requestparams = var_export($errors->request->getParams(), true);
     }
 
     public function getLog()
