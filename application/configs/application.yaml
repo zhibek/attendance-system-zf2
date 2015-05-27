@@ -23,7 +23,7 @@ base:
         displayExceptions: 1
         prefixDefaultModule: 1
     view:
-    # No contents - "view" block required to instantiate "CamelCaseTech_Resource_View" resource
+      scriptPath: APPLICATION_PATH/layouts
     entityManager:
       schemaDir: APPLICATION_PATH/../library/Attendance/Entity
       proxyDir: APPLICATION_PATH/data/doctrine/proxies
