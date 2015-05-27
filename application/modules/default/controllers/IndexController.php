@@ -1,5 +1,7 @@
 <?php
 
+use \Application_Form_Registeration;
+
 class Default_IndexController extends Zend_Controller_Action
 {
 
@@ -27,8 +29,22 @@ class Default_IndexController extends Zend_Controller_Action
         $this->view->list = $entities;
 //        var_dump('LIST', $entities);
         
+        
+        $form = new Application_Form_Registeration();
+        $this -> view -> signUp = $form;
+        
+        
+        
+        
+        
     }
 
 
+    
+   
+    
+    
+    
+    
 }
 
