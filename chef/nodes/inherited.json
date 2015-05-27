@@ -2,7 +2,7 @@
   "site": {
     "name": "attendance",
     "environment": "vagrant",
-    "host": "attendance.localhost",
+    "host": "attendance.local",
     "root_path": "/var/www",
     "public_path": "/var/www/public"
   },
