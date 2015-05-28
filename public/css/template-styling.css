@@ -5,3 +5,7 @@ body {
   padding: 40px 15px;
   text-align: center;
 }
+.user-photos{
+    height : 150 px;
+    width : 100 px;
+}

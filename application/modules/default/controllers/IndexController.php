@@ -12,22 +12,36 @@ class Default_IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        // Sample code for maniupulating Doctrine below...
-
-        
+//        echo $this->url(array('module' => 'user', 
+//                      'controller' => 'user', 
+//                      'action' => 'index'));
+        // get requested page number
+        if ( $this->_request->getParam("page"))
+        {
+            $pageNumber = $this->_request->getParam("page");
+        }
+        else 
+        {
+            $pageNumber = 1;
+        }    
+         
         $em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
-//
-//        $entity = new Attendance\Entity\User;
-//        $entity->name = 'TEST';
-//        $em->persist($entity);
-//        $em->flush();
-//        var_dump('CREATE', $entity);
-//        
         $repository = $em->getRepository('Attendance\Entity\User');
-        $entities = $repository->findAll();
+        $entitiesCount = sizeof($repository->findAll());
+        //get number of pages
+        $numberOfPages = ceil($entitiesCount/10.0);
+        //create an array of page numbers
+        $pageNumbers = array();
+        foreach ( range(1, $numberOfPages) as $currentPageNumber )
+        {
+            $pageNumbers[]=array('number'=> $currentPageNumber);
+        }
+        //get specified entities
+        $entities = $repository->findBy(array(),null,10, ($pageNumber-1)*10);//($pageNumber-1) for zero based count
         
-        $this->view->list = $entities;
-//        var_dump('LIST', $entities);
+        $this->view->userList = $entities;
+        $this->view->pageNumbers = $pageNumbers;
+        $this->view->pageNumber = $pageNumber;
         
         
         $form = new Application_Form_Registeration();
