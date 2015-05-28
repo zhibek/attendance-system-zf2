@@ -50,12 +50,12 @@
         </tbody>
       </table>
     </div>
-
+{{%IMPLICIT-ITERATOR}}
 <div class="pagination-bar">
     <ul class="pagination">
 
         {{#pageNumbers}}
-        <li><a href="?page={{number}}">{{number}}</a></li>
+        <li><a href="?page={{.}}">{{.}}</a></li>
         {{/pageNumbers}}
 
     </ul>
