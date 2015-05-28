@@ -1,5 +1,11 @@
 <?php
 
+/**
+
+ * User Registeration Form Class using Zend_Form
+ * @author Mohamed Ramadan
+ * 
+ *  */
 class Application_Form_Registeration extends Zend_Form
 {
     public function init() {
@@ -10,6 +16,7 @@ class Application_Form_Registeration extends Zend_Form
         
         // User ID Element
         $userID = new Zend_Form_Element_Hidden('userID');
+        
         
         // User Name Element
         $userName = new Zend_Form_Element_Text('userName');
@@ -48,6 +55,7 @@ class Application_Form_Registeration extends Zend_Form
                 'placeholder' => 'Confirm User Password'
             ));
         
+        
         // User Appeared Name Element
         $name = new Zend_Form_Element('name');
         $name                             ->
@@ -74,7 +82,12 @@ class Application_Form_Registeration extends Zend_Form
         
         
         // User Date Of Birth Element
-        //$dateOfBirth = new Zend_Form_Element
+        $dateOfBirth = new Zend_Form_Element_Text('dateOfBirth');
+        $dateOfBirth->setAttribs(array(
+            'class'=>'form-control',
+            'placeholder'=>'Example: 10/10/2010',
+            
+        ))->setRequired();
         
         
         // User Description Element 
@@ -183,7 +196,9 @@ class Application_Form_Registeration extends Zend_Form
             $reset
             ));
      
+        
+        
+        
     }
     
 }
-
