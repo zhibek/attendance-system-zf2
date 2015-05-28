@@ -2,6 +2,7 @@
 
 class Users_IndexController extends Zend_Controller_Action
 {
+
     public function indexAction()
     {
         // listing
@@ -23,18 +24,18 @@ class Users_IndexController extends Zend_Controller_Action
         $numberOfPages = $paginator->count();
         //create an array of page numbers
         $pageNumbers = array();
-        foreach ( range(1, $numberOfPages) as $currentPageNumber )
-        {
-            $pageNumbers[]=array('number'=> $currentPageNumber);
+        foreach (range(1, $numberOfPages) as $currentPageNumber) {
+            $pageNumbers[] = array('number' => $currentPageNumber);
         }
         
         $this->view->userList = $paginator;
         $this->view->pageNumbers = $pageNumbers;
-        
     }
-    
+
     public function editAction()
     {
-        
+        $form = new Users_Form_User();
+        $this->view->userForm = $form;
     }
+
 }

@@ -1,38 +1,36 @@
 <!doctype html>
 <html>
 
-<head>
-<title>Attendance System</title>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="css/template-styling.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-</head>
+    <head>
+        <title>Attendance System</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="/css/template-styling.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    </head>
 
-<body>
+    <body>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          
-          <a class="navbar-brand" href="#">Attendance System</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Users Module</a></li>
-           
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-</nav>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
 
-    <div class="container">
+                    <a class="navbar-brand" href="/">Attendance System</a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/users">Users Module</a></li>
 
-      {{$content}}{{/content}}
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
 
-    </div><!-- /.container -->
+        <div class="container">
+            {{$content}}{{/content}}
+        </div><!-- /.container -->
 
-</body>
+    </body>
 
 </html>
