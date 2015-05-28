@@ -17,6 +17,7 @@ base:
   pluginpaths:
     CamelCaseTech_Resource: CamelCaseTech/Resource
   resources:
+    modules: true
     frontController:
       moduleDirectory: APPLICATION_PATH/modules
       params:
