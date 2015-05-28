@@ -9,3 +9,6 @@ body {
     height : 150 px;
     width : 100 px;
 }
+nav li a {
+      padding: 15px 15px; 
+}
