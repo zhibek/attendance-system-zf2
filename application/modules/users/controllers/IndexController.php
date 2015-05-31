@@ -1,10 +1,17 @@
 <?php
 
-class Users_IndexController extends Zend_Controller_Action
-{
+class Users_IndexController extends Zend_Controller_Action {
 
-    public function indexAction()
-    {
+    public function init() {
+         $authorization = Default_Service_Auth_Adapter::getInstance();
+        if (!$authorization->hasIdentity() ){
+            $this->redirect("Sign/in");
+        }
+        $Identity= $authorization->getIdentity();
+        echo "identity is :".$Identity;
+    }
+
+    public function indexAction() {
         
         // get all databases entities
         $em = $this->getInvokeArg('bootstrap')->getResource('entityManager');

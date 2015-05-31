@@ -21,9 +21,22 @@
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="/users">Users Module</a></li>
-
                     </ul>
+                    <ul class="nav pull-right">
+                        <li>
+                            {{#visible}}
+                            <a class="btn-navbar btn-danger logout" href="Sign/out" id="navLogin">Log out</a>
+                            {{/visible}} 
+                        </li>
+                    </ul>
+
+
+
+
+                    <!--<a class="logout  btn-danger pull-right " href="Sign/out">Log Out</a>-->
+
                 </div><!--/.nav-collapse -->
+
             </div>
         </nav>
 
