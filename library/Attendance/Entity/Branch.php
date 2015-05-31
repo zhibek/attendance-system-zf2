@@ -6,11 +6,11 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class Branche
  * @ORM\Entity
- * @ORM\Table(name="branche")
+ * @ORM\Table(name="branch")
  * @package Attendance\Entity
  */
 
-class Branche
+class Branch
 {
 
     /**

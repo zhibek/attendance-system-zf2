@@ -3,7 +3,7 @@
 namespace Attendance\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Attendance\Entity\Branche;
+use Attendance\Entity\Branch;
 use Attendance\Entity\Department;
 use Attendance\Entity\Position;
 
@@ -83,11 +83,11 @@ class User
     
     /**
      *
-     * @ORM\ManyToOne(targetEntity="Attendance\Entity\Branche")
-     * @ORM\JoinColumn(name="branche_id", referencedColumnName="id")
-     * @var Attendance\Entity\Branche
+     * @ORM\ManyToOne(targetEntity="Attendance\Entity\Branch")
+     * @ORM\JoinColumn(name="branch_id", referencedColumnName="id")
+     * @var Attendance\Entity\Branch
      */
-     public $branche;
+     public $branch;
     
      /**
      *
