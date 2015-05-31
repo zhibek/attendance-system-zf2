@@ -2,18 +2,13 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  # use the following line if you have problem with chef installing some packages like MySQL
-  # you need to install vagrant plugin first [vagrant plugin install vagrant-omnibus] then uncomment the next line
-  config.omnibus.chef_version = '12.3.0'
   config.vm.box = "ubuntu/trusty64"
   #config.vm.box_url = "mybox/trusty64.box"
   config.vm.synced_folder "./", "/var/www", id: "web-root"
-  config.ssh.port = 2251
-  config.vm.network "forwarded_port", guest: 22, host: 2251
-  #config.vm.network "private_network", ip: "192.168.33.51"
+  config.vm.network "forwarded_port", guest: 22, host: 2251, id: "ssh", auto: true
   config.vm.network "private_network", ip: "10.1.1.33"
-  #config.ssh.forward_agent = true
-  config.omnibus.chef_version = '12.3.0'
+  config.omnibus.chef_version = "12.3.0"
+
   config.vm.provider "virtualbox" do |vb|
     vb.customize ["modifyvm", :id, "--name", "attendance-system"]
     vb.customize ["modifyvm", :id, "--memory", "1024"]
