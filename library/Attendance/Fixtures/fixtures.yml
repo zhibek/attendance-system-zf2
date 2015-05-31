@@ -1,0 +1,23 @@
+Attendance\Entity\User:
+    
+    user{1..10}:
+    
+        name: 'bob'
+        username: bob1
+        password: 123456
+        mobile: 0101010
+        photo: http://i.imgur.com/vg7csLP.jpg 
+        maritalStatus: exe        
+        description: human                        
+        vacationBalance: 31       
+        totalWorkingHoursThisMonth: 31   
+#    user1:
+#        name: 'bob2'
+#        username: bob2
+#        password: 123456
+#        mobile: 0101010
+#        photo: http://i.imgur.com/vg7csLP.jpg
+#        maritalStatus: exe        
+#        description: human                        
+#        vacationBalance: 31       
+#        totalWorkingHoursThisMonth: 31 
