@@ -23,6 +23,8 @@ base:
       params:
         displayExceptions: 1
         prefixDefaultModule: 1
+      plugins:
+          Auth: CamelCaseTech_Resource_Plugin_Auth 
     view:
       scriptPath: APPLICATION_PATH/layouts
     entityManager:
