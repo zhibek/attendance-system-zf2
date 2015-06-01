@@ -6,11 +6,27 @@
  * @author Mohamed Ramadan
  * 
  *  */
-class Users_Form_User extends Zend_Form
-{
+class Users_Form_User extends Zend_Form {
 
-    public function init()
-    {
+    public function init() {
+
+        //$users = Doctrine_Core::getTable('User')->findAll();
+//        foreach($users as $user) {
+//            echo $user->username . " has phonenumbers: ";
+//
+//            foreach($user->Phonenumbers as $phonenumber) {
+//                echo $phonenumber->phonenumber . "\n";
+//            }
+//        }
+        //$em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
+//        $em = $this->getActionController()->getInvokeArg('bootstrap')->getResource('entityManager');
+//        $users = $em->findAll();
+//        foreach ($users as $user) {
+//            $this->$user->department;
+//        }
+
+
+
 
         // Form Method
         $this->setMethod('post');
@@ -21,7 +37,7 @@ class Users_Form_User extends Zend_Form
 
 
         // User Name Element
-        $userName = new Zend_Form_Element_Text('userName');
+        $userName = new Zend_Form_Element_Text('username');
         $userName->
                 setRequired()->
                 setLabel('Username: ')->
@@ -33,7 +49,7 @@ class Users_Form_User extends Zend_Form
 
 
         // User Password Element
-        $passwrod = new Zend_Form_Element('password');
+        $passwrod = new Zend_Form_Element_Password('password');
         $passwrod->
                 setRequired()->
                 setLabel('Password: ')->
@@ -45,7 +61,7 @@ class Users_Form_User extends Zend_Form
 
 
         // Confirm Password Element
-        $confirmPassword = new Zend_Form_Element_Text('confirmPassword');
+        $confirmPassword = new Zend_Form_Element_Password('confirmPassword');
         $confirmPassword->
                 setRequired()->
                 setLabel('ConfirmPassword: ')->
@@ -104,26 +120,26 @@ class Users_Form_User extends Zend_Form
         $maritalStatus = new Zend_Form_Element_Select('maritalStatus');
         $maritalStatus->
                 setLabel('MaritalStatus: ')->
-                setOptions(array(
-                    'Single' => 'Single',
-                    'Married' => 'Married',
-                    'Complicated' => 'Complicated'
-                ))->
+                addMultiOption('single', 'Single')->
+                addMultiOption('married', 'Married')->
                 setAttrib('class', 'form-control');
 
 
         // User Department  Element
         $department = new Zend_Form_Element_Select('department');
         $department->
-                setLabel('Department: ')->
-                setOptions(array(
-                    " " => " "
-                ))->
-                setAttrib('class', 'form-control');
+                setLabel('Department: ');
+//        foreach ($users as $user) {
+//            $department->addMultiOption($user->department);
+//        }
+//        setAttrib('class', 'form-control');
 
+//        $em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
+//        $repository = $em->getRepository('Attendance\Entity\Branche');
+//        $entities = $repository->findAll();
 
-        // User Branch  Element
-        $branch = new Zend_Form_Element_Select('branch');
+// User Branch  Element
+        $branch = new Zend_Form_Element_Select('branche');
         $branch->
                 setLabel('Branch: ')->
                 setOptions(array(
@@ -143,22 +159,19 @@ class Users_Form_User extends Zend_Form
 
 
         // User Photo Element
-//        $photo = new Zend_Form_Element_File('photo');
-//        $photo->
-//                setLabel('Upload your photo: ')->
-//                setAttrib("class", "form-control")->
-//                setDestination('/application/public/forum')->
-//                addValidator('Count', false, 1);
-//        $thedate = date_create();
-//        $photo->addFilter('Rename', array('target' => $thedate->format('U = Y-m-d H:i:s')))->
-//                addValidator('Size', false, 2097152)->
-//                setMaxFileSize(2097152)->
-//                addValidator('Extension', false, 'jpg,png,gif,jpeg')->
-//                receive()->
-//                setValueDisabled(true);
-
-
-
+        $photo = new Zend_Form_Element_File('photo');
+        $photo->
+                setLabel('Upload your photo: ')->
+                setAttrib("class", "form-control")->
+                setDestination('/var/www/public/images')->
+                addValidator('Count', false, 1);
+        $thedate = date_create();
+        $photo->addFilter('Rename', array('target' => $thedate->format('U = Y-m-d H:i:s')))->
+                addValidator('Size', false, 2097152)->
+                setMaxFileSize(2097152)->
+                addValidator('Extension', false, 'jpg,png,gif,jpeg')->
+                receive()->
+                setValueDisabled(true);
         // Submit Button Element
         $submit = new Zend_Form_Element_Submit('submit');
         $submit->
@@ -180,17 +193,17 @@ class Users_Form_User extends Zend_Form
         // Add Elements to the Form
         $this->addElements(array(
             $userID,
-            $username,
+            $userName,
             $passwrod,
             $confirmPassword,
             $name,
             $mobile,
-            $photo,
+//            $photo,
             $maritalStatus,
             $description,
             $branch,
-            $department,
-            $position,
+//            $department,
+//            $position,
             $submit,
             $reset
         ));
