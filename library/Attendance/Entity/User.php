@@ -107,7 +107,7 @@ class User
     
      /**
      *
-     * @ORM\OneToOne(targetEntity="Attendance\Entity\Position")
+     * @ORM\ManyToOne(targetEntity="Attendance\Entity\Position")
      * @ORM\JoinColumn(name="position_id", referencedColumnName="id")
      * @var Attendance\Entity\Position
      */
