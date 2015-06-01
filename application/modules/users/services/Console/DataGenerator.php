@@ -1,15 +1,15 @@
 <?php
 
 /**
- * A test command
- *
+ * A command that uses the Alice data-generator to generate testing data 
+ * 
  * Run using:
- * bin/cli test:example
+ * bin/cli schema:data-generate
  *
- * Adapt this command to do what you require (and rename appropriately).
- *
- * New commands need to be added to the list in <root>/cli-commands.php
- * before they will be included in the command setup.
+ * 
+ * Note : please make use there is no 'CS Departement' in the department 
+ * database table, so as not to violate any constrains
+ * 
  */
 
 use Symfony\Component\Console\Input\InputInterface;
