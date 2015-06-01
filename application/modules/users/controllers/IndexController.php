@@ -3,12 +3,6 @@
 class Users_IndexController extends Zend_Controller_Action {
 
     public function init() {
-//        $authorization = Default_Service_Auth_Adapter::getInstance();
-//        if (!$authorization->hasIdentity() ){
-//            $this->redirect("Sign/in");
-//        }
-//        $Identity= $authorization->getIdentity();
-//        echo "identity is :".$Identity;
     }
 
     public function indexAction() {

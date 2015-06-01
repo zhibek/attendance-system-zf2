@@ -160,9 +160,10 @@ class Default_Service_Auth_Adapter implements Zend_Auth_Adapter_Interface {
             'username' => $this->_identity,
             'password' => $this->_credential,
         ));
-//        var_dump($entities);
-        $authResult = $this->_validateResult($entities);
-        return $authResult;
+
+        return $this->_validateResult($entities);
+//        $authResult = $this->_validateResult($entities);
+//        return $authResult;
     }
 
     /**
@@ -213,22 +214,12 @@ class Default_Service_Auth_Adapter implements Zend_Auth_Adapter_Interface {
      * @return Doctrine\ORM\Query
      */
     protected function _getQuery() {
-//      $dql='Select username , password from '.$this->_entityName .' where '.$this->_identityColumn.'='.$this ->_identity;
+
         $dql = 'SELECT username , password FROM ' . $this->_entityName . ' u 
                 WHERE u.' . $this->_identityColumn . ' = ?1';
 
-//        exit;
         $query = $this->_em->createQuery($dql)->setParameter(1, $this->_identity);
-//          $query =$this -> _em ->createQuery($dql);
-//        var_dump($this->_em);
-        var_dump($dql);
-        var_dump($this->_entityName);
-        var_dump($this->_identityColumn);
-        var_dump($this->_identity);
-
-//        exit;
         return $query;
-//        return $dql ;
     }
 
     /**
@@ -299,60 +290,6 @@ class Default_Service_Auth_Adapter implements Zend_Auth_Adapter_Interface {
         return new Zend_Auth_Result(
                 $this->_authenticateResultInfo['code'], $this->_authenticateResultInfo['identity'], $this->_authenticateResultInfo['messages']
         );
-    }
-
-    protected static $_instance = null;
-
-    static public function getInstance() {
-
-        if (null === self::$_instance) {
-            self::$_instance = new self();
-        }
-
-        return self::$_instance;
-    }
-
-    protected $_storage = null;
-
-    public function getStorage() {
-        if (null === $this->_storage) {
-            /**
-             * @see Zend_Auth_Storage_Session
-             */
-            require_once 'Zend/Auth/Storage/Session.php';
-            $this->setStorage(new Zend_Auth_Storage_Session());
-        }
-
-        return $this->_storage;
-    }
-
-    /**
-     * Sets the persistent storage handler
-     *
-     * @param  Zend_Auth_Storage_Interface $storage
-     * @return Zend_Auth Provides a fluent interface
-     */
-    public function setStorage(Zend_Auth_Storage_Interface $storage) {
-        $this->_storage = $storage;
-        return $this;
-    }
-
-    public function hasIdentity() {
-        return !$this->getStorage()->isEmpty();
-    }
-
-    public function getIdentity() {
-        $storage = $this->getStorage();
-
-        if ($storage->isEmpty()) {
-            return null;
-        }
-
-        return $storage->read();
-    }
-
-    public function clearIdentity() {
-        $this->getStorage()->clear();
     }
 
 }
