@@ -1,6 +1,7 @@
 <?php
 
-class Default_Service_Auth_Adapter implements Zend_Auth_Adapter_Interface {
+class Default_Service_Auth_Adapter implements Zend_Auth_Adapter_Interface
+{
 
     /**
      * Doctrine Entity Manager
@@ -61,7 +62,8 @@ class Default_Service_Auth_Adapter implements Zend_Auth_Adapter_Interface {
      * @param  string                   $credentialTreatment
      * @return void
      */
-    public function __construct($em = null, $entityName = null, $identityColumn = null, $credentialColumn = null) {
+    public function __construct($em = null, $entityName = null, $identityColumn = null, $credentialColumn = null)
+    {
         if (null !== $em) {
             $this->setEm($em);
         }
@@ -84,7 +86,8 @@ class Default_Service_Auth_Adapter implements Zend_Auth_Adapter_Interface {
      * setEm() - set the Doctrine2 Entity Manager
      * @param \Doctrine\ORM\EntityManager $em
      */
-    public function setEm($em) {
+    public function setEm($em)
+    {
         $this->_em = $em;
         return $this;
     }
@@ -95,7 +98,8 @@ class Default_Service_Auth_Adapter implements Zend_Auth_Adapter_Interface {
      * @param  string $entityName
      * @return My_Auth_Adapter_Doctrine2 Provides a fluent interface
      */
-    public function setEntityName($entityName) {
+    public function setEntityName($entityName)
+    {
         $this->_entityName = $entityName;
         return $this;
     }
@@ -106,7 +110,8 @@ class Default_Service_Auth_Adapter implements Zend_Auth_Adapter_Interface {
      * @param  string $identityColumn
      * @return My_Auth_Adapter_Doctrine2 Provides a fluent interface
      */
-    public function setIdentityColumn($identityColumn) {
+    public function setIdentityColumn($identityColumn)
+    {
         $this->_identityColumn = $identityColumn;
         return $this;
     }
@@ -117,7 +122,8 @@ class Default_Service_Auth_Adapter implements Zend_Auth_Adapter_Interface {
      * @param  string $credentialColumn
      * @return My_Auth_Adapter_Doctrine2 Provides a fluent interface
      */
-    public function setCredentialColumn($credentialColumn) {
+    public function setCredentialColumn($credentialColumn)
+    {
         $this->_credentialColumn = $credentialColumn;
         return $this;
     }
@@ -128,7 +134,8 @@ class Default_Service_Auth_Adapter implements Zend_Auth_Adapter_Interface {
      * @param  string $value
      * @return My_Auth_Adapter_Doctrine2 Provides a fluent interface
      */
-    public function setIdentity($value) {
+    public function setIdentity($value)
+    {
         $this->_identity = $value;
         return $this;
     }
@@ -139,7 +146,8 @@ class Default_Service_Auth_Adapter implements Zend_Auth_Adapter_Interface {
      * @param  string $credential
      * @return My_Auth_Adapter_Doctrine2 Provides a fluent interface
      */
-    public function setCredential($credential) {
+    public function setCredential($credential)
+    {
         $this->_credential = $credential;
         return $this;
     }
@@ -153,7 +161,8 @@ class Default_Service_Auth_Adapter implements Zend_Auth_Adapter_Interface {
      * @throws Zend_Auth_Adapter_Exception if answering the authentication query is impossible
      * @return Zend_Auth_Result
      */
-    public function authenticate() {
+    public function authenticate()
+    {
         $this->_authenticateSetup();
         $repository = $this->_em->getRepository('Attendance\Entity\User');
         $entities = $repository->findBy(array(
@@ -173,7 +182,8 @@ class Default_Service_Auth_Adapter implements Zend_Auth_Adapter_Interface {
      * @throws Zend_Auth_Adapter_Exception - in the event that setup was not done properly
      * @return true
      */
-    protected function _authenticateSetup() {
+    protected function _authenticateSetup()
+    {
         $exception = null;
 
         if ($this->_em === null) {
@@ -213,7 +223,8 @@ class Default_Service_Auth_Adapter implements Zend_Auth_Adapter_Interface {
      *
      * @return Doctrine\ORM\Query
      */
-    protected function _getQuery() {
+    protected function _getQuery()
+    {
 
         $dql = 'SELECT username , password FROM ' . $this->_entityName . ' u 
                 WHERE u.' . $this->_identityColumn . ' = ?1';
@@ -230,7 +241,8 @@ class Default_Service_Auth_Adapter implements Zend_Auth_Adapter_Interface {
      * @throws Zend_Auth_Adapter_Exception - when a invalid select object is encoutered
      * @return array
      */
-    protected function _performQuery(Doctrine\ORM\Query $query) {
+    protected function _performQuery(Doctrine\ORM\Query $query)
+    {
         try {
 
             $resultIdentities = $query->execute();
@@ -254,7 +266,8 @@ class Default_Service_Auth_Adapter implements Zend_Auth_Adapter_Interface {
      * @param array $resultIdentities
      * @return Zend_Auth_Result
      */
-    protected function _validateResult($resultIdentities) {
+    protected function _validateResult($resultIdentities)
+    {
         if (count($resultIdentities) < 1) {
             $this->_authenticateResultInfo['code'] = Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND;
             $this->_authenticateResultInfo['messages'][] = 'A record with the supplied identity could not be found.';
@@ -286,7 +299,8 @@ class Default_Service_Auth_Adapter implements Zend_Auth_Adapter_Interface {
      *
      * @return Zend_Auth_Result
      */
-    protected function _authenticateCreateAuthResult() {
+    protected function _authenticateCreateAuthResult()
+    {
         return new Zend_Auth_Result(
                 $this->_authenticateResultInfo['code'], $this->_authenticateResultInfo['identity'], $this->_authenticateResultInfo['messages']
         );
