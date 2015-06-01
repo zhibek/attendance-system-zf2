@@ -36,7 +36,7 @@ class User extends \Attendance\Entity\User implements \Doctrine\ORM\Proxy\Proxy
      *
      * @see \Doctrine\Common\Persistence\Proxy::__getLazyProperties
      */
-    public static $lazyPropertiesDefaults = array('name' => NULL, 'username' => NULL, 'password' => NULL, 'mobile' => NULL, 'dateOfBirth' => NULL, 'photo' => NULL, 'maritalStatus' => NULL, 'description' => NULL, 'branche' => NULL, 'department' => NULL, 'manager' => NULL, 'position' => NULL, 'startDate' => NULL, 'vacationBalance' => NULL, 'totalWorkingHoursThisMonth' => NULL);
+    public static $lazyPropertiesDefaults = array('name' => NULL, 'username' => NULL, 'password' => NULL, 'mobile' => NULL, 'dateOfBirth' => NULL, 'photo' => NULL, 'maritalStatus' => NULL, 'description' => NULL, 'branch' => NULL, 'department' => NULL, 'manager' => NULL, 'position' => NULL, 'startDate' => NULL, 'vacationBalance' => NULL, 'totalWorkingHoursThisMonth' => NULL);
 
 
 
@@ -46,7 +46,7 @@ class User extends \Attendance\Entity\User implements \Doctrine\ORM\Proxy\Proxy
      */
     public function __construct($initializer = null, $cloner = null)
     {
-        unset($this->name, $this->username, $this->password, $this->mobile, $this->dateOfBirth, $this->photo, $this->maritalStatus, $this->description, $this->branche, $this->department, $this->manager, $this->position, $this->startDate, $this->vacationBalance, $this->totalWorkingHoursThisMonth);
+        unset($this->name, $this->username, $this->password, $this->mobile, $this->dateOfBirth, $this->photo, $this->maritalStatus, $this->description, $this->branch, $this->department, $this->manager, $this->position, $this->startDate, $this->vacationBalance, $this->totalWorkingHoursThisMonth);
 
         $this->__initializer__ = $initializer;
         $this->__cloner__      = $cloner;
@@ -108,7 +108,7 @@ class User extends \Attendance\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'id', 'name', 'username', 'password', 'mobile', 'dateOfBirth', 'photo', 'maritalStatus', 'description', 'branche', 'department', 'manager', 'position', 'startDate', 'vacationBalance', 'totalWorkingHoursThisMonth');
+            return array('__isInitialized__', 'id', 'name', 'username', 'password', 'mobile', 'dateOfBirth', 'photo', 'maritalStatus', 'description', 'branch', 'department', 'manager', 'position', 'startDate', 'vacationBalance', 'totalWorkingHoursThisMonth');
         }
 
         return array('__isInitialized__', 'id');
@@ -133,7 +133,7 @@ class User extends \Attendance\Entity\User implements \Doctrine\ORM\Proxy\Proxy
                 }
             };
 
-            unset($this->name, $this->username, $this->password, $this->mobile, $this->dateOfBirth, $this->photo, $this->maritalStatus, $this->description, $this->branche, $this->department, $this->manager, $this->position, $this->startDate, $this->vacationBalance, $this->totalWorkingHoursThisMonth);
+            unset($this->name, $this->username, $this->password, $this->mobile, $this->dateOfBirth, $this->photo, $this->maritalStatus, $this->description, $this->branch, $this->department, $this->manager, $this->position, $this->startDate, $this->vacationBalance, $this->totalWorkingHoursThisMonth);
         }
     }
 
