@@ -3,12 +3,12 @@
 class Users_IndexController extends Zend_Controller_Action {
 
     public function init() {
-         $authorization = Default_Service_Auth_Adapter::getInstance();
-        if (!$authorization->hasIdentity() ){
-            $this->redirect("Sign/in");
-        }
-        $Identity= $authorization->getIdentity();
-        echo "identity is :".$Identity;
+//        $authorization = Default_Service_Auth_Adapter::getInstance();
+//        if (!$authorization->hasIdentity() ){
+//            $this->redirect("Sign/in");
+//        }
+//        $Identity= $authorization->getIdentity();
+//        echo "identity is :".$Identity;
     }
 
     public function indexAction() {
@@ -24,7 +24,13 @@ class Users_IndexController extends Zend_Controller_Action {
         $numberOfPages = $UserModel->getNumberOfPages();
         
         //create an array of page numbers
-        $pageNumbers = range(1,$numberOfPages);
+        if($numberOfPages > 1)
+        {
+            $pageNumbers = range(1,$numberOfPages);
+        }else
+        {
+            $pageNumbers = array();
+        }
         
         //setting view varaiables
         $this->view->userList = $UserModel->getCurrentItems();
