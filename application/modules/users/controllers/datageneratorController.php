@@ -12,8 +12,13 @@
         $loader = new \Nelmio\Alice\Fixtures\Loader();
         
         
-        $objects = $loader->load('Attendance/Fixtures/fixtures.yml');
+        $objects = $loader->load('Attendance/Fixtures/UserFixtures.yml');
+//        $objects = $loader->load('Attendance/Fixtures/BranchFixtures.yml');
+//        $objects = $loader->load('Attendance/Fixtures/PositionFixtures.yml');
+//        $objects = $loader->load('Attendance/Fixtures/DepartmentFixtures.yml');
         
+        
+        var_dump($objects);die;
         
         foreach($objects as $object)
         {
@@ -25,7 +30,7 @@
         
         $em->flush();
         
-        echo '<h1>Data Added</h1>';
+        echo 'Data Added';
         die;
     }
 
