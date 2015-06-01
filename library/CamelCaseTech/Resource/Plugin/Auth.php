@@ -11,7 +11,7 @@ class CamelCaseTech_Resource_Plugin_Auth extends Zend_Controller_Plugin_Abstract
         // anonymous user can not move to any page but Sign/in 
         if (!$auth->hasIdentity() && $this->getRequest()->getControllerName() != 'sign') {
 //            redirect to sign/in
-            $this->getResponse()->setRedirect('sign/in')->sendResponse();
+            $this->getResponse()->setRedirect('/sign/in')->sendResponse();
         } else if ($auth->hasIdentity() && $this->getRequest()->getControllerName() == 'sign' &&
                 $this->getRequest()->getActionName() == 'in') {
 
