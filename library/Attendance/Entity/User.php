@@ -34,14 +34,14 @@ class User
     
     /**
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string" , unique=true)
      * @var string
      */
     public $username;
 
     /**
      *
-     * @ORM\Column(type="string" , length =32)
+     * @ORM\Column(type="string" , length =64)
      * @var string
      */
     public $password;

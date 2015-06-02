@@ -16,6 +16,7 @@ class Users_Model_User
     public function __construct($em) {
         $repository = $em->getRepository('Attendance\Entity\User');
         $this->paginator =new Zend_Paginator(new Attendance_Paginator_Doctrine($repository));
+        
     }
     
     public function setPage($currentPage)
@@ -43,31 +44,67 @@ class Users_Model_User
         return $this->paginator;
     }
     
-    // My Helper Functions starts
-    public function getBranchById($branchId)
+ 
+    
+    
+    public function populateForm($form)
     {
-        $em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
-        $branch = $em->getReposatory('\Attendance\Entity\Branch')->find($branchId)->toArray();
-        return $branch[0];
+        $id = $this->_request->getParam('id');
+        $query = $this->_em->createQuery('Select u FROM Attendance\Entity\User  u WHERE u.id = ?1');
+        $query->setParameter(1, $id);
+        $result = $query->execute();
+        
+        $form->populate((array) $result[0]);
     }
     
-    public function getPositionById($positionId)
+     public function editUser($userInfo)
     {
-        $em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
-        $position = $em->getReposatory('\Attendance\Entity\Position')->find($positionId)->toArray();
-        return $position[0];
+        $entity = new Attendance\Entity\User();
+        $entity->id = $userInfo['id'];
+        $entity->name = $userInfo['name'];
+        $entity->username = $userInfo['userName'];
+        $entity->password = $userInfo['password'];
+        $entity->mobile = $userInfo['mobile'];
+        $entity->manager = $userInfo['manager'];
+        $entity->dateOfBirth = $userInfo['dateOfBirth'];
+        $entity->startDate = $userInfo['startDate'];
+        $entity->maritalStatus = $userInfo['maritalStatus'];
+        $entity->description = $userInfo['description'];
+        $entity->position = $userInfo['position'];
+        $entity->branch = $userInfo['branch'];
+        $entity->department = $userInfo['department'];
+        $entity->photo = $userInfo['photo'];
+        
+        
+        $updatequery = $this->_em->createQuery('UPDATE Attendance\Entity\User u SET '
+                . ' u.name = ?1, u.username = ?2  , u.password = ?3 , u.mobile = ?4 , u.manager = ?5, '
+                . ' u.dateOfBirth = ?6 , u.startDate = ?7 , u.maritalStatus = ?8 ,'
+                . ' u.description = ?9 , u.position = ?10 , u.branch = ?11 , u.department = ?12,'
+                . ' u.photo =?13'
+                . ' WHERE v.id = ?14');
+        
+        $updatequery->setParameter(1, $entity->name);
+        $updatequery->setParameter(2, $entity->username);
+        $updatequery->setParameter(3, $entity->password);
+        $updatequery->setParameter(4, $entity->mobile);
+        $updatequery->setParameter(5, $entity->manager);
+        $updatequery->setParameter(6, $entity->dateOfBirth);
+        $updatequery->setParameter(7, $entity->startDate);
+        $updatequery->setParameter(8, $entity->maritalStatus);
+        $updatequery->setParameter(9, $entity->description);
+        $updatequery->setParameter(10, $entity->position);
+        $updatequery->setParameter(11, $entity->branch);
+        $updatequery->setParameter(12, $entity->department);
+        $updatequery->setParameter(13, $entity->photo);
+        $updatequery->setParameter(14, $entity->id);
+        $updatequery->execute();
     }
     
-    public function getDepartmentById($departmentId)
-    {
-        $em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
-        $department = $em->getReposatory('\Attendance\Entity\Department')->find($departmentId)->toArray();
-        return $department[0];
+    
+    
     }
-    // My Helper functions ends
     
     
     
-    
-}
+
 

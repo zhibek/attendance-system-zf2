@@ -22,7 +22,7 @@ class Users_Form_User extends Zend_Form {
         $this->setAttrib('calss', 'form form-horizontal');
 
         // User ID Element
-        $userID = new Zend_Form_Element_Hidden('userID');
+        $id = new Zend_Form_Element_Hidden('id');
 
         // User Name Element
         $userName = new Zend_Form_Element_Text('userName');
@@ -157,8 +157,21 @@ class Users_Form_User extends Zend_Form {
                     " " => " "
                 ))->
                 setAttrib('class', 'form-control');
+        
+        // User Manager  Element
+        $manager = new Zend_Form_Element_Select('manager');
+        $manager->
+                setLabel('Manager: ')->
+                setOptions(array(
+                    " " => " "
+                ))->
+                setAttrib('class', 'form-control');
+        
+        
 
-        $photo = new Zend_Form_Element_File('picture', array(
+        
+        
+        $photo = new Zend_Form_Element_File('photo', array(
             'label' => 'Picture',
             'required' => true,
             'MaxFileSize' => 2097152, // 2097152 BYTES = 2 MEGABYTES
@@ -195,7 +208,7 @@ class Users_Form_User extends Zend_Form {
 
         // Add Elements to the Form
         $this->addElements(array(
-            $userID,
+            $id,
             $userName,
             $passwrod,
             $confirmPassword,
@@ -207,6 +220,7 @@ class Users_Form_User extends Zend_Form {
             $description,
             $branch,
             $department,
+            $manager,
             $position,
             $photo,
             $submit,

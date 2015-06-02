@@ -17,7 +17,6 @@ class Default_Form_Signin extends Zend_Form {
             'label' => 'Password',
             'required' => true,
             'filters' => array('StringTrim'),
-            'validators' => array(array('stringLength', false, array(8, 25))),
         ));
 
         $this->addElement('submit', 'login', array(

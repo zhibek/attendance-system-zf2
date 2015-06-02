@@ -165,14 +165,12 @@ class Default_Service_Auth_Adapter implements Zend_Auth_Adapter_Interface
     {
         $this->_authenticateSetup();
         $repository = $this->_em->getRepository('Attendance\Entity\User');
+        
         $entities = $repository->findBy(array(
             'username' => $this->_identity,
-            'password' => $this->_credential,
         ));
-
+        
         return $this->_validateResult($entities);
-//        $authResult = $this->_validateResult($entities);
-//        return $authResult;
     }
 
     /**
@@ -218,48 +216,6 @@ class Default_Service_Auth_Adapter implements Zend_Auth_Adapter_Interface
     }
 
     /**
-     * _getQuery() - This method creates a Doctrine\ORM\Query object that
-     * is completely configured to be queried against the database.
-     *
-     * @return Doctrine\ORM\Query
-     */
-    protected function _getQuery()
-    {
-
-        $dql = 'SELECT username , password FROM ' . $this->_entityName . ' u 
-                WHERE u.' . $this->_identityColumn . ' = ?1';
-
-        $query = $this->_em->createQuery($dql)->setParameter(1, $this->_identity);
-        return $query;
-    }
-
-    /**
-     * _performQuery() - This method accepts a Doctrine\ORM\Query object and
-     * performs a query against the database with that object.
-     *
-     * @param Doctrine\ORM\Query $query
-     * @throws Zend_Auth_Adapter_Exception - when a invalid select object is encoutered
-     * @return array
-     */
-    protected function _performQuery(Doctrine\ORM\Query $query)
-    {
-        try {
-
-            $resultIdentities = $query->execute();
-        } catch (Exception $e) {
-            /**
-             * @see Zend_Auth_Adapter_Exception
-             */
-            require_once 'Zend/Auth/Adapter/Exception.php';
-            throw new Zend_Auth_Adapter_Exception('The supplied parameters to \Doctrine\ORM\EntityManager failed to '
-            . 'produce a valid sql statement, please check entity and column names '
-            . 'for validity.');
-        }
-
-        return $resultIdentities;
-    }
-
-    /**
      * _validateResult() - This method attempts to validate that the record in the 
      * result set is indeed a record that matched the identity provided to this adapter.
      *
@@ -267,7 +223,7 @@ class Default_Service_Auth_Adapter implements Zend_Auth_Adapter_Interface
      * @return Zend_Auth_Result
      */
     protected function _validateResult($resultIdentities)
-    {
+    {        
         if (count($resultIdentities) < 1) {
             $this->_authenticateResultInfo['code'] = Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND;
             $this->_authenticateResultInfo['messages'][] = 'A record with the supplied identity could not be found.';
@@ -278,7 +234,9 @@ class Default_Service_Auth_Adapter implements Zend_Auth_Adapter_Interface
             return $this->_authenticateCreateAuthResult();
         } elseif (count($resultIdentities) == 1) {
             $resultIdentity = $resultIdentities[0];
-            if ($resultIdentity->{$this->_credentialColumn} != $this->_credential) {
+            $password = $resultIdentity->{$this->_credentialColumn};
+            
+            if (!password_verify($this->_credential, $password)) {
                 $this->_authenticateResultInfo['code'] = Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID;
                 $this->_authenticateResultInfo['messages'][] = 'Supplied credential is invalid.';
             } else {

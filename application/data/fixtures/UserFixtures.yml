@@ -1,9 +1,9 @@
 Attendance\Entity\User:
     
-    user{1..60}:
+    user{1..25}:
     
-        name: 'bob'
-        username: bob1
+        name: <firstName()> <lastName()>
+        username: <username()>
         password: 123456
         mobile: 0101010
         photo: http://i.imgur.com/vg7csLP.jpg 
@@ -12,6 +12,18 @@ Attendance\Entity\User:
         description: human                        
         vacationBalance: 31       
         totalWorkingHoursThisMonth: 31   
+    
+    user26:
+        name: Admin Admin
+        username: admin
+        password: admin
+        mobile: 0101010
+        photo: http://i.imgur.com/vg7csLP.jpg 
+        maritalStatus: exe  
+        dateOfBirth: <date()>
+        description: human                        
+        vacationBalance: 31       
+        totalWorkingHoursThisMonth: 31 
 Attendance\Entity\Holiday:
     holiday{1..10}:
         name: 'NEW Year'
