@@ -31,6 +31,14 @@ Class Users_SignController extends Zend_Controller_Action {
             $position->addMultiOption($p->id,$p->name);
         }
         
+        // Populate Element Manager
+        $manager = $form->getElement('manager');
+        $managerRepository = $em->getRepository('Attendance\Entity\User');
+        $allManagers = $managerRepository->findAll();
+        foreach($allManagers as $m){
+            $manager->addMultiOption($m->id,$m->name);
+        }
+        
         // Populate Element Departments
         $department = $form->getElement('department');
         $departmentRepository = $em->getRepository('Attendance\Entity\Department');
@@ -66,8 +74,12 @@ Class Users_SignController extends Zend_Controller_Action {
                     $entity->branch = $thisBranch;   
                     $entity->department = new Attendance\Entity\Department('department');    
                     $thisDepartment = $em->getRepository('\Attendance\Entity\Department')->find($userInfo['department']);
-                    $entity->department=$thisDepartment;     
-                    //$entity->manager = $userInfo['manager'];
+                    $entity->department=$thisDepartment;   
+                    
+                    $entity->manager = new Attendance\Entity\User('manager');    
+                    $thisManager = $em->getRepository('\Attendance\Entity\User')->find($userInfo['manager']);
+                    $entity->manager=$thisManager; 
+                    
                     $entity->vacationBalance = 21;
                     $entity->totalWorkingHoursThisMonth=0;
                     $entity->photo = $this->savePhoto();
@@ -126,31 +138,54 @@ Class Users_SignController extends Zend_Controller_Action {
     }
 
 
-    // edit action 
-    public function editAction() {
-
-        // /users/edit/user_id/1
-        $userId = $this->getParam('userId');
+    
+    
+    
+     public function editAction() {
+         
+        $form = new Users_Form_User();
+        $request = $this->getRequest();
         $em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
-        $userData = $em->getRepository('\Attendance\Entity\User')->findAll($userId);
+        $userModel = new Users_Model_User($em, $request);
+        $userModel->populateForm($form);
         
-        $form = new Users_Form_User(array('em' => $em)); 
-        $form->getElement('password')->setRequired(false);
-        $form->getElement('confirmPassword')->setRequired(false);
-        
-        $userModel = new Users_Model_User($em);
-
-        var_dump('TEST',serialize($userData[0]->position));die;
-        die();
-        // Populate Element Branch
-        $branchName= $userModel->getBranchById($userData->branch);
-        $branch = $form->getElement("branch"); 
-        $branch->setValue($branchName);
-        
-        // Populate another Element 
-   
-        $this->view->userForm = $form;
-        
-    }
-      
+        $this->view->editForm = $form;
+        if ($request->isPost()) {
+            if ($form->isValid($request->getPost())) {
+                $userInfo = $this->_request->getParams();
+                $userModel->editUser($userInfo);
+                $this->redirect('/users/user/index');
+            }
+        }
+         $this->view->userForm = $form; 
+         
+     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
