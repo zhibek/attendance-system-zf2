@@ -1,0 +1,52 @@
+{{<layout}}
+{{$content}}
+<br><br>
+<a href="/settings/holiday/new"><button class="btn btn-small btn-success">Create new Vacation</button></a>
+<br><br>
+<div class="panel panel-default">
+
+   
+
+      
+      <div class="panel-heading">Holidays</div>
+
+      <!-- Table -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            
+            <th>Name</th>
+            
+            <th>From</th>
+            <th>To</th>
+          </tr>
+        </thead>
+        <tbody>
+            {{#holidayList}}
+                <tr>
+                    <th scope="row">{{id}}</th>
+                    <td>{{name}}</td>
+                    <td>{{dateFrom}}</td>
+                    <td>{{dateTo}}</td>
+                    <td>
+                        <a href="/settings/holiday/delete/id/{{id}}"  class="btn btn-danger">
+                            Deactivate
+                        </a>
+                        <a href="/settings/holiday/edit/id/{{id}}" class="btn btn-default">
+                            Edit
+                        </a>
+                    </td>
+                </tr>
+                
+            {{/holidayList}}  
+            
+          
+          
+        </tbody>
+      </table>
+  
+
+
+{{/content}}
+{{/layout}}
