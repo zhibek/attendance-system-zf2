@@ -75,8 +75,6 @@ EOT
         // append a date object for every user object
         foreach($holidays as $object)
         {
-            $object->password = password_hash($object->password, PASSWORD_BCRYPT);
-            
             $object->dateFrom = new \DateTime("now");
             $object->dateTo = new \DateTime("now");
             
