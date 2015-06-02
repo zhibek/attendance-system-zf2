@@ -1,18 +1,16 @@
 <?php
 
-class Default_Model_UserAuth {
+class Default_Model_UserAuth
+{
 
-    public function init() {
-        // something  
-    }
-
-    public function __construct($request, $em) {
+    public function __construct($request, $em)
+    {
         $this->request = $request;
         $this->em = $em;
     }
 
-    public function authenticateMe() {
-
+    public function authenticateMe()
+    {
         //get value of username from post
         $username = $this->request->getParam('username');
         // get value of password from post
@@ -20,13 +18,14 @@ class Default_Model_UserAuth {
         // hashing password to compare
         $adapter = new Default_Service_Auth_Adapter($this->em, "Attendance/Entity/User", "username", "password");
         $adapter->setIdentity($username);
-        $adapter->setCredential(md5($password));
+        $adapter->setCredential($password);
         $result = $adapter->authenticate();
 
         return $result;
     }
 
-    public function newSession() {
+    public function newSession()
+    {
         $repository = $this->em->getRepository('Attendance\Entity\User');
         $entities = $repository->findBy(array(
             'username' => $this->request->getParam('username'),

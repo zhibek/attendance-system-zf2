@@ -1,13 +1,16 @@
 e<?php
 
-class Default_IndexController extends Zend_Controller_Action {
+class Default_IndexController extends Zend_Controller_Action
+{
 
-    public function init() {
+    public function init()
+    {
 //        something
     }
 
+    public function indexAction()
+    {
+        
+    }
 
-    public function indexAction() {
-
-        }
 }

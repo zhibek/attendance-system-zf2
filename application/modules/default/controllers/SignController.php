@@ -27,6 +27,7 @@ class Default_SignController extends Zend_Controller_Action {
                     $auth->newSession();
                     $this->redirect('/index');
                 } else {
+                    var_dump($result);exit;
                     $this->redirect('sign/in');
                 }
             }
