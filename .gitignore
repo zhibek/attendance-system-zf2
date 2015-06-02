@@ -3,3 +3,4 @@
 /logs
 nbproject/*
 composer.lock
+public/upload/images/*
