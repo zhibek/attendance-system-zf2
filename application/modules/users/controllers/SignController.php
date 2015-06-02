@@ -48,29 +48,29 @@ Class Users_SignController extends Zend_Controller_Action {
                 $em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
                 $entity = new Attendance\Entity\User();
                 $entity->username = $userInfo['userName'];
-                        $entity->name = $userInfo['name'];
-                        $entity->password = md5($userInfo['password']);
-                        $dateString = $userInfo['dateOfBirth'];
-                        $date = new DateTime($dateString); 
-                        $entity->dateOfBirth= $date;
-                        $entity->mobile = $userInfo['mobile'];
-                        $entity->description = $userInfo['description'];
-                        $thisPosition = $em->getRepository('\Attendance\Entity\Position')->find($userInfo['position']);
-                        $entity->position = $thisPosition;
-                        
-                        $startDateString= $userInfo['startDate'];
-                        $startDateObj = new DateTime($startDateString);
-                        $entity->startDate= $startDateObj;
-                        $entity->maritalStatus = $userInfo['maritalStatus'];
-                        $thisBranch = $em->getRepository("\Attendance\Entity\Branch")->find($userInfo["branch"]);
-                        $entity->branch = $thisBranch;   
-                        $entity->department = new Attendance\Entity\Department('department');    
-                        $thisDepartment = $em->getRepository('\Attendance\Entity\Department')->find($userInfo['department']);
-                        $entity->department=$thisDepartment;     
-                        //$entity->manager = $userInfo['manager'];
-                        $entity->vacationBalance = 21;
-                        $entity->totalWorkingHoursThisMonth=0;
-                        $entity->photo = $this->savePhoto();
+                    $entity->name = $userInfo['name'];
+                    $entity->password = md5($userInfo['password']);
+                    $dateString = $userInfo['dateOfBirth'];
+                    $date = new DateTime($dateString); 
+                    $entity->dateOfBirth= $date;
+                    $entity->mobile = $userInfo['mobile'];
+                    $entity->description = $userInfo['description'];
+                    $thisPosition = $em->getRepository('\Attendance\Entity\Position')->find($userInfo['position']);
+                    $entity->position = $thisPosition;
+
+                    $startDateString= $userInfo['startDate'];
+                    $startDateObj = new DateTime($startDateString);
+                    $entity->startDate= $startDateObj;
+                    $entity->maritalStatus = $userInfo['maritalStatus'];
+                    $thisBranch = $em->getRepository("\Attendance\Entity\Branch")->find($userInfo["branch"]);
+                    $entity->branch = $thisBranch;   
+                    $entity->department = new Attendance\Entity\Department('department');    
+                    $thisDepartment = $em->getRepository('\Attendance\Entity\Department')->find($userInfo['department']);
+                    $entity->department=$thisDepartment;     
+                    //$entity->manager = $userInfo['manager'];
+                    $entity->vacationBalance = 21;
+                    $entity->totalWorkingHoursThisMonth=0;
+                    $entity->photo = $this->savePhoto();
                         
                 $em->persist($entity);
                 $em->flush();   
@@ -86,7 +86,7 @@ Class Users_SignController extends Zend_Controller_Action {
         $upload = new Zend_File_Transfer_Adapter_Http();
 
         
-        $imagesPath = APPLICATION_PATH.'/../public/upload/images';
+        $imagesPath = APPLICATION_PATH.'/../public/upload/images/';
         
         $upload->setDestination($imagesPath);
 
@@ -128,15 +128,27 @@ Class Users_SignController extends Zend_Controller_Action {
 
     // edit action 
     public function editAction() {
+
+        // /users/edit/user_id/1
+        $userId = $this->getParam('userId');
         $em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
+        $userData = $em->getRepository('\Attendance\Entity\User')->findAll($userId);
+        
         $form = new Users_Form_User(array('em' => $em)); 
+        $form->getElement('password')->setRequired(false);
+        $form->getElement('confirmPassword')->setRequired(false);
         
+        $userModel = new Users_Model_User($em);
+
+        var_dump('TEST',serialize($userData[0]->position));die;
+        die();
+        // Populate Element Branch
+        $branchName= $userModel->getBranchById($userData->branch);
+        $branch = $form->getElement("branch"); 
+        $branch->setValue($branchName);
         
-        
-        
-        
-        
-        
+        // Populate another Element 
+   
         $this->view->userForm = $form;
         
     }

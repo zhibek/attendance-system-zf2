@@ -1,33 +1,22 @@
 <?php
 
 /**
-
  * User Registeration Form Class using Zend_Form
  * @author Mohamed Ramadan
  * 
  *  */
 class Users_Form_User extends Zend_Form {
-
+    
+    protected $em;
+    
+    public function __construct($options = null) {
+        $this->em = $options['em'];
+        parent::__construct($options);
+    }
+    
     public function init() {
-
-        //$users = Doctrine_Core::getTable('User')->findAll();
-//        foreach($users as $user) {
-//            echo $user->username . " has phonenumbers: ";
-//
-//            foreach($user->Phonenumbers as $phonenumber) {
-//                echo $phonenumber->phonenumber . "\n";
-//            }
-//        }
-        //$em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
-//        $em = $this->getActionController()->getInvokeArg('bootstrap')->getResource('entityManager');
-//        $users = $em->findAll();
-//        foreach ($users as $user) {
-//            $this->$user->department;
-//        }
-
-
-
-
+        
+        Zend_Dojo::enableForm($this);
         // Form Method
         $this->setMethod('post');
         $this->setAttrib('calss', 'form form-horizontal');
@@ -35,12 +24,11 @@ class Users_Form_User extends Zend_Form {
         // User ID Element
         $userID = new Zend_Form_Element_Hidden('userID');
 
-
         // User Name Element
-        $userName = new Zend_Form_Element_Text('username');
+        $userName = new Zend_Form_Element_Text('userName');
         $userName->
                 setRequired()->
-                setLabel('Username: ')->
+                setLabel('UserName: ')->
                 addFilter('StringTrim')->
                 setAttribs(array(
                     'class' => 'form-control',
@@ -95,16 +83,36 @@ class Users_Form_User extends Zend_Form {
                     'class' => 'form-control',
                     'placeholder' => 'Enter User Mobile #'
         ));
-
-
+         
+        
         // User Date Of Birth Element
         $dateOfBirth = new Zend_Form_Element_Text('dateOfBirth');
         $dateOfBirth->setAttribs(array(
             'class' => 'form-control',
             'placeholder' => 'Example: 10/10/2010',
-        ))->setRequired();
+        ))->setRequired()
+                ->setLabel('DateOfBirth: ');
+        
+        
+        // User Start Date
+        $startDate = new Zend_Form_Element_Text('startDate');
+        $startDate->setAttribs(array(
+            'class' => 'form-control',
+            'placeholder' => 'Example: 10/10/2010',
+        ))->setRequired()
+                ->setLabel('StartDate: ');
 
 
+        // User Vacation Balance
+        $vacationBalance = new Zend_Dojo_Form_Element_NumberSpinner('vacationBalance');     
+        $vacationBalance->setAttribs(array(
+            'class' => 'form-control',
+            'max' => '21',
+            'min' =>'0'    
+        ))->setRequired()
+                ->setLabel('VacationBalance: ');
+        
+        
         // User Description Element 
         $description = new Zend_Form_Element_Textarea('description');
         $description->
@@ -129,17 +137,10 @@ class Users_Form_User extends Zend_Form {
         $department = new Zend_Form_Element_Select('department');
         $department->
                 setLabel('Department: ');
-//        foreach ($users as $user) {
-//            $department->addMultiOption($user->department);
-//        }
-//        setAttrib('class', 'form-control');
+        $department->setAttrib('class', 'form-control');
 
-//        $em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
-//        $repository = $em->getRepository('Attendance\Entity\Branche');
-//        $entities = $repository->findAll();
-
-// User Branch  Element
-        $branch = new Zend_Form_Element_Select('branche');
+        // User Branch  Element
+        $branch = new Zend_Form_Element_Select('branch');
         $branch->
                 setLabel('Branch: ')->
                 setOptions(array(
@@ -147,7 +148,7 @@ class Users_Form_User extends Zend_Form {
                 ))->
                 setAttrib('class', 'form-control');
 
-
+        
         // User Position  Element
         $position = new Zend_Form_Element_Select('position');
         $position->
@@ -157,21 +158,23 @@ class Users_Form_User extends Zend_Form {
                 ))->
                 setAttrib('class', 'form-control');
 
+        $photo = new Zend_Form_Element_File('picture', array(
+            'label' => 'Picture',
+            'required' => true,
+            'MaxFileSize' => 2097152, // 2097152 BYTES = 2 MEGABYTES
+            'validators' => array(
+                array('Count', false, 1),
+                array('Size', false, 2097152),
+                array('Extension', false, 'gif,jpg,png'),
+                array('ImageSize', false, array('minwidth' => 100,
+                                                'minheight' => 100,
+                                                'maxwidth' => 1000,
+                                                'maxheight' => 1000))
+            )
+        ));
 
-        // User Photo Element
-        $photo = new Zend_Form_Element_File('photo');
-        $photo->
-                setLabel('Upload your photo: ')->
-                setAttrib("class", "form-control")->
-                setDestination('/var/www/public/images')->
-                addValidator('Count', false, 1);
-        $thedate = date_create();
-        $photo->addFilter('Rename', array('target' => $thedate->format('U = Y-m-d H:i:s')))->
-                addValidator('Size', false, 2097152)->
-                setMaxFileSize(2097152)->
-                addValidator('Extension', false, 'jpg,png,gif,jpeg')->
-                receive()->
-                setValueDisabled(true);
+      
+
         // Submit Button Element
         $submit = new Zend_Form_Element_Submit('submit');
         $submit->
@@ -180,7 +183,7 @@ class Users_Form_User extends Zend_Form {
                     'value' => 'Submit!'
         ));
 
-
+        
         // Reset Button Element
         $reset = new Zend_Form_Element_Reset("reset");
         $reset->
@@ -198,15 +201,19 @@ class Users_Form_User extends Zend_Form {
             $confirmPassword,
             $name,
             $mobile,
-//            $photo,
+            $dateOfBirth,
+            $startDate,
             $maritalStatus,
             $description,
             $branch,
-//            $department,
-//            $position,
+            $department,
+            $position,
+            $photo,
             $submit,
-            $reset
+            $reset,
+            
         ));
+        
     }
 
 }
