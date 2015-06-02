@@ -61,9 +61,6 @@ EOT
         foreach($users as $object)
         {
             $object->password = password_hash($object->password, PASSWORD_BCRYPT);
-            
-            $object->dateFrom = new \DateTime("now");
-            $object->dateTo = new \DateTime("now");
             $object->dateOfBirth = new \DateTime("now");
             $object->startDate = new \DateTime("now");
             $object->branch = $branches['branch1']; //$repository->find(1);
@@ -72,6 +69,20 @@ EOT
         }
         
         $this->insertObjectsInDatabase($entityManager , $users);
+        
+        $holidays = $loader->load('application/data/fixtures/HolidayFixtures.yml');
+        
+        // append a date object for every user object
+        foreach($holidays as $object)
+        {
+            $object->password = password_hash($object->password, PASSWORD_BCRYPT);
+            
+            $object->dateFrom = new \DateTime("now");
+            $object->dateTo = new \DateTime("now");
+            
+        }
+        
+        $this->insertObjectsInDatabase($entityManager , $holidays);
         
         $entityManager->flush();
         

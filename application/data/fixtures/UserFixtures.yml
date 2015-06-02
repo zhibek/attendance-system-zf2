@@ -24,9 +24,7 @@ Attendance\Entity\User:
         description: human                        
         vacationBalance: 31       
         totalWorkingHoursThisMonth: 31 
-Attendance\Entity\Holiday:
-    holiday{1..10}:
-        name: 'NEW Year'
+
 
 #    user1:
 #        name: 'bob2'
