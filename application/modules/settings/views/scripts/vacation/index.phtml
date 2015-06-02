@@ -1,0 +1,37 @@
+{{<layout}}
+{{$content}}
+<br><br>
+<a href="new"><button class="btn btn-small btn-success">Create new Vacation</button></a>
+<br><br>
+<div class="panel panel-default">
+
+    <div class="panel-heading">Vacations</div>
+
+    <!-- Table -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Balance</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#vacations}}
+            <tr>
+                <td>{{type}}</td>
+                <td>{{balance}}</td>
+                <td>{{description}}</td>
+                <td><a href="delete/id/{{id}}"><button class="btn btn-small btn-primary">Deactivate</button></a>
+                    &nbsp;<a href="edit/id/{{id}}"><button class="btn btn-small btn-warning">Edit</button></a>
+            </tr>
+            {{/vacations}}
+        </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+{{/content}}
+{{/layout}}
