@@ -1,10 +1,8 @@
 {{<layout}}
 {{$content}}
-<br><br><br><br><br>
-
-
-
-
+<br />
+<a href="/users/index/new"><button class="btn btn-small btn-success">Create new User</button></a>
+<br />
 <div class="panel panel-default">
       
       <div class="panel-heading">Users</div>
@@ -36,12 +34,8 @@
                     <td>{{department.name}}</td>
                     <td>{{manager.name}}</td>
                     <td>
-                        <button class="btn btn-danger">
-                            Deactivate
-                        </button>
-                        <button class="btn btn-default">
-                            Edit
-                        </button>
+                        <a class="btn btn-danger" href="/users/index/delete/id/{{id}}">Delete</a>
+                        <a class="btn btn-default" href="/users/index/edit/id/{{id}}">Edit</a>
                     </td>
                 </tr>
                 

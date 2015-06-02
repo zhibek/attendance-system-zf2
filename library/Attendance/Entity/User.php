@@ -13,9 +13,10 @@ use Attendance\Entity\Position;
  * @ORM\Table(name="user")
  * @package Attendance\Entity
  */
-
 class User
 {
+    
+    const DEFAULT_VACATION_BALANCE = 21;
 
     /**
      * @ORM\Id
@@ -31,7 +32,7 @@ class User
      * @var string
      */
     public $name;
-    
+
     /**
      *
      * @ORM\Column(type="string" , unique=true)
@@ -59,74 +60,74 @@ class User
      * @var date
      */
     public $dateOfBirth;
-    
+
     /**
      *
      * @ORM\Column(type="string")
      * @var string
      */
     public $photo;
-    
+
     /**
      *
      * @ORM\Column(type="string" )
      * @var string
      */
     public $maritalStatus;
-    
+
     /**
      *
      * @ORM\Column(type="string" , length = 1024 )
      * @var string
      */
     public $description;
-    
+
     /**
      *
      * @ORM\ManyToOne(targetEntity="Attendance\Entity\Branch")
      * @ORM\JoinColumn(name="branch_id", referencedColumnName="id")
      * @var Attendance\Entity\Branch
      */
-     public $branch;
-    
-     /**
+    public $branch;
+
+    /**
      *
      * @ORM\ManyToOne(targetEntity="Attendance\Entity\Department")
      * @ORM\JoinColumn(name="department_id", referencedColumnName="id")
      * @var Attendance\Entity\Department
      */
     public $department;
-    
-     /**
+
+    /**
      *
      * @ORM\ManyToOne(targetEntity="Attendance\Entity\User")
      * @ORM\JoinColumn(name="manager_id", referencedColumnName="id")
      * @var Attendance\Entity\User
      */
     public $manager;
-    
-     /**
+
+    /**
      *
      * @ORM\ManyToOne(targetEntity="Attendance\Entity\Position")
      * @ORM\JoinColumn(name="position_id", referencedColumnName="id")
      * @var Attendance\Entity\Position
      */
     public $position;
-    
-     /**
+
+    /**
      *
      * @ORM\Column(type="date")
      * @var date
      */
     public $startDate;
-    
-     /**
+
+    /**
      *
      * @ORM\Column(type="integer")
      * @var integer
      */
     public $vacationBalance;
-     
+
     /**
      *
      * @ORM\Column(type="integer")
@@ -134,7 +135,9 @@ class User
      */
     public $totalWorkingHoursThisMonth;
 
+    static public function hashPassword($password)
+    {
+        return password_hash($password, PASSWORD_BCRYPT);
+    }
 
-
-    
 }
