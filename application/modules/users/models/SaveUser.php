@@ -23,7 +23,7 @@ class Users_Model_SaveUser
         
         $entity->username = $userInfo['username'];
         $entity->name = $userInfo['name'];
-        if(is_null($userObj) && !empty($userInfo['password'])){
+        if(is_null($userObj)){
             $entity->password = Attendance\Entity\User::hashPassword($userInfo['password']);
         }
         $dateString = $userInfo['dateOfBirth'];
@@ -52,7 +52,7 @@ class Users_Model_SaveUser
         $entity->vacationBalance = \Attendance\Entity\User::DEFAULT_VACATION_BALANCE;
         $entity->totalWorkingHoursThisMonth = 0;
         
-        if(is_null($userObj) && !empty($userInfo['photo'])){
+        if(is_null($userObj)){
             $entity->photo = $this->savePhoto();
         }
 

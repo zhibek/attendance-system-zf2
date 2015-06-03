@@ -49,7 +49,7 @@ class Users_IndexController extends Zend_Controller_Action
                 $form->getElement("password")->setRequired(false);
                 $form->getElement("confirmPassword")->setRequired(false);
             }
-            if(empty($data['photo']))
+            if(empty($_FILES['photo']["name"]))
             {
                 $form->getElement('photo')->setRequired(false);
             }
