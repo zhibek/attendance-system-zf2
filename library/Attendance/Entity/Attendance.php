@@ -30,15 +30,15 @@ class Attendance
     
          /**
      *
-     * @ORM\Column(type="date")
-     * @var date
+     * @ORM\Column(type="string")
+     * @var string
      */
     public $startDate;
     
          /**
      *
-     * @ORM\Column(type="date")
-     * @var date
+     * @ORM\Column(type="string")
+     * @var string
      */
     public $endDate;
 

@@ -11,7 +11,6 @@
  * database table, so as not to violate any constrains
  * 
  */
-
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Command\Command;
@@ -25,9 +24,9 @@ class Users_Service_Console_DataGenerator extends Command
     protected function configure()
     {
         $this
-            ->setName('schema:data-generate')
-            ->setDescription('Use Alice to generate testing data')
-            ->setHelp(<<<EOT
+                ->setName('schema:data-generate')
+                ->setDescription('Use Alice to generate testing data')
+                ->setHelp(<<<EOT
 This command create 10 users , 1 branche , 1 postion , 1 department
 EOT
         );
@@ -40,60 +39,64 @@ EOT
     {
         /* @var $entityManager \Doctrine\ORM\EntityManager */
         $entityManager = $this->getHelper('em')->getEntityManager();
-        
+
         $loader = new \Nelmio\Alice\Fixtures\Loader();
-        
+
         $branches = $loader->load('application/data/fixtures/BranchFixtures.yml');
-        
-        $this->insertObjectsInDatabase($entityManager , $branches);
-        
+
+        $this->insertObjectsInDatabase($entityManager, $branches);
+
         $positions = $loader->load('application/data/fixtures/PositionFixtures.yml');
-        
-        $this->insertObjectsInDatabase($entityManager , $positions);
-        
+
+        $vacations = $loader->load('application/data/fixtures/VacationFixtures.yml');
+
+        $this->insertObjectsInDatabase($entityManager, $vacations);
+
+        $attendance = $loader->load('application/data/fixtures/AttendanceFixtures.yml');
+
+        $this->insertObjectsInDatabase($entityManager, $attendance);
+
+        $this->insertObjectsInDatabase($entityManager, $positions);
+
         $departments = $loader->load('application/data/fixtures/DepartmentFixtures.yml');
-        
-        $this->insertObjectsInDatabase($entityManager , $departments);
-        
+
+        $this->insertObjectsInDatabase($entityManager, $departments);
+
         $users = $loader->load('application/data/fixtures/UserFixtures.yml');
-        
+
         // append a date object for every user object
-        foreach($users as $object)
-        {
+        foreach ($users as $object) {
             $object->password = \Attendance\Entity\User::hashPassword($object->password);
-            
+
             $object->dateOfBirth = new \DateTime("now");
             $object->startDate = new \DateTime("now");
             $object->branch = $branches['branch1']; //$repository->find(1);
             $object->position = $positions['position1'];
             $object->department = $departments['department1'];
         }
-        
-        $this->insertObjectsInDatabase($entityManager , $users);
-        
+
+        $this->insertObjectsInDatabase($entityManager, $users);
+
         $holidays = $loader->load('application/data/fixtures/HolidayFixtures.yml');
-        
+
         // append a date object for every user object
-        foreach($holidays as $object)
-        {
+        foreach ($holidays as $object) {
             $object->dateFrom = new \DateTime("now");
             $object->dateTo = new \DateTime("now");
-            
         }
-        
-        $this->insertObjectsInDatabase($entityManager , $holidays);
-        
-        $entityManager->flush();
-        
-        $output->writeln('Data Added');
-   }
 
-   private function insertObjectsInDatabase($entityManager , $objectsToInsert )
-   {
-       foreach($objectsToInsert as $object)
-        {
+        $this->insertObjectsInDatabase($entityManager, $holidays);
+
+        $entityManager->flush();
+
+        $output->writeln('Data Added');
+    }
+
+    private function insertObjectsInDatabase($entityManager, $objectsToInsert)
+    {
+        foreach ($objectsToInsert as $object) {
             $entityManager->persist($object);
         }
-   }
+    }
 
 }

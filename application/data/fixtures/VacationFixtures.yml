@@ -1,0 +1,10 @@
+
+Attendance\Entity\Vacation:
+    
+    vacation{1..25}:
+    
+        type: <firstName()>
+        description: <lastName()>
+        balance: 2
+        
+    
