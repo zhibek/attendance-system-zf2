@@ -4,10 +4,12 @@ class Users_Model_SaveUser
 {
 
     protected $em;
+    protected $request;
 
-    public function __construct($em)
+    public function __construct($em, $request = null)
     {
         $this->em = $em;
+        $this->request = $request;
     }
 
     public function saveUser($request , $userObj = null)
@@ -115,4 +117,14 @@ class Users_Model_SaveUser
         $form->populate($user);
     }
 
+    
+    
+    public function deleteUser()
+    {
+        $id = $this->request->getParam('id');
+        $query = $this->em->createQuery('DELETE FROM Attendance\Entity\User  u WHERE u.id = ?1');
+        $query->setParameter(1, $id);
+        $query->execute();
+    }
+    
 }

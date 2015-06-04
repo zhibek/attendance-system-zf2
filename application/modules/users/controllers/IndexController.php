@@ -85,7 +85,11 @@ class Users_IndexController extends Zend_Controller_Action
     
     public function deleteAction()
     {
-        
+        $request = $this->getRequest();
+        $em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
+        $userModel = new Users_Model_SaveUser($em, $request);
+        $userModel->deleteUser();
+        $this->redirect("/users/index");
     }
 
 }
