@@ -1,0 +1,9 @@
+Attendance\Entity\Attendance:
+    
+    user{1..5}:
+        branch: <numberBetween(1, 5)>
+        startDate: 08:51:16
+        endDate: 014:42:04
+        
+    
+        
