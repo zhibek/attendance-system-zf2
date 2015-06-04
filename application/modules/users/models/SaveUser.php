@@ -65,6 +65,8 @@ class Users_Model_SaveUser
 
     protected function savePhoto()
     {
+        $uploadResult = null;
+        
         $upload = new Zend_File_Transfer_Adapter_Http();
 
         $imagesPath = APPLICATION_PATH . '/../public/upload/images/';
@@ -75,19 +77,21 @@ class Users_Model_SaveUser
             // upload received file(s)
             $upload->receive();
         } catch (Zend_File_Transfer_Exception $e) {
-            $e->getMessage();
+            $uploadResult = '/upload/images/defaultpic.png';
+            
         }
 
         $name = $upload->getFileName('photo');
 
         $extention = pathinfo($name, PATHINFO_EXTENSION);
 
-        //get random new name
+        //get random new namez
         $newName = $this->getRandomName();
 
         rename($name, APPLICATION_PATH . '/../public/upload/images/' . $newName . '.' . $extention);
 
-        return '/upload/images/' . $newName . '.' . $extention;
+        $uploadResult = '/upload/images/' . $newName . '.' . $extention;
+        return $uploadResult;
     }
 
     protected function getRandomName()
@@ -96,7 +100,7 @@ class Users_Model_SaveUser
             . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
             . '0123456789'); // and any other characters
         shuffle($seed); // probably optional since array_is randomized; this may be redundant
-        $cid = substr(implode('', $seed), 1, 51) . uniqid();
+        $cid = substr(implode('', $seed), 1, 10) . uniqid();
 
 
         return $cid;
