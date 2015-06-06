@@ -36,7 +36,7 @@ base:
       master:
         default: true
         driver: pdo_mysql
-        host: attendance-system-test.cu11kojwys3f.eu-west-1.rds.amazonaws.com
+        host: 172.31.14.204
         dbname: attendance
         user: attendance
         password: attendance
