@@ -36,10 +36,10 @@ base:
       master:
         default: true
         driver: pdo_mysql
-        host: localhost
+        host: attendance-system-test.cu11kojwys3f.eu-west-1.rds.amazonaws.com
         dbname: attendance
-        user: root
-        password: ilikerandompasswords
+        user: attendance
+        password: attendance
 
 production:
   _extends: base
