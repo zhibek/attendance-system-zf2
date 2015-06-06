@@ -21,16 +21,12 @@ class Settings_Form_AttendanceForm extends Zend_Form
         $this->addElement('text', 'startdate', array(
             'label' => 'Start Date',
             'required' => true,
-//            'class' => 'Timepicker',
-            'class' => 'time start',
-            'id' => 'timeOnlyExample',
+            'class' => 'time',
         ));
 
         $this->addElement('text', 'enddate', array(
             'label' => 'End Date',
-//            'class' => 'Timepicker',
-            'class' => 'time end',
-            'id' => 'timeOnlyExample',
+            'class' => 'time',
             'required' => true,
         ));
         $this->addElement('hidden', 'id', array(
