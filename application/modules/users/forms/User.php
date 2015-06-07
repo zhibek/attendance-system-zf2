@@ -81,6 +81,7 @@ class Users_Form_User extends Zend_Form
         $mobile->
             setRequired()->
             setLabel('Mobile: ')->
+            addValidator('Digits')->
             addFilter('StringTrim')->
             setAttribs(array(
                 'class' => 'form-control',
@@ -94,6 +95,9 @@ class Users_Form_User extends Zend_Form
                 'class' => 'form-control',
                 'placeholder' => 'Example: 10/10/2010',
             ))->setRequired()
+            ->addValidators(array (
+            array('date', false, array('dd/MM/yyyy'))
+        ))
             ->setLabel('DateOfBirth: ');
 
 
@@ -103,6 +107,9 @@ class Users_Form_User extends Zend_Form
                 'class' => 'form-control',
                 'placeholder' => 'Example: 10/10/2010',
             ))->setRequired()
+            ->addValidators(array (
+            array('date', false, array('dd/MM/yyyy'))
+        ))
             ->setLabel('StartDate: ');
 
 

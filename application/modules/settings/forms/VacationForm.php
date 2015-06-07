@@ -14,14 +14,14 @@ class Settings_Form_VacationForm extends Zend_Form
             'filters' => array('StringTrim'),
         ));
 
-        $this->addElement('text', 'description', array(
+        $this->addElement('textarea', 'description', array(
             'label' => 'Description',
             'required' => true,
             'filters' => array('StringTrim'),
-            'validators' => array(array('stringLength', false, array(1, 1024))),
+            'validators' => array(array('stringLength', false, array(1, 512))),
         ));
 
-        $this->addElement('text', 'balance', array(
+        $this->addElement('integer', 'balance', array(
             'label' => 'Balance',
             'required' => true,
             'filters' => array('StringTrim'),

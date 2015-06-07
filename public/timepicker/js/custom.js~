@@ -1,0 +1,5 @@
+$(document).ready(function(){
+    $(".Timepicker").focus(function(){
+        $(this).timepicker();
+    })
+})
