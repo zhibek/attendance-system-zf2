@@ -5,41 +5,35 @@
  *
  * @author ahmed
  */
-class Settings_HolidayController extends Zend_Controller_Action
-{
+class Settings_HolidayController extends Zend_Controller_Action {
 
-    public function init()
-    {
+    public function init() {
         //something
         $entityManager = $this->getInvokeArg('bootstrap')->getResource('entityManager');
         $this->holidayModel = new Settings_Model_Holiday($entityManager);
     }
 
-    public function indexAction()
-    {
-        
+    public function indexAction() {
+
         $holidayList = $this->holidayModel->listAll();
-        foreach ($holidayList as $holiday)
-        {
+        foreach ($holidayList as $holiday) {
             $holiday->dateFrom = date_format($holiday->dateFrom, 'm/d/Y');
             $holiday->dateTo = date_format($holiday->dateTo, 'm/d/Y');
         }
         $this->view->holidayList = $holidayList;
     }
 
-    public function deleteAction()
-    {
+    public function deleteAction() {
 
         $this->holidayModel->deactivateHoilday($this->_getParam('id'));
         $this->redirect('/settings/holiday/index');
     }
 
-    public function editAction()
-    {
+    public function editAction() {
         $form = new Settings_Form_HolidayForm();
         $request = $this->getRequest();
         $entityManager = $this->getInvokeArg('bootstrap')->getResource('entityManager');
-        $this->holidayModel->populateForm($form,$this->_getParam('id'));
+        $this->holidayModel->populateForm($form, $this->_getParam('id'));
         $this->view->editForm = $form;
 
         if ($request->isPost()) {
@@ -51,32 +45,25 @@ class Settings_HolidayController extends Zend_Controller_Action
         }
     }
 
-    public function newAction()
-    {
+    public function newAction() {
         $form = new Settings_Form_HolidayForm();
         $request = $this->getRequest();
-        
-                    
+
+
         if ($request->isPost()) {
             if ($form->isValid($request->getPost())) {
-                
+
                 $holidayInfo = $this->_request->getParams();
-                
+
                 //validate dates
-                $dateFrom = new DateTime($holidayInfo['dateFrom']) ;
-                $dateTo =  new DateTime($holidayInfo['dateTo']) ;
-                if($dateFrom > $dateTo)
-                {
+                $dateFrom = new DateTime($holidayInfo['dateFrom']);
+                $dateTo = new DateTime($holidayInfo['dateTo']);
+                if ($dateFrom > $dateTo) {
                     $form->getElement('dateTo')->addErrors(array('To Date: should be more than From Date:'));
-                }
-                else
-                {
+                } else {
                     $this->holidayModel->newHoliday($holidayInfo);
                     $this->redirect('/settings/holiday/index');
                 }
-                
-                
-                
             }
         }
 
