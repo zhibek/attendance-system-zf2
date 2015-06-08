@@ -21,10 +21,11 @@ class Settings_Form_VacationForm extends Zend_Form
             'validators' => array(array('stringLength', false, array(1, 512))),
         ));
 
-        $this->addElement('integer', 'balance', array(
+        $this->addElement('text', 'balance', array(
             'label' => 'Balance',
             'required' => true,
             'filters' => array('StringTrim'),
+            'validators'=>array('Digits')
         ));
         $this->addElement('hidden', 'id', array(
         

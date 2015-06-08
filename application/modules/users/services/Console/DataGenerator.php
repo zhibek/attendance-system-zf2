@@ -67,7 +67,7 @@ EOT
         // append a date object for every user object
         foreach ($users as $object) {
             $object->password = \Attendance\Entity\User::hashPassword($object->password);
-
+            $object->manager = $users['user26'];
             $object->dateOfBirth = new \DateTime("now");
             $object->startDate = new \DateTime("now");
             $object->branch = $branches['branch1']; //$repository->find(1);
