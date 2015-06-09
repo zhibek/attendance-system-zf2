@@ -23,6 +23,12 @@ class Settings_Model_Attendance
     {
         $repository = $this->_em->getRepository('Attendance\Entity\Attendance');
         $attendances = $repository->findAll();
+        foreach ($attendances as $key) {
+            $query = $this->_em->createQuery('Select v FROM Attendance\Entity\Branch  v WHERE v.id = ?1')->setParameter(1, $key->branch);
+            $result = $query->execute();
+            $key->branch = $result[0]->name;
+        }
+
         return $attendances;
     }
 
@@ -32,26 +38,29 @@ class Settings_Model_Attendance
         $entity->branch = $attendanceInfo['branch'];
         $entity->startDate = $attendanceInfo['startdate'];
         $entity->endDate = $attendanceInfo['enddate'];
+
 //      INSERT statements are not allowed in DQL, because entities and their
 //      relations have to be introduced into the persistence context 
 //      through EntityManager#persist() to ensure consistency of your object model.
         $this->_em->persist($entity);
         $this->_em->flush();
     }
-        public function deactivateVacation()
+
+    public function deactivateVacation()
     {
         $id = $this->_request->getParam('id');
         $query = $this->_em->createQuery('DELETE FROM Attendance\Entity\Attendance  v WHERE v.id = ?1');
         $query->setParameter(1, $id);
         $query->execute();
     }
-    
+
     public function populateForm($form)
     {
         $id = $this->_request->getParam('id');
         $query = $this->_em->createQuery('Select v FROM Attendance\Entity\Attendance  v WHERE v.id = ?1');
         $query->setParameter(1, $id);
         $result = $query->execute();
+        unset($result->branch);
         $form->populate((array) $result[0]);
     }
 

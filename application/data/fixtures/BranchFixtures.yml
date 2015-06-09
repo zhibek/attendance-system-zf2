@@ -1,3 +1,10 @@
 Attendance\Entity\Branch:
     branch1:
         name: 'Cairo Branch'
+    branch2:
+        name: 'Alex Branch'
+    branch3:
+        name: 'Aswan Branch'
+    branch4:
+        name: 'Post-Saeed Branch'
+        

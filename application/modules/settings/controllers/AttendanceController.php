@@ -23,9 +23,9 @@ class Settings_AttendanceController extends Zend_Controller_Action
 
     public function newAction()
     {
-        $form = new Settings_Form_AttendanceForm();
-        $request = $this->getRequest();
         $em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
+        $form = new Settings_Form_AttendanceForm(array('em' => $em));
+        $request = $this->getRequest();
         $attendanceInfo = $this->_request->getParams();
         $attendanceModel = new Settings_Model_Attendance($em);
         if ($request->isPost()) {
@@ -49,11 +49,12 @@ class Settings_AttendanceController extends Zend_Controller_Action
 
     public function editAction()
     {
-        $form = new Settings_Form_AttendanceForm();
-        $request = $this->getRequest();
         $em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
+        $form = new Settings_Form_AttendanceForm(array('em' => $em));
+        $request = $this->getRequest();
         $attendanceModel = new Settings_Model_Attendance($em, $request);
         $attendanceModel->populateForm($form);
+//        unset($form->branch);
         $this->view->editForm = $form;
 
         if ($request->isPost()) {

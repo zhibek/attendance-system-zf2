@@ -1,7 +1,7 @@
 {{<layout}}
 {{$content}}
 <br><br>
-<a href="/settings/vacation/new"><button class="btn btn-small btn-success">Create new Vacation</button></a>
+<a href="/settings/vacation/new" class="btn btn-small btn-success">Create new Vacation</a>
 <br><br>
 <div class="panel panel-default">
 
@@ -23,8 +23,8 @@
                 <td>{{type}}</td>
                 <td>{{balance}}</td>
                 <td>{{description}}</td>
-                <td><a href="delete/id/{{id}}" class="delete_row"><button class="btn btn-small btn-primary">Deactivate</button></a>
-                    &nbsp;<a href="edit/id/{{id}}"><button class="btn btn-small btn-warning">Edit</button></a>
+                <td><a href="delete/id/{{id}}" class="delete_row  btn btn-small btn-primary"> Deactivate</a>
+                    &nbsp;<a href="edit/id/{{id}}" class="btn btn-small btn-warning" >Edit</a>
             </tr>
             {{/vacations}}
         </td>
