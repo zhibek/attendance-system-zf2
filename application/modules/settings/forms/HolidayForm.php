@@ -28,7 +28,7 @@ class Settings_Form_HolidayForm extends Zend_Form
         // From Date
         $fromDate = new Zend_Form_Element_Text('dateFrom');
         $fromDate->setAttribs(array(
-            'class' => 'form-control',
+            'class' => 'form-control date',
             'placeholder' => 'MM/DD/YYYY Example: 10/10/2010',
         ))->setRequired()
                 ->setLabel('From Date: ');
@@ -36,7 +36,7 @@ class Settings_Form_HolidayForm extends Zend_Form
         // To Date
         $toDate = new Zend_Form_Element_Text('dateTo');
         $toDate->setAttribs(array(
-            'class' => 'form-control',
+            'class' => 'form-control date',
             'placeholder' => 'MM/DD/YYYY Example: 10/10/2010',
         ))->setRequired()
                 ->setLabel('To Date: ');

@@ -81,8 +81,10 @@ EOT
 
         // append a date object for every user object
         foreach ($holidays as $object) {
-            $object->dateFrom = new \DateTime("now");
-            $object->dateTo = new \DateTime("now");
+            $randomDate = new \DateTime($object->dateFrom);
+            $object->dateFrom =clone $randomDate;
+            $randomDate->modify('+'.  rand(1, 30).' day');
+            $object->dateTo = $randomDate;
         }
 
         $this->insertObjectsInDatabase($entityManager, $holidays);

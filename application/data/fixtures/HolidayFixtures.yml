@@ -1,3 +1,4 @@
 \Attendance\Entity\Holiday:
     holiday{1..10}:
         name: 'NEW Year'
+        dateFrom: <date()>
