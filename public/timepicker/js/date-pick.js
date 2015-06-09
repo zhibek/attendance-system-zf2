@@ -1,4 +1,5 @@
 $('.date').datepicker({
     'format': 'm/d/yyyy',
-    'autoclose': true
+    'autoclose': true,
+    'orientation': 'top' 
 });
