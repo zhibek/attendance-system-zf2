@@ -1,4 +1,22 @@
 \Attendance\Entity\Holiday:
-    holiday{1..10}:
-        name: 'NEW Year'
+    holiday1:
+        name: 'Eid El-Fetr'
+        dateFrom: <date()>
+    holiday2:
+        name: 'Eid El-Adha'
+        dateFrom: <date()>
+    holiday3:
+        name: '6 October'
+        dateFrom: <date()>
+    holiday4:
+        name: 'Christmas'
+        dateFrom: <date()>
+    holiday5:
+        name: 'Eid El-Ommal'
+        dateFrom: <date()>
+    holiday6:
+        name: 'Tahrir Sina'
+        dateFrom: <date()>
+    holiday7:
+        name: '25 Jan'
         dateFrom: <date()>
