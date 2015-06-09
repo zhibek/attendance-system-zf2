@@ -13,6 +13,7 @@ class Users_Form_User extends Zend_Form
     public function __construct($options = null)
     {
         $this->em = $options['em'];
+        unset($options['em']);
         parent::__construct($options);
     }
 
