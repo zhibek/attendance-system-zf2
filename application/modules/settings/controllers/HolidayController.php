@@ -6,20 +6,30 @@
  * @author ahmed
  */
 class Settings_HolidayController extends Zend_Controller_Action {
+    
+    protected  $entityManager;
+
 
     public function init() {
         //something
-        $entityManager = $this->getInvokeArg('bootstrap')->getResource('entityManager');
-        $this->holidayModel = new Settings_Model_Holiday($entityManager);
+        $this->entityManager = $this->getInvokeArg('bootstrap')->getResource('entityManager');
+        $this->holidayModel = new Settings_Model_Holiday($this->entityManager);
     }
 
     public function indexAction() {
-
-        $holidayList = $this->holidayModel->listAll();
+        $filterForm = new Settings_Form_FilterByYearForm(null,$this->entityManager);
+        if($this->getParam('year'))
+        {
+            $holidayList = $this->holidayModel->filterByYear($this->getParam('year'));
+        }else
+        {
+            $holidayList = $this->holidayModel->listAll();
+        }
         foreach ($holidayList as $holiday) {
             $holiday->dateFrom = date_format($holiday->dateFrom, 'm/d/Y');
             $holiday->dateTo = date_format($holiday->dateTo, 'm/d/Y');
         }
+        $this->view->filterForm = $filterForm;
         $this->view->holidayList = $holidayList;
     }
 

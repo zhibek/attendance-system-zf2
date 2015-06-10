@@ -40,6 +40,16 @@ class Settings_Model_Holiday
     {
         return $this->repository->findAll();
     }
+    
+    public function filterByYear($year)
+    {
+//       
+        $query = $this->entityManager->createQuery('Select v FROM Attendance\Entity\Holiday  v WHERE v.dateFrom BETWEEN :year AND :yearPlus');
+        $query->setParameter('year',$year.'-1-1' );
+        $query->setParameter('yearPlus', new DateTime(($year+1).'-1-1') );
+        return $query->execute();
+        
+    }
 
     public function populateForm($form,$id)
     {
