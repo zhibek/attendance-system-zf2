@@ -82,7 +82,8 @@ class Users_Form_User extends Zend_Form
         $mobile->
             setRequired()->
             setLabel('Mobile: ')->
-            addValidator('Digits')->
+            //addValidator('Digits')->
+            addValidators(array('Digits',array('regex',false,array('pattern'   => '/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/','messages'=>'This is not a mobile number!'))))->
             addFilter('StringTrim')->
             setAttribs(array(
                 'class' => 'form-control',
@@ -93,11 +94,11 @@ class Users_Form_User extends Zend_Form
         // User Date Of Birth Element
         $dateOfBirth = new Zend_Form_Element_Text('dateOfBirth');
         $dateOfBirth->setAttribs(array(
-                'class' => 'form-control',
+                'class' => 'form-control date',
                 'placeholder' => 'Example: 10/10/2010',
             ))->setRequired()
             ->addValidators(array (
-            array('date', false, array('dd/MM/yyyy'))
+            array('date', false, array('MM/dd/yyyy'))
         ))
             ->setLabel('DateOfBirth: ');
 
@@ -105,11 +106,11 @@ class Users_Form_User extends Zend_Form
         // User Start Date
         $startDate = new Zend_Form_Element_Text('startDate');
         $startDate->setAttribs(array(
-                'class' => 'form-control',
+                'class' => 'form-control date',
                 'placeholder' => 'Example: 10/10/2010',
             ))->setRequired()
             ->addValidators(array (
-            array('date', false, array('dd/MM/yyyy'))
+            array('date', false, array('MM/dd/yyyy'))
         ))
             ->setLabel('StartDate: ');
 
