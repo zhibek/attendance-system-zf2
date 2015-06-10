@@ -25,7 +25,12 @@ class Settings_Form_AttendanceForm extends Zend_Form
             'label' => 'Start Date',
             'required' => true,
             'class' => 'time',
-            'id' => 'timeformat'
+            'id' => 'timeformat',
+            'validators' => array(
+                  array('regex', false, array(
+                  'pattern'   => '/^(2[0-3]|1[0-9]|0[0-9]|[^0-9][0-9]):([0-5][0-9]|[0-9]):([0-5][0-9]|[0-9])$/',
+                  'messages'  =>  'please pick time from the menu .... '))
+              )
         ));
 
         $this->addElement('text', 'enddate', array(
@@ -33,6 +38,12 @@ class Settings_Form_AttendanceForm extends Zend_Form
             'required' => true,
             'class' => 'time',
             'id' => 'timeformat',
+            'validators' => array(
+                  array('regex', false, array(
+                  'pattern'   => '/^(2[0-3]|1[0-9]|0[0-9]|[^0-9][0-9]):([0-5][0-9]|[0-9]):([0-5][0-9]|[0-9])$/',
+                  'messages'  =>  'please pick time from the menu .... '))
+              ),
+            
         ));
 
         // User Branch  Element
