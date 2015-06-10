@@ -82,8 +82,12 @@ class Users_Form_User extends Zend_Form
         $mobile->
             setRequired()->
             setLabel('Mobile: ')->
-            //addValidator('Digits')->
-            addValidators(array('Digits',array('regex',false,array('pattern'   => '/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/','messages'=>'This is not a mobile number!'))))->
+            addValidators(array('Digits',
+                array(
+                    'regex', false,
+                    array(
+                        'pattern'  => '/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/',
+                        'messages' => 'This is not a mobile number!'))))->
             addFilter('StringTrim')->
             setAttribs(array(
                 'class' => 'form-control',
@@ -97,9 +101,9 @@ class Users_Form_User extends Zend_Form
                 'class' => 'form-control date',
                 'placeholder' => 'Example: 10/10/2010',
             ))->setRequired()
-            ->addValidators(array (
-            array('date', false, array('MM/dd/yyyy'))
-        ))
+            ->addValidators(array(
+                array('date', false, array('MM/dd/yyyy'))
+            ))
             ->setLabel('DateOfBirth: ');
 
 
@@ -109,9 +113,9 @@ class Users_Form_User extends Zend_Form
                 'class' => 'form-control date',
                 'placeholder' => 'Example: 10/10/2010',
             ))->setRequired()
-            ->addValidators(array (
-            array('date', false, array('MM/dd/yyyy'))
-        ))
+            ->addValidators(array(
+                array('date', false, array('MM/dd/yyyy'))
+            ))
             ->setLabel('StartDate: ');
 
 
@@ -150,7 +154,7 @@ class Users_Form_User extends Zend_Form
         $department->
             setLabel('Department: ');
         $department->setAttrib('class', 'form-control');
-        
+
         $departmentRepository = $this->em->getRepository('Attendance\Entity\Department');
         $allDepartments = $departmentRepository->findAll();
         foreach ($allDepartments as $d) {
@@ -194,7 +198,7 @@ class Users_Form_User extends Zend_Form
                 " " => " "
             ))->
             setAttrib('class', 'form-control');
-        
+
         $managerRepository = $this->em->getRepository('Attendance\Entity\User');
         $allManagers = $managerRepository->findAll();
         foreach ($allManagers as $m) {
