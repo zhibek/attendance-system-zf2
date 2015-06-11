@@ -53,7 +53,10 @@ EOT
         $this->insertObjectsInDatabase($entityManager, $vacations);
 
         $attendance = $loader->load('application/data/fixtures/AttendanceFixtures.yml');
-
+        foreach ($attendance as $key ){
+            $key->startTime = new \DateTime("now");
+            $key->endTime=new \DateTime("now");
+        }
         $this->insertObjectsInDatabase($entityManager, $attendance);
 
         $this->insertObjectsInDatabase($entityManager, $positions);

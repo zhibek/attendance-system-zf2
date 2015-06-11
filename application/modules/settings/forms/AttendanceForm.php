@@ -21,8 +21,8 @@ class Settings_Form_AttendanceForm extends Zend_Form
     {
         $this->setMethod("POST");
 
-        $this->addElement('text', 'startdate', array(
-            'label' => 'Start Date',
+        $this->addElement('text', 'startTime', array(
+            'label' => 'Start Time',
             'required' => true,
             'class' => 'time',
             'id' => 'timeformat',
@@ -33,8 +33,8 @@ class Settings_Form_AttendanceForm extends Zend_Form
               )
         ));
 
-        $this->addElement('text', 'enddate', array(
-            'label' => 'End Date',
+        $this->addElement('text', 'endTime', array(
+            'label' => 'End Time',
             'required' => true,
             'class' => 'time',
             'id' => 'timeformat',

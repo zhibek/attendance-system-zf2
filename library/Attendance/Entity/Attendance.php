@@ -28,18 +28,18 @@ class Attendance
      */
     public $branch;
     
-         /**
+    /**
      *
-     * @ORM\Column(type="string")
-     * @var string
+     * @ORM\Column(type="time")
+     * @var time
      */
-    public $startDate;
+    public $startTime;
     
-         /**
+    /**
      *
-     * @ORM\Column(type="string")
-     * @var string
+     * @ORM\Column(type="time")
+     * @var time
      */
-    public $endDate;
+    public $endTime;
 
 }

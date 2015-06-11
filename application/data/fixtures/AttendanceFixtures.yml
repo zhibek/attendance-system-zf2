@@ -1,9 +1,9 @@
 Attendance\Entity\Attendance:
     
-    user{1..5}:
+    attendance {1..4}:
         branch: <numberBetween(1, 4)>
-        startDate: <numberBetween(0, 23)>:<numberBetween(0, 60)>:<numberBetween(0, 60)>
-        endDate: <numberBetween(0, 23)>:<numberBetween(0, 60)>:<numberBetween(0, 60)>
+        startTime: 18:15:22
+        endTime: 18:15:22
         
     
         
