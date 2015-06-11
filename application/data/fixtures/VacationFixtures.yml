@@ -1,10 +1,20 @@
 
 Attendance\Entity\Vacation:
     
-    vacation{1..25}:
+    vacation0:
     
-        type: <firstName()>
-        description: <lastName()>
-        balance: 2
+        type: Sick Vacation
+        description: Sick
+        balance: 7
         
+    vacation1:
     
+        type: Casual Vacation
+        description: Casual
+        balance: 7
+        
+    vacation2:
+    
+        type: Annual Vacation
+        description: Annual
+        balance: 21
