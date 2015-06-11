@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * Vacation Request Form Class using Zend_Form
+ * @author Mohamed Ramadan
+ * 
+ *  */
+class Requests_Form_Vacation extends Zend_Form
+{
+
+    public function init()
+    {
+
+        
+    }
+
+}

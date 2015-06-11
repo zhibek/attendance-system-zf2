@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * Description of VacationController
+ *
+ * @author Mohamed Ramadan
+ */
+class Vacation
+{
+
+    public function createAction()
+    {
+        
+    }
+
+}

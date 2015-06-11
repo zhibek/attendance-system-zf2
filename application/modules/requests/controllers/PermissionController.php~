@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * Description of PermissionController
+ *
+ * @author Mohamed Ramadan
+ */
+class Requests_PermissionController extends Zend_Controller_Action
+{
+
+    public function createAction()
+    {
+	$form = new Requests_Form_Permission();
+        $this->view->permissionRequestForm = $form;
+    }
+
+
+    public function indexAction()
+    {
+
+    }
+
+}

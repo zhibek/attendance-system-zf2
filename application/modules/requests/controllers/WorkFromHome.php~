@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * Description of WorkFromHomeController
+ *
+ * @author Mohamed Ramadan
+ */
+class WorkFromHome
+{
+
+    public function createAction()
+    {
+        
+    }
+
+}
