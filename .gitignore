@@ -4,3 +4,4 @@
 nbproject/*
 composer.lock
 public/upload/images/*
+public/bower_components/

@@ -1,0 +1,18 @@
+{
+  "name": "Attendance System",
+  "version": "0.1",
+  "homepage": "https://github.com/camelcasetechsd/attendance-system",
+  "keywords": [
+    "attendance",
+    "system"
+  ],
+  "authors": [
+    "Adham Saad"
+  ],
+  "license": "MIT",
+  "dependencies": {
+      "bootstrap" : "~3.x",
+      "bootstrap-datepicker" : "~1.x",
+      "jt.timepicker": "1.7"
+  }
+}
