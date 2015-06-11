@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * Permission Request Form Class using Zend_Form
+ * @author Mohamed Ramadan
+ * 
+ *  */
+class Requests_Form_Permission extends Zend_Form
+{
+
+    public function init()
+    {
+
+        
+    }
+
+}

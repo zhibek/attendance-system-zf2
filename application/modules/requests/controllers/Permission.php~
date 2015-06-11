@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * Description of PermissionController
+ *
+ * @author Mohamed Ramadan
+ */
+class Permission
+{
+
+    public function createAction()
+    {
+	$form = new Requests_Form_Permission();
+        $this->view->permissionRequestForm = $form;
+    }
+
+
+    public function indexAction()
+    {
+
+    }
+
+}
