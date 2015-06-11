@@ -6,7 +6,7 @@ Installation
 
 ### Clone repo and provision with vagrant:
 
-    git clone --recursive git@github.com:camelcasetechsd/attendance-system.git
+    git clone git@github.com:camelcasetechsd/attendance-system.git
     cd attendance-system
     vagrant up
     vagrant provision ## run this if the initial "vagrant up" had any fatal error preventing it completing
@@ -29,12 +29,18 @@ To access the vagrant environment from the terminal, change to the vagrant direc
     cd /vagrant
     composer install --prefer-dist
 
+### Use bower to install css/js dependencies:
+    cd /vagrant/public
+    bower install 
 
-### Install later database schema
+### Install latest database schema
     cd /vagrant
-    vendor/bin/doctrine orm:schema-tool:update --force
+    ./bin/cli orm:schema-tool:update --force
 
+### Install acceptance data
+    cd /vagrant
+    ./bin/cli schema:data-generate 
 
 ### View the site:
 
-Visit [http://attendance.localhost/](http://attendance.localhost/) to view the site.
+Visit [http://attendance.local/](http://attendance.local/) to view the site.
