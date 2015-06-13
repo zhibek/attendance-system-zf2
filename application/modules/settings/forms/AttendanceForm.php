@@ -27,10 +27,10 @@ class Settings_Form_AttendanceForm extends Zend_Form
             'class' => 'time',
             'id' => 'timeformat',
             'validators' => array(
-                  array('regex', false, array(
-                  'pattern'   => '/^(2[0-3]|1[0-9]|0[0-9]|[^0-9][0-9]):([0-5][0-9]|[0-9]):([0-5][0-9]|[0-9])$/',
-                  'messages'  =>  'please pick time from the menu .... '))
-              )
+                array('regex', false, array(
+                        'pattern' => '/^(2[0-3]|1[0-9]|0[0-9]|[^0-9][0-9]):([0-5][0-9]|[0-9]):([0-5][0-9]|[0-9])$/',
+                        'messages' => 'please pick time from the menu .... '))
+            )
         ));
 
         $this->addElement('text', 'endTime', array(
@@ -39,11 +39,17 @@ class Settings_Form_AttendanceForm extends Zend_Form
             'class' => 'time',
             'id' => 'timeformat',
             'validators' => array(
-                  array('regex', false, array(
-                  'pattern'   => '/^(2[0-3]|1[0-9]|0[0-9]|[^0-9][0-9]):([0-5][0-9]|[0-9]):([0-5][0-9]|[0-9])$/',
-                  'messages'  =>  'please pick time from the menu .... '))
-              ),
-            
+                array('regex', false, array(
+                        'pattern' => '/^(2[0-3]|1[0-9]|0[0-9]|[^0-9][0-9]):([0-5][0-9]|[0-9]):([0-5][0-9]|[0-9])$/',
+                        'messages' => 'please pick time from the menu .... ')
+                ),
+                array('Time',
+                    false,
+                    array(
+                        'token' => 'startTime'
+                    ),
+                ),
+            ),
         ));
 
         // User Branch  Element
