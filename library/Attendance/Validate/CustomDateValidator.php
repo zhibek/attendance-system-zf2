@@ -1,25 +1,47 @@
 <?php
+/**
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Validate
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
+ */
+
 
 /**
- * Description of CustomTimeValidator
- *
- * @author ahmed
+ * @category   Zend
+ * @package    Zend_Validate
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-require_once 'Zend/Validate/Abstract.php';
-
-class Zend_Validate_Time extends Zend_Validate_Abstract
+class Attendance_Validate_CustomDateValidator extends Zend_Validate_Abstract
 {
-
-    const NOT_GREATER = 'notGreater';
-//    const MISSING_TOKEN = 'missingToken';
+    /**
+     * Error codes
+     * @const string
+     */
+    const NOT_GREATER      = 'notGreater';
+    const MISSING_TOKEN = 'missingToken';
 
     /**
      * Error messages
      * @var array
      */
     protected $_messageTemplates = array(
-        self::NOT_GREATER => "End time should be greater than start time",
-//        self::MISSING_TOKEN => 'No token was provided to match against',
+        self::NOT_GREATER      => "DateTo should be more than  DateFrom",
+        self::MISSING_TOKEN => 'No token was provided to match against',
     );
 
     /**
@@ -68,28 +90,19 @@ class Zend_Validate_Time extends Zend_Validate_Abstract
     {
         return $this->_token;
     }
-    
 
     /**
      * Set token against which to compare
      *
      * @param  mixed $token
-     * @return Zend_Validate_Time
+     * @return Zend_Validate_Identical
      */
     public function setToken($token)
     {
         $this->_tokenString = $token;
-        $this->_token = $token;
+        $this->_token       = $token;
         return $this;
     }
-    
-    protected function explodeToken($token){
-		$startTime = explode(":", $token);
-        $token = $startTime;
-        return $token;
-        
-	}
-
 
     /**
      * Returns the strict parameter
@@ -104,7 +117,7 @@ class Zend_Validate_Time extends Zend_Validate_Abstract
     /**
      * Sets the strict parameter
      *
-     * @param Zend_Validate_Time
+     * @param Zend_Validate_Identical
      * @return $this
      */
     public function setStrict($strict)
@@ -113,12 +126,6 @@ class Zend_Validate_Time extends Zend_Validate_Abstract
         return $this;
     }
 
-    protected function explodeValue($value){
-		$endTime = explode(":", $value);
-        $value = $endTime;
-        return $value;
-	}
-	
     /**
      * Defined by Zend_Validate_Interface
      *
@@ -130,10 +137,7 @@ class Zend_Validate_Time extends Zend_Validate_Abstract
      * @return boolean
      */
     public function isValid($value, $context = null)
-    {  
-
-	#$endTime=  explode(":", $value);
-        #$value=$endTime[0];
+    {
         $this->_setValue($value);
 
         if (($context !== null) && isset($context) && array_key_exists($this->getToken(), $context)) {
@@ -141,26 +145,21 @@ class Zend_Validate_Time extends Zend_Validate_Abstract
         } else {
             $token = $this->getToken();
         }
-        
-         
-        $strict = $this->getStrict();
-        $token=$this->explodeToken($token);
-        $value=$this->explodeValue($value);
 
-            
-        //compare hours
-         if (($strict && ($value[0] < $token[0]))) {
-            $this->_error(self::NOT_GREATER);
+        if ($token === null) {
+            $this->_error(self::MISSING_TOKEN);
             return false;
-         //compare minutes
-        } else if ($strict && ($value[0] == $token[0]) && ( ($value[1] == $token[1]) || ($value[1] <$token[1]))) {
-            $this->_error(self::NOT_GREATER);
-            return false;
-        } else {
-            return true;
         }
 
+        $strict = $this->getStrict();
+        
+        $valueDate = new DateTime($value);
+        $tokenDate = new DateTime($token);
+        if (($strict && ($valueDate <= $tokenDate)) || (!$valueDate && ($value <= $tokenDate))) {
+            $this->_error(self::NOT_GREATER);
+            return false;
+        }
+
+        return true;
     }
-
-
 }

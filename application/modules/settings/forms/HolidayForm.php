@@ -41,6 +41,8 @@ class Settings_Form_HolidayForm extends Zend_Form
         ))->setRequired()
                 ->setLabel('To Date: ');
         
+        $toDate->addValidator(new Attendance_Validate_CustomDateValidator(array('token' =>  'dateFrom'))) ;
+        
         $submit = new Zend_Form_Element_Submit('submit');
         $submit->
                 setAttribs(array(

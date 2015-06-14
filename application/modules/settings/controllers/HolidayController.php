@@ -42,7 +42,6 @@ class Settings_HolidayController extends Zend_Controller_Action {
     public function editAction() {
         $form = new Settings_Form_HolidayForm();
         $request = $this->getRequest();
-        $entityManager = $this->getInvokeArg('bootstrap')->getResource('entityManager');
         $this->holidayModel->populateForm($form, $this->_getParam('id'));
         $this->view->editForm = $form;
 
