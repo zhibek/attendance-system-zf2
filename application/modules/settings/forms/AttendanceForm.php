@@ -43,14 +43,16 @@ class Settings_Form_AttendanceForm extends Zend_Form
                         'pattern' => '/^(2[0-3]|1[0-9]|0[0-9]|[^0-9][0-9]):([0-5][0-9]|[0-9]):([0-5][0-9]|[0-9])$/',
                         'messages' => 'please pick time from the menu .... ')
                 ),
-                array('Time',
-                    false,
-                    array(
-                        'token' => 'startTime'
-                    ),
-                ),
+//                array('Time',
+//                    false,
+//                    array(
+//                        'token' => 'startTime'
+//                    ),
+//                ),
             ),
         ));
+        
+        $this->getElement("endTime")->addValidator(new Attendance_Validate_Time(array('token'=>'startTime')));
 
         // User Branch  Element
         $branch = new Zend_Form_Element_Select('branch');

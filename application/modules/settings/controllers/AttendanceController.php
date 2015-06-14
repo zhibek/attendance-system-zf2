@@ -34,7 +34,7 @@ class Settings_AttendanceController extends Zend_Controller_Action
                 $this->redirect('/settings/attendance/index');
             }
         }
-
+        
         $this->view->form = $form;
     }
 
