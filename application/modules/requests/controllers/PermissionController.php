@@ -3,14 +3,19 @@
 /**
  * Description of PermissionController
  *
- * @author Mohamed Ramadan
+ * @author Moataz
  */
 class Requests_PermissionController extends Zend_Controller_Action
 {
+    public function init() {
+        $this->entityManager = $this->getInvokeArg('bootstrap')->getResource('entityManager');
+    }
 
     public function indexAction()
     {
-        $form =  new Requests_Form_PermissionForm();
+        
+        
+        
     }
 
 }

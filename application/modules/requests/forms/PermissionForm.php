@@ -7,31 +7,40 @@
  *  */
 class Requests_Form_PermissionForm extends Zend_Form
 {
+    protected $entityManager;
+    
+    public function __construct($options = null,$em)
+    {
+        $this->entityManager = $em;
+        unset($options['em']);
+        parent::__construct($options);
+    }
+
 
     public function init()
     {
         $this->setMethod('post');
         $this->setAttrib('calss', 'form form-horizontal');
         
-        $em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
-        $UserModel = new Users_Model_User($em);
+        $UserModel = new Users_Model_User($this->entityManager);
 
         $user = new Zend_Form_Element_Select('user');
-        $user->setLabel('Department: ');
+        $user->setLabel('User: ');
         $user->setAttrib('class', 'form-control');
 
         
         $allUsers = $UserModel->listAll();
-        foreach ($allDepartments as $d) {
-            $user->addMultiOption($d->id, $d->name);
+        foreach ($allUsers as $currentUser) {
+            $user->addMultiOption($currentUser->id, $currentUser->name);
         }
         
         // Permission Date 
         $date = new Zend_Form_Element_Text('date');
         $date->setAttribs(array(
-                'class' => 'form-control time',
+                'class' => 'form-control date',
                 
-            ))->setRequired()
+            ))
+            ->setRequired()
             ->addValidators(array(
                 array('date', false, array('MM/dd/yyyy'))
             ))
@@ -40,24 +49,31 @@ class Requests_Form_PermissionForm extends Zend_Form
         $fromTime = new Zend_Form_Element_Text('fromTime');
         $fromTime->setAttribs(array(
             'class' => 'form-control time',            
-        ))->setRequired()
-                ->setLabel('From Date: ');
-       
+        ))
+        ->setRequired()
+        ->setLabel('From Time: ')
+        ->addValidators(array(
+            array('regex', false, array(
+                        'pattern' => '/^(2[0-3]|1[0-9]|0[0-9]|[^0-9][0-9]):([0-5][0-9]|[0-9]):([0-5][0-9]|[0-9])$/',
+                        'messages' => 'please pick time from the menu .... '))
+            
+        ));
         
         $toTime = new Zend_Form_Element_Text('toTime');
         $toTime->setAttribs(array(
             'class' => 'form-control time',
-            
         ))
         ->setRequired()
-        ->addValidator(array('regex', false, array(
+        ->setLabel('To Time: ')
+        ->addValidators(array(
+            array('regex', false, array(
                         'pattern' => '/^(2[0-3]|1[0-9]|0[0-9]|[^0-9][0-9]):([0-5][0-9]|[0-9]):([0-5][0-9]|[0-9])$/',
-                        'messages' => 'please pick time from the menu .... ')))
-        ->setLabel('To Date: ');
-
+                        'messages' => 'please pick time from the menu .... '))
+            
+        ));
                         
         
-        $toTime->addValidator(new Attendance_Validate_CustomDateValidator(array('token' =>  'fromTime'))) ;
+        $toTime->addValidator(new Attendance_Validate_Time(array('token' =>  'fromTime'))) ;
         
         
         // From-Time Permission

@@ -20,7 +20,7 @@ class Users_Model_User
 
     public function listAll()
     {
-        $this->repository->findAll();
+        return $this->repository->findBy(array(), array('name'=>'asc'));;
     }
     
     public function setPage($currentPage)
