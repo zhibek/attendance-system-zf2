@@ -14,10 +14,15 @@ class Users_Model_User
 
     public function __construct($em)
     {
-        $repository = $em->getRepository('Attendance\Entity\User');
-        $this->paginator = new Zend_Paginator(new Attendance_Paginator_Doctrine($repository));
+        $this->repository = $em->getRepository('Attendance\Entity\User');
+        $this->paginator = new Zend_Paginator(new Attendance_Paginator_Doctrine($this->repository));
     }
 
+    public function listAll()
+    {
+        $this->repository->findAll();
+    }
+    
     public function setPage($currentPage)
     {
         $this->paginator->setCurrentPageNumber($currentPage);
