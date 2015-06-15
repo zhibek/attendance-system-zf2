@@ -2,7 +2,7 @@
 
 /**
  * WorkFromHome Request Form Class using Zend_Form
- * @author Mohamed Ramadan
+ * @author Ahmed
  * 
  *  */
 class Requests_Form_WorkFromHome extends Zend_Form
@@ -13,42 +13,34 @@ class Requests_Form_WorkFromHome extends Zend_Form
         $this->setMethod('post');
         $this->setAttrib('class', 'form form-horizontal');
         
-        // From Date
-        $dateFrom = new Zend_Form_Element_Text('dateFrom');
-        $dateFrom->setAttribs(array(
-            'class' => 'form-control date',
-            'placeholder' => 'MM/DD/YYYY Example: 10/10/2010',
-        ))->setRequired()
-                ->setLabel('From Date: ');
-        
-        // To Date
-        $dateTo = new Zend_Form_Element_Text('dateTo');
-        $dateTo->setAttribs(array(
-            'class' => 'form-control date',
-            'placeholder' => 'MM/DD/YYYY Example: 10/10/2010',
-        ))->setRequired()
-                ->setLabel('To Date: ');
-        
-        
-        // Reason
-        $reason = new Zend_Form_Element_Textarea('reason');
-        $reason->setAttribs(array('class'=>'from-control','row'=>'5'))
-            ->setRequired()
-            ->setLabel('Reason: ');
-        
-        $submit = new Zend_Form_Element_Submit('submit');
-        $submit->
-                setAttribs(array(
-                    'class' => 'btn btn-success',
-                    'value' => 'Submit!'
+        $this->addElement('text','startDate',array(
+           'lable'=>'Start Date',
+           'required' => true,
+            'validators' => array(
+                array('regex', false, array(
+                        'pattern' => '~(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d~',
+                        'messages' => 'please pick a Date '))
+            )
         ));
         
-        $this->addElements(array(
-            $dateFrom,
-            $dateTo,
-            $reason
+        $this->addElement('text','endDate',array(
+           'lable'=>'End Date',
+           'required' => true,
+            'validators' => array(
+                array('regex', false, array(
+                        'pattern' => '~(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d~',
+                        'messages' => 'please pick a Date '))
+            )
         ));
-        
+        $this->getElement('endDate')->
+                addValidators(new Attendance_Validate_CustomDateValidator(array('token' =>  'startDate')));
+       
+        $this->addElement('textarea','reason',array(
+           'label'=>'Reason',
+           'required' => true,
+            'filters' => array('StringTrim'),
+            'validators' => array(array('stringLength', false, array(1, 512))),
+        ));
     }
 
 }

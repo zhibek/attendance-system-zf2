@@ -1,0 +1,10 @@
+
+Attendance\Entity\WorkFromHome:
+    
+    workfromhome{1..7}:
+    
+        user: <FirstName()>
+        startDate: <date()>
+        endDate: <date()>
+        reason: Sick
+    
