@@ -61,7 +61,7 @@ class Requests_Model_VacationRequest
         }
 
         $name = $upload->getFileName('attachment');
-        var_dump($name);exit;
+        
         $extention = pathinfo($name, PATHINFO_EXTENSION);
 
         //get random new namez
