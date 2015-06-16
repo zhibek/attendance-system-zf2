@@ -33,7 +33,7 @@ class Requests_Model_VacationRequest
         $entity->vacationType =$vacationRepository->find($vacationType);
         
         if(isset($vacationRequestInfo['attachment'])){
-            $entity->attachment = $this->savePhoto();
+            $entity->attachment = $this->saveAttachement();
         }
         
         $this->_em->persist($entity);
@@ -42,34 +42,32 @@ class Requests_Model_VacationRequest
 
     
     
-    protected function savePhoto()
+    protected function saveAttachement()
     {
         $uploadResult = null;
         
         $upload = new Zend_File_Transfer_Adapter_Http();
 
-        $imagesPath = APPLICATION_PATH . '/../public/upload/images/';
+        $attachementPath = APPLICATION_PATH . '/../public/upload/vacation_attachments/';
 
-        $upload->setDestination($imagesPath);
+        $upload->setDestination($attachementPath);
         
         try {
             // upload received file(s)
             $upload->receive();
             
         } catch (Zend_File_Transfer_Exception $e) {
-            $uploadResult = '/upload/images/defaultpic.png';
+            echo"attachment is needed";
         }
 
         $name = $upload->getFileName('attachment');
         
-        $extention = pathinfo($name, PATHINFO_EXTENSION);
+        
 
         //get random new namez
         $newName = $this->getRandomName();
-
-        rename($name, APPLICATION_PATH . '/../public/upload/images/' . $newName . '.' . $extention);
-
-        $uploadResult = '/upload/images/' . $newName . '.' . $extention;
+        rename($name, APPLICATION_PATH . '/../public/upload/vacation_attachments/' . $newName . '.jpg');
+        $uploadResult = '/upload/vacation_attachments/' . $newName . '.jpg' ;
         return $uploadResult;
     }
 
