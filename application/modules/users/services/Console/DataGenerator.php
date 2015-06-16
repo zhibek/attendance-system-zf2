@@ -42,38 +42,36 @@ EOT
 
         $loader = new \Nelmio\Alice\Fixtures\Loader();
 
-        $branches = $loader->load('application/data/fixtures/BranchFixtures.yml');
+        $roles = $loader->load('application/data/fixtures/RoleFixtures.yml');
+        $this->insertObjectsInDatabase($entityManager, $roles);
 
+        $branches = $loader->load('application/data/fixtures/BranchFixtures.yml');
         $this->insertObjectsInDatabase($entityManager, $branches);
 
         $positions = $loader->load('application/data/fixtures/PositionFixtures.yml');
+        $this->insertObjectsInDatabase($entityManager, $positions);
 
         $vacations = $loader->load('application/data/fixtures/VacationFixtures.yml');
-
         $this->insertObjectsInDatabase($entityManager, $vacations);
-        
+
         $workFromHome = $loader->load('application/data/fixtures/WorkFromHomeFixtures.yml');
-        foreach ($workFromHome as $key ){
+        foreach ($workFromHome as $key) {
             $key->startDate = new \DateTime("now");
-            $key->endDate=new \DateTime("now");
+            $key->endDate = new \DateTime("now");
         }
         $this->insertObjectsInDatabase($entityManager, $workFromHome);
 
         $attendance = $loader->load('application/data/fixtures/AttendanceFixtures.yml');
-        foreach ($attendance as $key ){
+        foreach ($attendance as $key) {
             $key->startTime = new \DateTime("now");
-            $key->endTime=new \DateTime("now");
+            $key->endTime = new \DateTime("now");
         }
         $this->insertObjectsInDatabase($entityManager, $attendance);
 
-        $this->insertObjectsInDatabase($entityManager, $positions);
-
         $departments = $loader->load('application/data/fixtures/DepartmentFixtures.yml');
-
         $this->insertObjectsInDatabase($entityManager, $departments);
 
         $users = $loader->load('application/data/fixtures/UserFixtures.yml');
-
         // append a date object for every user object
         foreach ($users as $object) {
             $object->password = \Attendance\Entity\User::hashPassword($object->password);
@@ -83,20 +81,19 @@ EOT
             $object->branch = $branches['branch1']; //$repository->find(1);
             $object->position = $positions['position1'];
             $object->department = $departments['department1'];
+            $object->role = $roles['role1'];
+            
         }
-
         $this->insertObjectsInDatabase($entityManager, $users);
 
         $holidays = $loader->load('application/data/fixtures/HolidayFixtures.yml');
-
         // append a date object for every user object
         foreach ($holidays as $object) {
             $randomDate = new \DateTime($object->dateFrom);
-            $object->dateFrom =clone $randomDate;
-            $randomDate->modify('+'.  rand(1, 30).' day');
+            $object->dateFrom = clone $randomDate;
+            $randomDate->modify('+' . rand(1, 30) . ' day');
             $object->dateTo = $randomDate;
         }
-
         $this->insertObjectsInDatabase($entityManager, $holidays);
 
         $entityManager->flush();

@@ -25,6 +25,30 @@ Attendance\Entity\User:
         vacationBalance: 31       
         totalWorkingHoursThisMonth: 31 
 
+    user27:
+        name: HR HR
+        username: HR
+        password: HR
+        mobile: 0101010
+        photo: http://i.imgur.com/vg7csLP.jpg 
+        maritalStatus: exe  
+        dateOfBirth: <date()>
+        description: human                        
+        vacationBalance: 31       
+        totalWorkingHoursThisMonth: 31 
+
+    user28:
+        name: Manager Manager 
+        username: Manager
+        password: manager
+        mobile: 0101010
+        photo: http://i.imgur.com/vg7csLP.jpg 
+        maritalStatus: exe  
+        dateOfBirth: <date()>
+        description: human                        
+        vacationBalance: 31       
+        totalWorkingHoursThisMonth: 31 
+
 
 #    user1:
 #        name: 'bob2'
