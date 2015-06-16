@@ -1,17 +1,20 @@
 <?php
 
-class Default_SignController extends Zend_Controller_Action {
+class Default_SignController extends Zend_Controller_Action
+{
 
-    public function init() {
+    public function init()
+    {
         //init
     }
 
-    public function index() {
+    public function index()
+    {
         //something
-    
     }
 
-    public function inAction() {
+    public function inAction()
+    {
 
         $form = new Default_Form_Signin();
         $request = $this->getRequest();
@@ -27,7 +30,6 @@ class Default_SignController extends Zend_Controller_Action {
                     $auth->newSession();
                     $this->redirect('/index');
                 } else {
-                    var_dump($result);exit;
                     $this->redirect('sign/in');
                 }
             }
@@ -36,7 +38,8 @@ class Default_SignController extends Zend_Controller_Action {
         $this->view->form = $form;
     }
 
-    public function outAction() {
+    public function outAction()
+    {
         Zend_Auth::getInstance()->clearIdentity();
         //Redirect to login page again 
         $this->redirect('/in');
