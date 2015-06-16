@@ -18,11 +18,11 @@ class Requests_WorkfromhomeController extends Zend_Controller_Action
         $form = new Requests_Form_WorkfromhomeForm();
         $em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
         $request = $this->getRequest();
-//        $requestInfo = $this->_request->getParams();
-//        $workFromHomeModel = new Requests_Model_Workfromhome($em);
+        $requestInfo = $this->_request->getParams();
+        $workFromHomeModel = new Requests_Model_Workfromhome($em);
         if ($request->isPost()) {
             if ($form->isValid($request->getPost())) {
-//                $attendanceModel->newRequest($requestInfo);
+                $workFromHomeModel->newRequest($requestInfo);
                 $this->redirect('/requests/workfromhome/index');
             }
         }

@@ -3,9 +3,12 @@
 class Default_SignController extends Zend_Controller_Action
 {
 
+    protected $_flashMessenger = null;
+
     public function init()
     {
-        //init
+        $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
+        $this->initView();
     }
 
     public function index()
@@ -30,7 +33,17 @@ class Default_SignController extends Zend_Controller_Action
                     $auth->newSession();
                     $this->redirect('/index');
                 } else {
-                    $this->redirect('sign/in');
+                    $this->_flashMessenger->addMessage('Username and password are invalid !');
+                    
+                    $messages = array();
+                    foreach($this->_flashMessenger->getMessages() as $m){
+                        $messages['message'] = $m;
+                    }
+                    
+                    $this->view->messages = $messages;
+                    
+//                    $this->render();
+//                    $this->redirect('sign/in');
                 }
             }
         }
