@@ -33,10 +33,15 @@ class Requests_Model_Permission
     
     private function createEntity($permissionInfo)
     {
+        //get user id from session
+        $auth = Zend_Auth::getInstance();
+        $storage = $auth->getStorage();
+        $userId = $storage->read();
+        
         $userRepository = $this->entityManager->getRepository('Attendance\Entity\User');
         $entity = new Attendance\Entity\Permission();
         
-        $entity->user = $userRepository->find($permissionInfo['user']);
+        $entity->user = $userRepository->find($userId);
         $entity->date = new DateTime($permissionInfo['date']) ;
         $entity->fromTime =  new DateTime($permissionInfo['fromTime']) ;
         $entity->toTime =  new DateTime($permissionInfo['toTime']) ;

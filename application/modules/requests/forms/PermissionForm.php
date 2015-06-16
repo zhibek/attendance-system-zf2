@@ -22,18 +22,6 @@ class Requests_Form_PermissionForm extends Zend_Form
         $this->setMethod('post');
         $this->setAttrib('calss', 'form form-horizontal');
         
-        $UserModel = new Users_Model_User($this->entityManager);
-
-        $user = new Zend_Form_Element_Select('user');
-        $user->setLabel('User: ');
-        $user->setAttrib('class', 'form-control');
-
-        
-        $allUsers = $UserModel->listAll();
-        foreach ($allUsers as $currentUser) {
-            $user->addMultiOption($currentUser->id, $currentUser->name);
-        }
-        
         // Permission Date 
         $date = new Zend_Form_Element_Text('date');
         $date->setAttribs(array(
@@ -86,11 +74,11 @@ class Requests_Form_PermissionForm extends Zend_Form
         
         $this->addElements(array(
            
-            $user,
             $date,
             $fromTime,
             $toTime,
             $submit
+                
         ));
         
         
