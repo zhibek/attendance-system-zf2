@@ -1,0 +1,13 @@
+Attendance\Entity\Status:
+    status1:
+        name: 'Submitted'
+
+    status2:
+        name: 'Cancelled'
+
+    status3:
+        name: 'Approved'
+
+    status4:
+        name: 'Denied'
+                                
