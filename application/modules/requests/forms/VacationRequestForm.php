@@ -12,6 +12,7 @@ class Requests_Form_VacationRequestForm extends Zend_Form
     {
         $this->setMethod('post');
         $this->setAttrib('class','form form-horizontal');
+        $this->setAttrib('id', 'VacationRequestForm');
         
         
         
@@ -21,6 +22,7 @@ class Requests_Form_VacationRequestForm extends Zend_Form
         $fromDate->setAttribs(array(
             'class' => 'form-control date',
             'placeholder' => 'MM/DD/YYYY Example: 10/10/2010',
+            'id' => 'fromDate'
         ))->setRequired()
                 ->setLabel('From Date: ');
         
@@ -29,6 +31,7 @@ class Requests_Form_VacationRequestForm extends Zend_Form
         $toDate->setAttribs(array(
             'class' => 'form-control date',
             'placeholder' => 'MM/DD/YYYY Example: 10/10/2010',
+            'id' => 'toDate'
         ))->setRequired()
                 ->setLabel('To Date: ');
         
@@ -36,14 +39,18 @@ class Requests_Form_VacationRequestForm extends Zend_Form
         $type = new Zend_Form_Element_Select('type');
         $type->setLabel('VacationType: ')->
             setAttrib('class', 'form-control')->
-            addMultiOption('casual', 'casual')->
-            addMultiOption('annual','annual')->
-            addMultiOption('sick','sick');
+            setAttrib('id', 'type')->
+            addMultiOption('','');
+        $type->setRegisterInArrayValidator(false);
+            
         
-        
-        
+        $submit = new Zend_Form_Element_Submit('submit');
+        $submit->setAttribs(array(
+            'class'=>'btn btn-success',
+            'value'=>'Submit'
+        ));
         $this->addElements(array(
-            $fromDate,$toDate,$type
+            $fromDate,$toDate,$type,$submit
         ));
     }
 
