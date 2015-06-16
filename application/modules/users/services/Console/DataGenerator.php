@@ -53,7 +53,10 @@ EOT
         $this->insertObjectsInDatabase($entityManager, $vacations);
         
         $workFromHome = $loader->load('application/data/fixtures/WorkFromHomeFixtures.yml');
-
+        foreach ($workFromHome as $key ){
+            $key->startDate = new \DateTime("now");
+            $key->endDate=new \DateTime("now");
+        }
         $this->insertObjectsInDatabase($entityManager, $workFromHome);
 
         $attendance = $loader->load('application/data/fixtures/AttendanceFixtures.yml');
