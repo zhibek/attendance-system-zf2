@@ -3,9 +3,9 @@ Attendance\Entity\Permission:
     
     permission{1..3}:
     
-        created: <date()>
+        date: <date()>
         fromTime: <time($format = 'H:i:s', $max = 'now')>
         toTime: <time($format = 'H:i:s', $max = 'now')>
-        dateOfSubmittion: <date()>
+        dateOfSubmission: <date()>
         status: <numberBetween(1, 4)>
     

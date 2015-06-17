@@ -45,9 +45,6 @@ EOT
         $roles = $loader->load('application/data/fixtures/RoleFixtures.yml');
         $this->insertObjectsInDatabase($entityManager, $roles);
 
-        $status = $loader->load('application/data/fixtures/StatusFixtures.yml');
-        $this->insertObjectsInDatabase($entityManager, $status);
-
         $branches = $loader->load('application/data/fixtures/BranchFixtures.yml');
         $this->insertObjectsInDatabase($entityManager, $branches);
 
@@ -61,7 +58,7 @@ EOT
         foreach ($workFromHome as $key) {
             $key->startDate = new \DateTime("now");
             $key->endDate = new \DateTime("now");
-            $key->dateOfSubmittion= new \DateTime('now');
+            $key->dateOfSubmission= new \DateTime('now');
         }
         $this->insertObjectsInDatabase($entityManager, $workFromHome);
 
@@ -102,10 +99,10 @@ EOT
         $permissions = $loader->load('application/data/fixtures/PermissionFixtures.yml');
         foreach ($permissions as $key) {
             
-            $key->created = new \DateTime($key->created);
+            $key->date = new \DateTime($key->date);
             $key->fromTime = new \DateTime($key->fromTime);
             $key->toTime = new \DateTime($key->toTime);
-            $key->dateOfSubmittion = new \DateTime($key->dateOfSubmittion);
+            $key->dateOfSubmission = new \DateTime($key->dateOfSubmission);
         }
         $this->insertObjectsInDatabase($entityManager, $permissions);
         
