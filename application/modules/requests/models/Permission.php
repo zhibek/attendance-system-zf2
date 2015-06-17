@@ -46,6 +46,8 @@ class Requests_Model_Permission
         $entity->date = new DateTime($permissionInfo['date']) ;
         $entity->fromTime =  new DateTime($permissionInfo['fromTime']) ;
         $entity->toTime =  new DateTime($permissionInfo['toTime']) ;
+        $entity->dateOfSubmission=new DateTime("now");
+        $entity->status=1;
         return $entity;
     }
 
