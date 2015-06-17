@@ -29,7 +29,7 @@ class Requests_Model_Permission
         $this->entityManager->flush();
     }
     
-    private function permissionListing()
+    public function permissionListing()
     {
         $this->repository->findAll();
     }    

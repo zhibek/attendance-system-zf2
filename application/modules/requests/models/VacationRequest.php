@@ -83,7 +83,7 @@ class Requests_Model_VacationRequest
         return $cid;
     }
     public function vacationRequestListing(){
-        $repository = $this->_em->getRepository('Attendance\Entity\WorkFromHome');
+        $repository = $this->_em->getRepository('Attendance\Entity\VacationRequest');
         $requests = $repository->findAll();
         foreach ($requests as $key) {
             $key->fromDate = date_format($key->fromDate, 'm/d/Y');
