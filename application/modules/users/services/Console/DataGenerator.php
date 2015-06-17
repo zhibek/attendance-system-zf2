@@ -45,6 +45,9 @@ EOT
         $roles = $loader->load('application/data/fixtures/RoleFixtures.yml');
         $this->insertObjectsInDatabase($entityManager, $roles);
 
+        $status = $loader->load('application/data/fixtures/StatusFixtures.yml');
+        $this->insertObjectsInDatabase($entityManager, $status);
+
         $branches = $loader->load('application/data/fixtures/BranchFixtures.yml');
         $this->insertObjectsInDatabase($entityManager, $branches);
 
@@ -82,7 +85,6 @@ EOT
             $object->position = $positions['position1'];
             $object->department = $departments['department1'];
             $object->role = $roles['role1'];
-            
         }
         $this->insertObjectsInDatabase($entityManager, $users);
 
