@@ -61,6 +61,7 @@ EOT
         foreach ($workFromHome as $key) {
             $key->startDate = new \DateTime("now");
             $key->endDate = new \DateTime("now");
+            $key->dateOfSubmittion= new \DateTime('now');
         }
         $this->insertObjectsInDatabase($entityManager, $workFromHome);
 

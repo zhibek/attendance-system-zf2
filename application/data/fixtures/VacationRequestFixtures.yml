@@ -1,7 +1,7 @@
 
-Attendance\Entity\WorkFromHome:
+Attendance\Entity\VacationRequest:
     
-    workfromhome{1..7}:
+    vacationrequest{1..7}:
         
         user: <numberBetween(1, 7)>
         startDate: <date()>
