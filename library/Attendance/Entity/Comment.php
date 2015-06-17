@@ -12,7 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
 
 class Comment
 {
-
+    const REQUEST_TYPE_PERMISSION = 1;    
+    const REQUEST_TYPE_VACATIONREQUEST = 2;
+    const REQUEST_TYPE_WORKFROMHOME = 3;
+    
     /**
      * @ORM\Id
      * @ORM\Column(type="integer");
@@ -44,9 +47,8 @@ class Comment
     
     /**
      *
-     * @ORM\ManyToOne(targetEntity="Attendance\Entity\RequestType")
-     * @ORM\JoinColumn(name="request_type_id", referencedColumnName="id")
-     * @var Attendance\Entity\RequestType
+     * @ORM\Column(type="integer");
+     * @var integer
      */
     public $request_type;
     
