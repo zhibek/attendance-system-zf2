@@ -98,6 +98,16 @@ EOT
         }
         $this->insertObjectsInDatabase($entityManager, $holidays);
 
+        $permissions = $loader->load('application/data/fixtures/PermissionFixtures.yml');
+        foreach ($permissions as $key) {
+            
+            $key->created = new \DateTime($key->created);
+            $key->fromTime = new \DateTime($key->fromTime);
+            $key->toTime = new \DateTime($key->toTime);
+            $key->dateOfSubmittion = new \DateTime($key->dateOfSubmittion);
+        }
+        $this->insertObjectsInDatabase($entityManager, $permissions);
+        
         $entityManager->flush();
 
         $output->writeln('Data Added');
