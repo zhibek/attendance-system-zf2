@@ -28,3 +28,20 @@ class CamelCaseTech_Resource_Plugin_Auth extends Zend_Controller_Plugin_Abstract
     }
 
 }
+
+class CamelCaseTech_Resource_Plugin_Acl extends Zend_Controller_Plugin_Abstract
+{
+    public function preDispatch(\Zend_Controller_Request_Abstract $request)
+    {
+        parent::preDispatch($request);
+        $auth = Zend_Auth::getInstance();
+        $view = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->view;
+        
+        $acl = new Zend_Acl();
+        $roleGuest = new Zend_Acl_Role('guest');
+        $acl->addRole($roleGuest);
+        $acl->deny($roleGuest);
+        $acl->allow($roleGuest, null, 'new');
+        echo $acl->isAllowed('guest', null, $this->getRequest()->getActionName() ) ? "allowed" : "denied";
+    }
+}

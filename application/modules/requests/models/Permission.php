@@ -28,9 +28,12 @@ class Requests_Model_Permission
         $this->entityManager->persist($entity);
         $this->entityManager->flush();
     }
+    
+    private function permissionListing()
+    {
+        $this->repository->findAll();
+    }    
 
-    
-    
     private function createEntity($permissionInfo)
     {
         //get user id from session
