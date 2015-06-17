@@ -1,20 +1,11 @@
 
-Attendance\Entity\Vacation:
+Attendance\Entity\Permission:
     
-    vacation0:
+    permission{1..3}:
     
-        type: Sick Vacation
-        description: Sick
-        balance: 7
-        
-    vacation1:
+        created: <date()>
+        fromTime: <time($format = 'H:i:s', $max = 'now')>
+        toTime: <time($format = 'H:i:s', $max = 'now')>
+        dateOfSubmittion: <date()>
+        status: <numberBetween(1, 4)>
     
-        type: Casual Vacation
-        description: Casual
-        balance: 7
-        
-    vacation2:
-    
-        type: Annual Vacation
-        description: Annual
-        balance: 21
