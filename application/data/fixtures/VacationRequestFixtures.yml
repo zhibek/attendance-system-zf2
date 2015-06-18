@@ -1,0 +1,9 @@
+
+Attendance\Entity\VacationRequest:
+
+    user: <numberBetween(1, 7)>
+    fromDate: <date()>
+    toDate: <date()>
+    vacationType: <numberBetween(1, 3)>
+    
+       
