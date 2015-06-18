@@ -1,12 +1,13 @@
-#
-#Attendance\Entity\VacationRequest:
-#    
-#    vacationrequest{1..7}:
-#        
-#        user: <numberBetween(1, 7)>
-#        startDate: <date()>
-#        endDate: <date()>
-#        reason: Sick
-#        dateOfSubmission: <date()>
-#        status: <numberBetween(1, 4)>
-#    
+
+Attendance\Entity\VacationRequest:
+    
+    vacationrequest{1..7}:
+        
+        user: <numberBetween(1, 7)>
+        startDate: <date()>
+        endDate: <date()>
+        reason: Sick
+        dateOfSubmission: <date()>
+        status: <numberBetween(1, 4)>
+    
+
