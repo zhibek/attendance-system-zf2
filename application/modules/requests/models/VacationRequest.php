@@ -70,4 +70,35 @@ class Requests_Model_VacationRequest
         $cid = substr(implode('', $seed), 1, 10) . uniqid();
         return $cid;
     }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public function vacationRequestListing(){
+        $repository = $this->_em->getRepository('Attendance\Entity\VacationRequest');
+        $requests = $repository->findAll();
+        foreach ($requests as $key) {
+            $key->fromDate = date_format($key->fromDate, 'm/d/Y');
+            $key->toDate = date_format($key->toDate, 'm/d/Y');
+        }    
+        return $requests ;
+    }
 }

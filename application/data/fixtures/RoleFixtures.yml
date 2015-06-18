@@ -1,0 +1,13 @@
+Attendance\Entity\Role:
+    role1:
+        name: 'Employee'
+
+    role2:
+        name: 'HR'
+
+    role3:
+        name: 'Manager'
+
+    role4:
+        name: 'Admin'
+                                

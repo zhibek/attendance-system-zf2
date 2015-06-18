@@ -82,6 +82,14 @@ class User
      */
     public $description;
 
+     /**
+     *
+     * @ORM\ManyToOne(targetEntity="Attendance\Entity\Role")
+     * @ORM\JoinColumn(name="role_id", referencedColumnName="id")
+     * @var Attendance\Entity\Role
+     */
+    public $role;
+    
     /**
      *
      * @ORM\ManyToOne(targetEntity="Attendance\Entity\Branch")

@@ -1,0 +1,11 @@
+
+Attendance\Entity\Permission:
+    
+    permission{1..3}:
+    
+        date: <date()>
+        fromTime: <time($format = 'H:i:s', $max = 'now')>
+        toTime: <time($format = 'H:i:s', $max = 'now')>
+        dateOfSubmission: <date()>
+        status: <numberBetween(1, 4)>
+    

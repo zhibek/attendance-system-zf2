@@ -1,9 +1,13 @@
 
 Attendance\Entity\VacationRequest:
-
-    user: <numberBetween(1, 7)>
-    fromDate: <date()>
-    toDate: <date()>
-    vacationType: <numberBetween(1, 3)>
     
-       
+    vacationrequest{1..7}:
+        
+        user: <numberBetween(1, 7)>
+        startDate: <date()>
+        endDate: <date()>
+        reason: Sick
+        dateOfSubmission: <date()>
+        status: <numberBetween(1, 4)>
+    
+

@@ -32,7 +32,7 @@ class Default_Model_UserAuth
         ));
         $auth = Zend_Auth::getInstance();
         $storage = $auth->getStorage();
-        $storage->write($entities[0]->id, $entities[0]->name, $entities[0]->username, $entities[0]->photo);
+        $storage->write($entities[0]->id, $entities[0]->name, $entities[0]->username, $entities[0]->photo,$entities[0]->role);
     }
 
 }

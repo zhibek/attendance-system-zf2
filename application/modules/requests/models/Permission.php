@@ -28,16 +28,17 @@ class Requests_Model_Permission
         $this->entityManager->persist($entity);
         $this->entityManager->flush();
     }
+    
+    public function permissionListing()
+    {
+        $this->repository->findAll();
+    }    
 
-    
-    
     private function createEntity($permissionInfo)
     {
         //get user id from session
-        $auth = Zend_Auth::getInstance();
-        $storage = $auth->getStorage();
-        $userId = $storage->read();
-        
+        $userId = Zend_Auth::getInstance()->getIdentity('id');
+       
         $userRepository = $this->entityManager->getRepository('Attendance\Entity\User');
         $entity = new Attendance\Entity\Permission();
         
@@ -45,6 +46,8 @@ class Requests_Model_Permission
         $entity->date = new DateTime($permissionInfo['date']) ;
         $entity->fromTime =  new DateTime($permissionInfo['fromTime']) ;
         $entity->toTime =  new DateTime($permissionInfo['toTime']) ;
+        $entity->dateOfSubmission=new DateTime("now");
+        $entity->status=1;
         return $entity;
     }
 
