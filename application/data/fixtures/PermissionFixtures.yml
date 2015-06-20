@@ -2,7 +2,7 @@
 Attendance\Entity\Permission:
     
     permission{1..3}:
-    
+        user: <numberBetween(1, 25)>
         date: <date()>
         fromTime: <time($format = 'H:i:s', $max = 'now')>
         toTime: <time($format = 'H:i:s', $max = 'now')>

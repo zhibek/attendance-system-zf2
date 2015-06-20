@@ -45,8 +45,7 @@ class Requests_Model_VacationRequest
         $upload->setDestination($attachmentPath);
         try {
             $upload->receive();
-        } 
-        catch (Zend_File_Transfer_Exception $e) {
+        } catch (Zend_File_Transfer_Exception $e) {
             $uploadResult = 'null';
         }
         $name = $upload->getFileName('attachment');
@@ -60,45 +59,43 @@ class Requests_Model_VacationRequest
         }
         return $uploadResult;
     }
-    
+
     protected function getRandomName()
     {
         $seed = str_split('abcdefghijklmnopqrstuvwxyz'
-            . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-            . '0123456789'); 
-        shuffle($seed); 
+                . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+                . '0123456789');
+        shuffle($seed);
         $cid = substr(implode('', $seed), 1, 10) . uniqid();
         return $cid;
     }
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    public function vacationRequestListing(){
+    // Dont Delete
+    public function vacationRequestListing()
+    {
         $repository = $this->_em->getRepository('Attendance\Entity\VacationRequest');
-        $requests = $repository->findAll();
+        $storage = Zend_Auth::getInstance()->getIdentity();
+        $requests = $repository->findBy(array('user' => $storage['id']));
         foreach ($requests as $key) {
+            $key->dateOfSubmission = date_format($key->dateOfSubmission, 'm/d/Y');
             $key->fromDate = date_format($key->fromDate, 'm/d/Y');
             $key->toDate = date_format($key->toDate, 'm/d/Y');
-        }    
-        return $requests ;
+            switch ($key->status) {
+                case 1 :
+                    $key->status = 'Submitted';
+                    break;
+                case 2 :
+                    $key->status = 'Cancelled';
+                    break;
+                case 3 :
+                    $key->status = 'Approved';
+                    break;
+                case 4 :
+                    $key->status = 'Denied';
+                    break;
+            }
+        }
+        return $requests;
     }
+
 }

@@ -21,8 +21,8 @@ class Requests_Model_Workfromhome
         $entity->endDate = new DateTime($requestInfo['endDate']);
         $entity->reason = $requestInfo['reason'];
         $entity->user = Zend_Auth::getInstance()->getIdentity('id');
-        $entity->dateOfSubmission=new DateTime("now");
-        $entity->status=1;
+        $entity->dateOfSubmission = new DateTime("now");
+        $entity->status = 1;
 //      INSERT statements are not allowed in DQL, because entities and their
 //      relations have to be introduced into the persistence context 
 //      through EntityManager#persist() to ensure consistency of your object model.
@@ -33,11 +33,31 @@ class Requests_Model_Workfromhome
     public function workFromHomeListing()
     {
         $repository = $this->_em->getRepository('Attendance\Entity\WorkFromHome');
-        $requests = $repository->findAll();
+        $storage = Zend_Auth::getInstance()->getIdentity();
+        $requests = $repository->findBy(array(
+            'user' => $storage['id']
+        ));
+
         foreach ($requests as $key) {
+            $key->dateOfSubmission = date_format($key->dateOfSubmission, 'm/d/Y');
             $key->startDate = date_format($key->startDate, 'm/d/Y');
             $key->endDate = date_format($key->endDate, 'm/d/Y');
+            switch ($key->status) {
+                case 1 :
+                    $key->status = 'Submitted';
+                    break;
+                case 2 :
+                    $key->status = 'Cancelled';
+                    break;
+                case 3 :
+                    $key->status = 'Approved';
+                    break;
+                case 4 :
+                    $key->status = 'Denied';
+                    break;
+            }
         }
-        return $requests ;
+        return $requests;
     }
+
 }
