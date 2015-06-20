@@ -20,10 +20,10 @@ class CamelCaseTech_Resource_Plugin_Acl extends Zend_Controller_Plugin_Abstract
         Zend_Registry::set('acl', $acl);
         // creating roles
         $base = new Zend_Acl_Role('base');
-        $employee = new Zend_Acl_Role('user');
-        $hr = new Zend_Acl_Role('hr');
-        $manager = new Zend_Acl_Role('manager');
-        $admin = new Zend_Acl_Role('admin');
+        $employee = new Zend_Acl_Role('Employee');
+        $hr = new Zend_Acl_Role('HR');
+        $manager = new Zend_Acl_Role('Manager');
+        $admin = new Zend_Acl_Role('Admin');
         // adding created roles to ACL
         $acl->addRole($base, null);
         $acl->addRole($employee, $base);
@@ -38,8 +38,8 @@ class CamelCaseTech_Resource_Plugin_Acl extends Zend_Controller_Plugin_Abstract
         // giving roles thier privileges in /requests/myrequests
         $acl->allow($base, $resources, 'comment');
         $acl->allow($employee, $resources, 'cancel');
-        $acl->allow($hr, $resources, array('approve','decline'));
-        $acl->allow($manager, $resources,  array('approve','decline'));
+        $acl->allow($hr, $resources, array('approve','decline','viewall'));
+        $acl->allow($manager, $resources,  array('approve','decline','viewall'));
 
     }
 
