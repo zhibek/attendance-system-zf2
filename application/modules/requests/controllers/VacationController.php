@@ -41,13 +41,22 @@ class Requests_VacationController extends Zend_Controller_Action
     {
         $em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
         $request = $this->getRequest();
-        $requestId =  $request->id;
+        $requestId = $request->id;
         $vacationRequestModel = new Requests_Model_VacationRequest($em);
-        
         $vacation = $vacationRequestModel->getVacationById($requestId);
-       
-        $this->view->vacationArray = $vacation[0];
-        $this->view->id = $request->id;
+        $currentUserRole = $vacationRequestModel->getCurrentUserRole();
+        
+        if($currentUserRole == 1){
+            $this->view->role = TRUE;
+        }
+        $this->view->vacationCreator = $vacation[0]->user;
+        $this->view->vacationType = $vacation[0]->vacationType;
+        $this->view->fromDate = $vacation[0]->fromDate;
+        $this->view->toDate = $vacation[0]->toDate;
+        $this->view->dateOfSubmission = $vacation[0]->dateOfSubmission;
+        $this->view->attachment = $vacation[0]->attachment;
+        $this->view->status = $vacation[0]->status;
+        
     }
     
     

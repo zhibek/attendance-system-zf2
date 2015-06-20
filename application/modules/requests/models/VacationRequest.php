@@ -24,7 +24,7 @@ class Requests_Model_VacationRequest
         $auth = Zend_Auth::getInstance();
         $storage = $auth->getStorage();
         $userRepository = $this->_em->getRepository('Attendance\Entity\User');
-        $vacationRepository = $this->_em->getRepository('Attendance\Entity\Vacation');
+        $vacationRepository = $this->_em->getRepository('Attendance\Entity\Vacation'); 
         $userId = $storage->read('id');
         $vacationType = $vacationRequestInfo['type'];
         $entity->user = $userRepository->find($userId);
@@ -103,15 +103,57 @@ class Requests_Model_VacationRequest
     
     public function getVacationById($id)
     {
-        
-        //$repository = $this->_em->getRepository('Attendance\Entity\VacationRequest');  
-        //$requests = $repository->findBy(array('id' => $id ));
-        $query = $this->_em->createQuery("SELECT v FROM Attendance\Entity\VacationRequest v WHERE v.id = $id");
-        //$resutls = $query->getResult();
-        $array = get_object_vars($query->getResult());
-        //$test = get_object_vars($resutls);
-        var_dump ($array);exit();
+        $query = $this->_em->createQuery('Select v FROM Attendance\Entity\VacationRequest  v WHERE v.id = ?1');
+        $query->setParameter(1, $id);
+        $result = $query->execute();
+        foreach ($result as $key) {
+            $key->dateOfSubmission = date_format($key->dateOfSubmission ,'m/d/Y' );
+            $key->fromDate = date_format($key->fromDate ,'m/d/Y' );
+            $key->toDate = date_format($key->toDate ,'m/d/Y' );
+            $key->user = $this->getUserNameById($key->user);
+            $key->vacationType = $this->getVacationTypeById($key->vacationType);
+            if($key->status == 1)
+            {
+                $key->status = "ON";
+            }
+            else
+            {
+                $key->status = "OFF";
+            }
+            if($key->attachment == NULL)
+            {
+                $key->attachment = "No Attachment Available";
+            }
+        }
         return $result;
+    }
+    
+    function getUserNameById($id)
+    {
+        $query = $this->_em->createQuery('Select u FROM Attendance\Entity\User  u WHERE u.id = ?1');
+        $query->setParameter(1, $id);
+        $result = $query->execute();
+        return $result[0]->name;
+    }
+    
+    function getCurrentUserRole()
+    {
+//        $auth = Zend_Auth::getInstance();
+//        $storage = $auth->getStorage();
+//        $id = $storage->read('id');
+//        $query = $this->_em->createQuery('Select u FROM Attendance\Entity\User  u WHERE u.id = ?1');
+//        $query->setParameter(1, $id);
+//        $result = $query->execute();
+//        return $result[0]->role;
+        return 0;
+    }
+    
+    function getVacationTypeById($id)
+    {
+        $query = $this->_em->createQuery('Select v FROM Attendance\Entity\Vacation  v WHERE v.id = ?1');
+        $query->setParameter(1, $id);
+        $result = $query->execute();
+        return $result[0]->type;
     }
     
     
