@@ -60,4 +60,58 @@ class Requests_Model_Workfromhome
         return $requests;
     }
 
+    
+    
+    
+     public function getWorkFromHomeById($id)
+    {
+        $query = $this->_em->createQuery('Select w FROM Attendance\Entity\WorkFromHome  w WHERE w.id = ?1');
+        $query->setParameter(1, $id);
+        $result = $query->execute();
+        foreach ($result as $key) {
+            $key->dateOfSubmission = date_format($key->dateOfSubmission ,'m/d/Y' );
+            $key->startDate = date_format($key->startDate ,'m/d/Y' );
+            $key->endDate = date_format($key->endDate ,'m/d/Y' );
+            $key->user = $this->getUserNameById($key->user);
+            if($key->status == 1)
+            {
+                $key->status = "ON";
+            }
+            else
+            {
+                $key->status = "OFF";
+            }
+            
+        }
+        return $result;
+    }
+    
+    
+    function getUserNameById($id)
+    {
+        $query = $this->_em->createQuery('Select u FROM Attendance\Entity\User  u WHERE u.id = ?1');
+        $query->setParameter(1, $id);
+        $result = $query->execute();
+        return $result[0]->name;
+    }
+    
+    
+    
+    
+    
+    function getCurrentUserRole()
+    {
+        $auth = Zend_Auth::getInstance();
+        $storage = $auth->getStorage();
+        $id = $storage->read('id');
+        $query = $this->_em->createQuery('Select u FROM Attendance\Entity\User  u WHERE u.id = ?1');
+        $query->setParameter(1, $id['id']);
+        $result = $query->execute();
+        return $result[0]->role;
+        
+    }
+   
+    
+    
+    
 }

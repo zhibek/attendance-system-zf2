@@ -9,7 +9,7 @@
             
             <div class="row">
                 <div class="col-sm-2">
-                    Vacation Type: 
+                    <strong>Vacation Type:</strong> 
                 </div>
                  <div class="col-sm-10">
                     {{vacationType}}
@@ -18,7 +18,7 @@
             
             <div class="row">
                 <div class="col-sm-2">
-                    From: 
+                    <strong>From:</strong> 
                 </div>
                  <div class="col-sm-10">
                     {{fromDate}}
@@ -27,7 +27,7 @@
             
             <div class="row">
                 <div class="col-sm-2">
-                    To: 
+                    <strong>To:</strong> 
                 </div>
                  <div class="col-sm-10">
                     {{toDate}}
@@ -36,7 +36,7 @@
             
             <div class="row">
                 <div class="col-sm-2">
-                    Submition Date: 
+                    <strong>Submition Date: </strong>
                 </div>
                  <div class="col-sm-10">
                     {{dateOfSubmission}}
@@ -45,7 +45,7 @@
             
             <div class="row">
                 <div class="col-sm-2">
-                    Status: 
+                    <strong>Status:</strong>
                 </div>
                  <div class="col-sm-10">
                     {{status}}
@@ -54,7 +54,7 @@
            
             <div class="row">
                 <div class="col-sm-2">
-                    Attachment: 
+                    <strong> Attachment: </strong>
                 </div>
                  <div class="col-sm-10">
                     {{attachment}}
@@ -63,7 +63,7 @@
             {{#role}}
                 <div class="row">
                 <div class="col-sm-2">
-                    Creator: 
+                    <strong>Creator:</strong>
                 </div>
                  <div class="col-sm-10">
                     {{vacationCreator}}
@@ -77,6 +77,11 @@
         </div><!-- panel body -->
     </div><!--panel default-->
 </div><!--container-->
+
+<br />
+<div class="container">
+{{commentForm}}
+</div>
 {{/content}}
 {{$scripts}}
 {{/scripts}}

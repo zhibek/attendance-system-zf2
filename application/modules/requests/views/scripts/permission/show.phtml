@@ -2,7 +2,77 @@
 {{$styles}}
 {{/styles}}
 {{$content}}
-show permisson
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">Permission Details</div>
+        <div class="panel-body">
+            
+            <div class="row">
+                <div class="col-sm-2">
+                    <strong> Permission Date: </strong>
+                </div>
+                 <div class="col-sm-10">
+                    {{permissionDate}}
+                </div>
+            </div><!-- row -->
+            
+            <div class="row">
+                <div class="col-sm-2">
+                    <strong> From: </strong>
+                </div>
+                 <div class="col-sm-10">
+                    {{fromTime}}
+                </div>
+            </div><!-- row -->
+            
+            <div class="row">
+                <div class="col-sm-2">
+                    <strong>  To: </strong>
+                </div>
+                 <div class="col-sm-10">
+                    {{toTime}}
+                </div>
+            </div><!-- row -->
+            
+            <div class="row">
+                <div class="col-sm-2">
+                    <strong> Submition Date: </strong>
+                </div>
+                 <div class="col-sm-10">
+                    {{dateOfSubmission}}
+                </div>
+            </div><!-- row -->
+            
+            <div class="row">
+                <div class="col-sm-2">
+                    <strong> Status: </strong>
+                </div>
+                 <div class="col-sm-10">
+                    {{status}}
+                </div>
+           </div><!-- row -->
+           
+            
+            {{#role}}
+                <div class="row">
+                <div class="col-sm-2">
+                    <strong>  Creator: </strong>       
+                </div>
+                 <div class="col-sm-10">
+                    {{vacationCreator}}
+                </div>
+            </div><!-- row -->
+            {{/role}}
+            
+           
+                
+            
+        </div><!-- panel body -->
+    </div><!--panel default-->
+</div><!--container-->
+<div class="container">
+{{commentForm}}
+</div>
 {{/content}}
 {{$scripts}}
 {{/scripts}}

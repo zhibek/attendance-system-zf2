@@ -40,6 +40,35 @@ class Requests_PermissionController extends Zend_Controller_Action
     
     public function showAction()
     {
+        $em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
+        $request = $this->getRequest();
+        $requestId = $request->id;
+        $permissionRequestModel = new Requests_Model_Permission($em);
+        $permission = $permissionRequestModel->getPermissionById($requestId);
+        $currentUserRole = $permissionRequestModel->getCurrentUserRole();
+        
+        if($currentUserRole === 1){
+            $this->view->role = TRUE;
+        }
+        $this->view->permissionCreator = $permission[0]->user;
+        $this->view->permissionDate = $permission[0]->date;
+        $this->view->fromTime = $permission[0]->fromTime;
+        $this->view->toTime = $permission[0]->toTime;
+        $this->view->dateOfSubmission = $permission[0]->dateOfSubmission;
+        $this->view->status = $permission[0]->status;
+        
+        $commentForm = new Requests_Form_CommentForm();
+        $commentModel = new Requests_Model_Comment($em);
+        $request = $this->getRequest();
+        $commentInfo =  $this->_request->getParams();
+//        
+//        if ($request->isPost()) {
+//            if ($commentForm->isValid($request->getPost())) {
+//                    $commentModel->addComment($commentInfo,$requestId);
+//                }
+//            }
+//        $comments = $commentModel->listAllComments();
+        $this->view->commentForm = $commentForm;
         
     }
     

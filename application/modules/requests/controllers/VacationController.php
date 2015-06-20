@@ -46,7 +46,7 @@ class Requests_VacationController extends Zend_Controller_Action
         $vacation = $vacationRequestModel->getVacationById($requestId);
         $currentUserRole = $vacationRequestModel->getCurrentUserRole();
         
-        if($currentUserRole == 1){
+        if($currentUserRole === 1){
             $this->view->role = TRUE;
         }
         $this->view->vacationCreator = $vacation[0]->user;
@@ -56,6 +56,19 @@ class Requests_VacationController extends Zend_Controller_Action
         $this->view->dateOfSubmission = $vacation[0]->dateOfSubmission;
         $this->view->attachment = $vacation[0]->attachment;
         $this->view->status = $vacation[0]->status;
+        
+        $commentForm = new Requests_Form_CommentForm();
+        $commentModel = new Requests_Model_Comment($em);
+        $request = $this->getRequest();
+        $commentInfo =  $this->_request->getParams();
+//        
+//        if ($request->isPost()) {
+//            if ($commentForm->isValid($request->getPost())) {
+//                    $commentModel->addComment($commentInfo,$requestId);
+//                }
+//            }
+//        $comments = $commentModel->listAllComments();
+        $this->view->commentForm = $commentForm;
         
     }
     

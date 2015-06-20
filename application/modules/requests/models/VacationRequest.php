@@ -138,14 +138,14 @@ class Requests_Model_VacationRequest
     
     function getCurrentUserRole()
     {
-//        $auth = Zend_Auth::getInstance();
-//        $storage = $auth->getStorage();
-//        $id = $storage->read('id');
-//        $query = $this->_em->createQuery('Select u FROM Attendance\Entity\User  u WHERE u.id = ?1');
-//        $query->setParameter(1, $id);
-//        $result = $query->execute();
-//        return $result[0]->role;
-        return 0;
+        $auth = Zend_Auth::getInstance();
+        $storage = $auth->getStorage();
+        $id = $storage->read('id');
+        $query = $this->_em->createQuery('Select u FROM Attendance\Entity\User  u WHERE u.id = ?1');
+        $query->setParameter(1, $id['id']);
+        $result = $query->execute();
+        return $result[0]->role;
+        
     }
     
     function getVacationTypeById($id)
