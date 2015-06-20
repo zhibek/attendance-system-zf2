@@ -32,6 +32,8 @@ class Requests_Model_VacationRequest
         $entity->toDate = new DateTime($vacationRequestInfo['toDate']);
         $entity->vacationType = $vacationRepository->find($vacationType);
         $entity->attachment = $this->saveAttachement();
+        $entity->dateOfSubmission=new DateTime("now");
+        $entity->status=1;
         $this->_em->persist($entity);
         $this->_em->flush();
     }
