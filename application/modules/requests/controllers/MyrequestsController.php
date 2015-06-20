@@ -18,6 +18,7 @@ class Requests_MyrequestsController extends Zend_Controller_Action
     {
         $storage = Zend_Auth::getInstance()->getIdentity();
         $role = $storage['role'];
+        $resource = 'requests-myrequests';
         // convert incomplete object into array
         $userRole = get_object_vars($role);
         $query = $this->_em->createQuery('Select v FROM Attendance\Entity\Role  v WHERE v.id = ?1');
@@ -26,7 +27,14 @@ class Requests_MyrequestsController extends Zend_Controller_Action
         $role = $result[0]->name;
 
         $permissionModel = new Requests_Model_Permission($this->_em);
-        $permissions = $permissionModel->permissionListing();
+        if($this->acl->isAllowed($role, $resource, 'viewall'))
+        {
+            $permissions = $permissionModel->listAll();
+        }
+        else
+        {
+            $permissions = $permissionModel->permissionListing();
+        }
         $this->view->permissions = $permissions;
 
         $vacationRequestsModel = new Requests_Model_VacationRequest($this->_em);

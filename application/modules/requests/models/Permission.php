@@ -29,10 +29,39 @@ class Requests_Model_Permission
         $this->entityManager->flush();
     }
 
+    public function listAll()
+    {
+        $data = $this->repository->findAll();
+        return $this->prepareForDisplay($data);
+    }
+
     public function permissionListing()
     {
         $storage = Zend_Auth::getInstance()->getIdentity();
         $data = $this->repository->findBy(array('user' => $storage['id']));
+        return $this->prepareForDisplay($data);
+    }
+
+    private function createEntity($permissionInfo)
+    {
+        //get user id from session
+        $storage = Zend_Auth::getInstance()->getIdentity();
+        $userId = $storage['id'];
+
+        $userRepository = $this->entityManager->getRepository('Attendance\Entity\User');
+        $entity = new Attendance\Entity\Permission();
+
+        $entity->user = $userRepository->find($userId);
+        $entity->date = new DateTime($permissionInfo['date']);
+        $entity->fromTime = new DateTime($permissionInfo['fromTime']);
+        $entity->toTime = new DateTime($permissionInfo['toTime']);
+        $entity->dateOfSubmission = new DateTime("now");
+        $entity->status = 1;
+        return $entity;
+    }
+
+    private function prepareForDisplay($data)
+    {
         foreach ($data as $key) {
             $key->dateOfSubmission = date_format($key->dateOfSubmission, 'm/d/Y');
             $key->fromTime = date_format($key->fromTime, 'H:i:s');
@@ -55,23 +84,4 @@ class Requests_Model_Permission
 
         return $data;
     }
-
-    private function createEntity($permissionInfo)
-    {
-        //get user id from session
-        $storage = Zend_Auth::getInstance()->getIdentity();
-        $userId = $storage['id'];
-
-        $userRepository = $this->entityManager->getRepository('Attendance\Entity\User');
-        $entity = new Attendance\Entity\Permission();
-
-        $entity->user = $userRepository->find($userId);
-        $entity->date = new DateTime($permissionInfo['date']);
-        $entity->fromTime = new DateTime($permissionInfo['fromTime']);
-        $entity->toTime = new DateTime($permissionInfo['toTime']);
-        $entity->dateOfSubmission = new DateTime("now");
-        $entity->status = 1;
-        return $entity;
-    }
-
 }
