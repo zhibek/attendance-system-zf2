@@ -165,7 +165,6 @@ class Default_Service_Auth_Adapter implements Zend_Auth_Adapter_Interface
     {
         $this->_authenticateSetup();
         $repository = $this->_em->getRepository('Attendance\Entity\User');
-        
         $entities = $repository->findBy(array(
             'username' => $this->_identity,
         ));

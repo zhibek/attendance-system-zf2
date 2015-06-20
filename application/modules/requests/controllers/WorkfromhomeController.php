@@ -13,7 +13,7 @@ class Requests_WorkfromhomeController extends Zend_Controller_Action
         $em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
         $model = new Requests_Model_Workfromhome($em);
         $requests = $model->workFromHomeListing();
-        var_dump($requests);
+//        var_dump($requests);
     }
 
     public function newAction()

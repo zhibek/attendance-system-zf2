@@ -98,7 +98,7 @@ EOT
 
         $permissions = $loader->load('application/data/fixtures/PermissionFixtures.yml');
         foreach ($permissions as $key) {
-            
+            $key->user = $users['user23'];
             $key->date = new \DateTime($key->date);
             $key->fromTime = new \DateTime($key->fromTime);
             $key->toTime = new \DateTime($key->toTime);
