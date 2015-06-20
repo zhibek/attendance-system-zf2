@@ -38,5 +38,5 @@ class Requests_MyrequestsController extends Zend_Controller_Action
         $this->view->workFromHomeRequests = $workFromHomeRequests;
 
     }
-
-}
+    
+    }

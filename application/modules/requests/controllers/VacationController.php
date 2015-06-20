@@ -34,5 +34,22 @@ class Requests_VacationController extends Zend_Controller_Action
         
         $this->view->vacationRequestForm = $form;
     }
+    
+    
+    
+    public function showAction()
+    {
+        $em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
+        $request = $this->getRequest();
+        $requestId =  $request->id;
+        $vacationRequestModel = new Requests_Model_VacationRequest($em);
+        
+        $vacation = $vacationRequestModel->getVacationById($requestId);
+       
+        $this->view->vacationArray = $vacation[0];
+        $this->view->id = $request->id;
+    }
+    
+    
 
 }

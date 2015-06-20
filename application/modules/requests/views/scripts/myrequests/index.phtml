@@ -23,7 +23,7 @@
         <tbody>
             {{#permissions}}
             <tr>
-                <td><a href="/requets/Permission/id/{{id}}">{{dateOfSubmission}}</a></td>
+                <td><a href="/requests/permission/show/id/{{id}}">{{dateOfSubmission}}</a></td>
                 <td>{{fromTime}}</td>
                 <td>{{toTime}}</td>
                 <td>{{status}}</td>
@@ -60,7 +60,7 @@
         <tbody>
             {{#vacationRequests}}
             <tr>
-                <td><a href="/requets/vacation/id/{{id}}">{{dateOfSubmission}}</a></td>                <td>{{fromDate}}</td>
+                <td><a href="/requests/vacation/show/id/{{id}}">{{dateOfSubmission}}</a></td>                <td>{{fromDate}}</td>
                 <td>{{toDate}}</td>
                 <td>{{status}}</td>
 
@@ -97,7 +97,7 @@
         <tbody>
             {{#workFromHomeRequests}}
             <tr>
-                <td><a href="/requets/workfromhome/id/{{id}}">{{dateOfSubmission}}</a></td>
+                <td><a href="/requests/workfromhome/show/id/{{id}}">{{dateOfSubmission}}</a></td>
                 <td>{{startDate}}</td>
                 <td>{{endDate}}</td>
                 <td>{{reason}}</td>

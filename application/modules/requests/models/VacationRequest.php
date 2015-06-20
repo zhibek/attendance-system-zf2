@@ -99,5 +99,23 @@ class Requests_Model_VacationRequest
         }
         return $requests;
     }
+    
+    
+    public function getVacationById($id)
+    {
+        
+        //$repository = $this->_em->getRepository('Attendance\Entity\VacationRequest');  
+        //$requests = $repository->findBy(array('id' => $id ));
+        $query = $this->_em->createQuery("SELECT v FROM Attendance\Entity\VacationRequest v WHERE v.id = $id");
+        //$resutls = $query->getResult();
+        $array = get_object_vars($query->getResult());
+        //$test = get_object_vars($resutls);
+        var_dump ($array);exit();
+        return $result;
+    }
+    
+    
+    
+    
 
 }

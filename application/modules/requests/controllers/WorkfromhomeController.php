@@ -32,5 +32,15 @@ class Requests_WorkfromhomeController extends Zend_Controller_Action
 
         $this->view->newform = $form;
     }
+    
+    
+    
+    public function showAction()
+    {
+        
+    }
+    
+    
+    
 
 }
