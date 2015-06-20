@@ -16,6 +16,8 @@ class CamelCaseTech_Resource_Plugin_Acl extends Zend_Controller_Plugin_Abstract
         $view = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->view;
 
         $acl = new Zend_Acl();
+        // to have the acl object available in global storage
+        Zend_Registry::set('acl', $acl);
         // creating roles
         $base = new Zend_Acl_Role('base');
         $employee = new Zend_Acl_Role('user');

@@ -38,16 +38,16 @@ class Requests_Model_Permission
             $key->fromTime = date_format($key->fromTime, 'H:i:s');
             $key->toTime = date_format($key->toTime, 'H:i:s');
             switch ($key->status) {
-                case 1 :
+                case Attendance\Entity\Permission::STATUS_SUBMITTED :
                     $key->status = 'Submitted';
                     break;
-                case 2 :
+                case Attendance\Entity\Permission::STATUS_CANCELLED :
                     $key->status = 'Cancelled';
                     break;
-                case 3 :
+                case Attendance\Entity\Permission::STATUS_APPROVED :
                     $key->status = 'Approved';
                     break;
-                case 4 :
+                case Attendance\Entity\Permission::STATUS_DENIED :
                     $key->status = 'Denied';
                     break;
             }
@@ -59,7 +59,8 @@ class Requests_Model_Permission
     private function createEntity($permissionInfo)
     {
         //get user id from session
-        $userId = Zend_Auth::getInstance()->getIdentity('id');
+        $storage = Zend_Auth::getInstance()->getIdentity();
+        $userId = $storage['id'];
 
         $userRepository = $this->entityManager->getRepository('Attendance\Entity\User');
         $entity = new Attendance\Entity\Permission();

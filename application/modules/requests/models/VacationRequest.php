@@ -81,16 +81,16 @@ class Requests_Model_VacationRequest
             $key->fromDate = date_format($key->fromDate, 'm/d/Y');
             $key->toDate = date_format($key->toDate, 'm/d/Y');
             switch ($key->status) {
-                case 1 :
+                case Attendance\Entity\VacationRequest::STATUS_SUBMITTED :
                     $key->status = 'Submitted';
                     break;
-                case 2 :
+                case Attendance\Entity\VacationRequest::STATUS_CANCELLED :
                     $key->status = 'Cancelled';
                     break;
-                case 3 :
+                case Attendance\Entity\VacationRequest::STATUS_APPROVED :
                     $key->status = 'Approved';
                     break;
-                case 4 :
+                case Attendance\Entity\VacationRequest::STATUS_DENIED :
                     $key->status = 'Denied';
                     break;
             }

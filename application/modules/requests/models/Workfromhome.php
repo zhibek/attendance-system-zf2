@@ -43,16 +43,16 @@ class Requests_Model_Workfromhome
             $key->startDate = date_format($key->startDate, 'm/d/Y');
             $key->endDate = date_format($key->endDate, 'm/d/Y');
             switch ($key->status) {
-                case 1 :
+                case Attendance\Entity\WorkFromHome::STATUS_SUBMITTED :
                     $key->status = 'Submitted';
                     break;
-                case 2 :
+                case Attendance\Entity\WorkFromHome::STATUS_CANCELLED :
                     $key->status = 'Cancelled';
                     break;
-                case 3 :
+                case Attendance\Entity\WorkFromHome::STATUS_APPROVED :
                     $key->status = 'Approved';
                     break;
-                case 4 :
+                case Attendance\Entity\WorkFromHome::STATUS_DENIED :
                     $key->status = 'Denied';
                     break;
             }

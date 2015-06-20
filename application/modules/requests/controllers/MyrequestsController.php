@@ -11,6 +11,7 @@ class Requests_MyrequestsController extends Zend_Controller_Action
     public function init()
     {
         $this->_em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
+        $this->acl = Zend_Registry::get('acl');
     }
 
     public function indexAction()
