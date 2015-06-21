@@ -14,6 +14,7 @@
         <thead>
             <tr>
                 <th>Date Of Submission</th>
+                <th>Requester</th>
                 <th>From</th>
                 <th>To</th>
                 <th>Status</th>
@@ -25,6 +26,7 @@
             {{#permissions}}
             <tr>
                 <td><a href="/requests/permission/show/id/{{id}}">{{dateOfSubmission}}</a></td>
+                <td>{{user.name}}</td>
                 <td>{{fromTime}}</td>
                 <td>{{toTime}}</td>
                 <td>{{status}}</td>
@@ -65,6 +67,7 @@
         <thead>
             <tr>
                 <th>Date Of Submission</th>
+                <th>Requester</th>
                 <th>From</th>
                 <th>To</th>
                 <th>Status</th>
@@ -74,7 +77,9 @@
         <tbody>
             {{#vacationRequests}}
             <tr>
-                <td><a href="/requests/vacation/show/id/{{id}}">{{dateOfSubmission}}</a></td>                <td>{{fromDate}}</td>
+                <td><a href="/requests/vacation/show/id/{{id}}">{{dateOfSubmission}}</a></td>                
+                <td>{{user.name}}</td>
+                <td>{{fromDate}}</td>
                 <td>{{toDate}}</td>
                 <td>{{status}}</td>
 
@@ -114,6 +119,7 @@
         <thead>
             <tr>
                 <th>Date Of Submission</th>
+                <th>Requester</th>
                 <th>From</th>
                 <th>To</th>
                 <th>Reason</th>
@@ -125,6 +131,7 @@
             {{#workFromHomeRequests}}
             <tr>
                 <td><a href="/requests/workfromhome/show/id/{{id}}">{{dateOfSubmission}}</a></td>
+                <td>{{user.name}}</td>
                 <td>{{startDate}}</td>
                 <td>{{endDate}}</td>
                 <td>{{reason}}</td>

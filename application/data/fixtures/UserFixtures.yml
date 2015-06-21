@@ -1,3 +1,16 @@
+Attendance\Entity\Role:
+    role1:
+        name: 'Employee'
+        
+    role2:
+        name: 'HR'
+
+    role3:
+        name: 'Manager'
+
+    role4:
+        name: 'Admin'
+        
 Attendance\Entity\User:
     
     user{1..25}:
@@ -12,7 +25,7 @@ Attendance\Entity\User:
         description: human                        
         vacationBalance: 31       
         totalWorkingHoursThisMonth: 31   
-    
+        role: @role1
     user26:
         name: Admin Admin
         username: admin
@@ -24,7 +37,7 @@ Attendance\Entity\User:
         description: human                        
         vacationBalance: 31       
         totalWorkingHoursThisMonth: 31 
-
+        role: @role4
     user27:
         name: HR HR
         username: HR
@@ -36,7 +49,7 @@ Attendance\Entity\User:
         description: human                        
         vacationBalance: 31       
         totalWorkingHoursThisMonth: 31 
-
+        role: @role2
     user28:
         name: Manager Manager 
         username: Manager
@@ -48,7 +61,7 @@ Attendance\Entity\User:
         description: human                        
         vacationBalance: 31       
         totalWorkingHoursThisMonth: 31 
-
+        role: @role3
 
 #    user1:
 #        name: 'bob2'

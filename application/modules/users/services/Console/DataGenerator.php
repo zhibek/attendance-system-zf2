@@ -75,14 +75,13 @@ EOT
         $users = $loader->load('application/data/fixtures/UserFixtures.yml');
         // append a date object for every user object
         foreach ($users as $object) {
-            $object->password = \Attendance\Entity\User::hashPassword($object->password);
+            if(isset($object->password))$object->password = \Attendance\Entity\User::hashPassword($object->password);
             $object->manager = $users['user26'];
             $object->dateOfBirth = new \DateTime("now");
             $object->startDate = new \DateTime("now");
             $object->branch = $branches['branch1']; //$repository->find(1);
             $object->position = $positions['position1'];
             $object->department = $departments['department1'];
-            $object->role = $roles['role1'];
         }
         $this->insertObjectsInDatabase($entityManager, $users);
 

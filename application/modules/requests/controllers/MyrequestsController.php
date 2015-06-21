@@ -26,12 +26,13 @@ class Requests_MyrequestsController extends Zend_Controller_Action
         $result = $query->execute();
         $role = $result[0]->name;
 
+        $userRepository = $this->_em->getRepository('Attendance\Entity\User'); 
+        
         $permissionModel = new Requests_Model_Permission($this->_em);
         
         $vacationRequestsModel = new Requests_Model_VacationRequest($this->_em);
         
         $workFromHomeModel = new Requests_Model_Workfromhome($this->_em);
-        
         
         if($this->acl->isAllowed($role, $resource, 'viewall'))
         {
@@ -51,18 +52,17 @@ class Requests_MyrequestsController extends Zend_Controller_Action
         $cancelActionAllowed = $this->acl->isAllowed($role, $resource, 'cancel');
         $approveActionAllowed = $this->acl->isAllowed($role, $resource, 'approve');
         $declineActionAllowed = $this->acl->isAllowed($role, $resource, 'decline');
-        
         foreach ($permissions as $request)
         {
-            $request->commentActionAllowed = $commentActionAllowed;
-            $request->cancelActionAllowed = $cancelActionAllowed && ($request->status != 'Cancelled');
+            //$request->commentActionAllowed = $commentActionAllowed;
+            $request->cancelActionAllowed = ($cancelActionAllowed && ($request->status != 'Cancelled'));
             $request->approveActionAllowed = $approveActionAllowed && ($request->status != 'Approved') && ($request->status != 'Cancelled');
             $request->declineActionAllowed = $declineActionAllowed && ($request->status != 'Denied') && ($request->status != 'Cancelled');
         }
         
         foreach ($workFromHomeRequests as $request)
         {
-            $request->commentActionAllowed = $commentActionAllowed;
+            $request->user = $userRepository->find($request->user);
             $request->cancelActionAllowed = $cancelActionAllowed && ($request->status != 'Cancelled');
             $request->approveActionAllowed = $approveActionAllowed && ($request->status != 'Approved') && ($request->status != 'Cancelled');
             $request->declineActionAllowed = $declineActionAllowed && ($request->status != 'Denied') && ($request->status != 'Cancelled');
@@ -70,7 +70,7 @@ class Requests_MyrequestsController extends Zend_Controller_Action
         
         foreach ($vacationRequests as $request)
         {
-            $request->commentActionAllowed = $commentActionAllowed;
+            //$request->commentActionAllowed = $commentActionAllowed;
             $request->cancelActionAllowed = $cancelActionAllowed && ($request->status != 'Cancelled');
             $request->approveActionAllowed = $approveActionAllowed && ($request->status != 'Approved') && ($request->status != 'Cancelled');
             $request->declineActionAllowed = $declineActionAllowed && ($request->status != 'Denied') && ($request->status != 'Cancelled');

@@ -28,7 +28,7 @@ class VacationRequest
 
     /**
      * @ORM\ManyToOne(targetEntity="Attendance\Entity\User")
-     * @ORM\JoinColumn(name="user", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      * @var Attendance\Entity\User
      */
     public $user;
