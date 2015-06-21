@@ -33,20 +33,16 @@
                     &nbsp;<a href="edit/id/{{id}}" class="btn btn-small btn-warning" >Edit</a>
                 </td>-->
                 <td>
-                    {{#commentActionAllowed}}
-                        <a href="#" class="btn btn-primary">Comment</a>
-                    {{/commentActionAllowed}}
-                    
                     {{#cancelActionAllowed}}
-                        <a href="#" class="btn delete_row btn-primary">Cancel</a>
+                        <a href="cancel/id/{{id}}/requesttype/Permission" class="btn delete_row btn-danger">Cancel</a>
                     {{/cancelActionAllowed}}
                     
                     {{#approveActionAllowed}}
-                        <a href="#" class="btn btn-primary">Approve</a>
+                        <a href="approve/id/{{id}}/requesttype/Permission" class="btn btn-success">Approve</a>
                     {{/approveActionAllowed}}
                     
                     {{#declineActionAllowed}}
-                        <a href="#" class="btn btn-primary">Decline</a>
+                        <a href="decline/id/{{id}}/requesttype/Permission" class="btn btn-danger">Decline</a>
                     {{/declineActionAllowed}}
                 </td>
             </tr>
@@ -85,6 +81,19 @@
 <!--                <td><a href="delete/id/{{id}}" class="delete_row  btn btn-small btn-primary"> Deactivate</a>
                     &nbsp;<a href="edit/id/{{id}}" class="btn btn-small btn-warning" >Edit</a>
                 </td>-->
+                <td>
+                    {{#cancelActionAllowed}}
+                        <a href="cancel/id/{{id}}/requesttype/VacationRequest" class="btn delete_row btn-danger">Cancel</a>
+                    {{/cancelActionAllowed}}
+                    
+                    {{#approveActionAllowed}}
+                        <a href="approve/id/{{id}}/requesttype/VacationRequest" class="btn btn-success">Approve</a>
+                    {{/approveActionAllowed}}
+                    
+                    {{#declineActionAllowed}}
+                        <a href="decline/id/{{id}}/requesttype/VacationRequest" class="btn btn-danger">Decline</a>
+                    {{/declineActionAllowed}}
+                </td>
             </tr>
             {{/vacationRequests}}
             </td>
@@ -124,6 +133,19 @@
 <!--                <td><a href="delete/id/{{id}}" class="delete_row  btn btn-small btn-primary"> Deactivate</a>
                     &nbsp;<a href="edit/id/{{id}}" class="btn btn-small btn-warning" >Edit</a>
                 </td>-->
+                <td>
+                    {{#cancelActionAllowed}}
+                        <a href="cancel/id/{{id}}/requesttype/Workfromhome" class="btn delete_row btn-danger">Cancel</a>
+                    {{/cancelActionAllowed}}
+                    
+                    {{#approveActionAllowed}}
+                        <a href="approve/id/{{id}}/requesttype/Workfromhome" class="btn btn-success">Approve</a>
+                    {{/approveActionAllowed}}
+                    
+                    {{#declineActionAllowed}}
+                        <a href="decline/id/{{id}}/requesttype/Workfromhome" class="btn btn-danger">Decline</a>
+                    {{/declineActionAllowed}}
+                </td>
             </tr>
             {{/workFromHomeRequests}}
             </td>

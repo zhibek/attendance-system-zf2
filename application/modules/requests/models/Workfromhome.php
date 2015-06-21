@@ -16,11 +16,14 @@ class Requests_Model_Workfromhome
 
     public function newRequest($requestInfo)
     {
+        $auth = Zend_Auth::getInstance();
+        $storage = $auth->getStorage();
+        
         $entity = new Attendance\Entity\WorkFromHome();
         $entity->startDate = new DateTime($requestInfo['startDate']);
         $entity->endDate = new DateTime($requestInfo['endDate']);
         $entity->reason = $requestInfo['reason'];
-        $entity->user = Zend_Auth::getInstance()->getIdentity('id');
+        $entity->user = $storage->read('id');
         $entity->dateOfSubmission = new DateTime("now");
         $entity->status = 1;
 //      INSERT statements are not allowed in DQL, because entities and their
@@ -28,6 +31,19 @@ class Requests_Model_Workfromhome
 //      through EntityManager#persist() to ensure consistency of your object model.
         $this->_em->persist($entity);
         $this->_em->flush();
+    }
+    
+    public function listAll()
+    {
+        $repository = $this->_em->getRepository('Attendance\Entity\WorkFromHome');
+        $data = $repository->findAll();
+        return $this->prepareForDisplay($data);
+    }
+    
+    public function findById($id)
+    {
+        $repository = $this->_em->getRepository('Attendance\Entity\WorkFromHome');
+        return $repository->find($id);
     }
 
     public function workFromHomeListing()
@@ -59,8 +75,33 @@ class Requests_Model_Workfromhome
         }
         return $requests;
     }
-
     
+    
+
+    private function prepareForDisplay($data)
+    {
+        foreach ($data as $key) {
+            $key->dateOfSubmission = date_format($key->dateOfSubmission, 'm/d/Y');
+            $key->startDate = date_format($key->startDate, 'm/d/Y');
+            $key->endDate = date_format($key->endDate, 'm/d/Y');
+            switch ($key->status) {
+                case Attendance\Entity\Permission::STATUS_SUBMITTED :
+                    $key->status = 'Submitted';
+                    break;
+                case Attendance\Entity\Permission::STATUS_CANCELLED :
+                    $key->status = 'Cancelled';
+                    break;
+                case Attendance\Entity\Permission::STATUS_APPROVED :
+                    $key->status = 'Approved';
+                    break;
+                case Attendance\Entity\Permission::STATUS_DENIED :
+                    $key->status = 'Denied';
+                    break;
+            }
+        }
+
+        return $data;
+    }
     
     
      public function getWorkFromHomeById($id)

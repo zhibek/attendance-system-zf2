@@ -34,6 +34,11 @@ class Requests_Model_Permission
         $data = $this->repository->findAll();
         return $this->prepareForDisplay($data);
     }
+    
+    public function findById($id)
+    {
+        return $this->repository->find($id);
+    }
 
     public function permissionListing()
     {
