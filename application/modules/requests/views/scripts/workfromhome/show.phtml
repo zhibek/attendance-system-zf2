@@ -70,6 +70,15 @@
         </div><!-- panel body -->
     </div><!--panel default-->
 </div><!--container-->
+<br />
+<div class="container">
+    {{#requestComments}}
+    
+    <p>{{user}}  {{body}}  {{created}}</p>
+<br />
+{{/requestComments}}
+</div>
+
 <div class="container">
 {{commentForm}}
 </div>

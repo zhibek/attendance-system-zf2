@@ -60,14 +60,14 @@ class Requests_VacationController extends Zend_Controller_Action
         $commentForm = new Requests_Form_CommentForm();
         $commentModel = new Requests_Model_Comment($em);
         $request = $this->getRequest();
-        $commentInfo =  $this->_request->getParams();
-//        
-//        if ($request->isPost()) {
-//            if ($commentForm->isValid($request->getPost())) {
-//                    $commentModel->addComment($commentInfo,$requestId);
-//                }
-//            }
-//        $comments = $commentModel->listAllComments();
+         if ($request->isPost()) {
+            if ($commentForm->isValid($request->getPost())) {      
+                    $commentInfo =  $this->_request->getParams();
+                    $commentModel->addComment($commentInfo,$requestId);
+            }
+        }
+        $comments = $commentModel->listRequestComments($requestId);
+        $this->view->requestComments = $comments;      
         $this->view->commentForm = $commentForm;
         
     }

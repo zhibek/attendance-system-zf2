@@ -37,6 +37,10 @@ class Requests_WorkfromhomeController extends Zend_Controller_Action
     
     public function showAction()
     {
+        //$acl = Zend_Registry::get('acl');
+        $storage = Zend_Auth::getInstance()->getIdentity();
+        $role = $storage['role'];
+        var_dump($role);exit();
         $em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
         $request = $this->getRequest();
         $requestId = $request->id;
@@ -58,14 +62,15 @@ class Requests_WorkfromhomeController extends Zend_Controller_Action
         $commentForm = new Requests_Form_CommentForm();
         $commentModel = new Requests_Model_Comment($em);
         $request = $this->getRequest();
-        $commentInfo =  $this->_request->getParams();
-//        
-//        if ($request->isPost()) {
-//            if ($commentForm->isValid($request->getPost())) {
-//                    $commentModel->addComment($commentInfo,$requestId);
-//                }
-//            }
-//        $comments = $commentModel->listAllComments();
+         if ($request->isPost()) {
+            if ($commentForm->isValid($request->getPost())) {      
+                    $commentInfo =  $this->_request->getParams();
+                    $commentModel->addComment($commentInfo,$requestId);
+            }
+        }
+        $comments = $commentModel->listRequestComments($requestId);
+        $this->view->requestComments = $comments;      
+        $this->view->commentForm = $commentForm;
         $this->view->commentForm = $commentForm;
         
     }
