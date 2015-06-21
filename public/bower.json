@@ -13,6 +13,7 @@
   "dependencies": {
       "bootstrap" : "~3.x",
       "bootstrap-datepicker" : "~1.x",
-      "jt.timepicker": "1.7"
+      "jt.timepicker": "1.7",
+      "startbootstrap-sb-admin-2" : "~1.x"
   }
 }

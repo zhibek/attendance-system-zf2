@@ -1,16 +1,16 @@
 body {
-  padding-top: 50px;
-}
+    padding: 0px;
+    margin: 0px;}
 .starter-template {
-  padding: 40px 15px;
-  text-align: center;
+    padding: 40px 15px;
+    text-align: center;
 }
 .user-photos{
-    height : 150 px;
-    width : 100 px;
+    height : 150px;
+    width : 100px;
 }
 nav li a {
-      padding: 15px 15px; 
+    padding: 15px 15px; 
 }
 
 .loginform{
@@ -19,4 +19,16 @@ nav li a {
 
 .invalid{
     color: RED;
+}
+
+.content{
+    background-color: white; 
+}
+.panel{
+    margin-bottom: 230px;
+}
+.myrow{
+    margin-right: 0px !important ; 
+    margin-left: -7px !important ; 
+
 }

@@ -69,7 +69,7 @@ class Requests_VacationController extends Zend_Controller_Action
 //            }
 //        $comments = $commentModel->listAllComments();
         $this->view->commentForm = $commentForm;
-        
+
     }
     
     
