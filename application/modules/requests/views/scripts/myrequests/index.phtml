@@ -21,6 +21,7 @@
             </tr>
         </thead>
         <tbody>
+            {{!template-with-dereferencing.mustache}}
             {{#permissions}}
             <tr>
                 <td><a href="/requests/permission/show/id/{{id}}">{{dateOfSubmission}}</a></td>
@@ -31,6 +32,23 @@
 <!--                <td><a href="delete/id/{{id}}" class="delete_row  btn btn-small btn-primary"> Deactivate</a>
                     &nbsp;<a href="edit/id/{{id}}" class="btn btn-small btn-warning" >Edit</a>
                 </td>-->
+                <td>
+                    {{#commentActionAllowed}}
+                        <a href="#" class="btn btn-primary">Comment</a>
+                    {{/commentActionAllowed}}
+                    
+                    {{#cancelActionAllowed}}
+                        <a href="#" class="btn delete_row btn-primary">Cancel</a>
+                    {{/cancelActionAllowed}}
+                    
+                    {{#approveActionAllowed}}
+                        <a href="#" class="btn btn-primary">Approve</a>
+                    {{/approveActionAllowed}}
+                    
+                    {{#declineActionAllowed}}
+                        <a href="#" class="btn btn-primary">Decline</a>
+                    {{/declineActionAllowed}}
+                </td>
             </tr>
             {{/permissions}}
             </td>

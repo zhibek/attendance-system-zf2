@@ -35,6 +35,20 @@ class Requests_MyrequestsController extends Zend_Controller_Action
         {
             $permissions = $permissionModel->permissionListing();
         }
+        
+        $commentActionAllowed = $this->acl->isAllowed($role, $resource, 'comment');
+        $cancelActionAllowed = $this->acl->isAllowed($role, $resource, 'cancel');
+        $approveActionAllowed = $this->acl->isAllowed($role, $resource, 'approve');
+        $declineActionAllowed = $this->acl->isAllowed($role, $resource, 'decline');
+
+        foreach ($permissions as $permission)
+        {
+            $permission->commentActionAllowed = $commentActionAllowed;
+            $permission->cancelActionAllowed = $cancelActionAllowed;
+            $permission->approveActionAllowed = $approveActionAllowed;
+            $permission->declineActionAllowed = $declineActionAllowed;
+        }
+        
         $this->view->permissions = $permissions;
 
         $vacationRequestsModel = new Requests_Model_VacationRequest($this->_em);

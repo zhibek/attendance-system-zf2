@@ -75,7 +75,7 @@ class Users_IndexController extends Zend_Controller_Action
         if ($request->isPost()) {
             // checking if the form is valid
             if ($form->isValid($request->getPost())) {
-                if($form->getElement('password') == $form->getElement('confirmPassword'))
+                if($request->getParam('password') == $request->getParam('confirmPassword'))
                 {
                     $saveUserModel = new Users_Model_SaveUser($em);
                     $saveUserModel->saveUser($request);
