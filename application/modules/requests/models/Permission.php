@@ -34,7 +34,7 @@ class Requests_Model_Permission
         $data = $this->repository->findAll();
         return $this->prepareForDisplay($data);
     }
-    
+
     public function findById($id)
     {
         return $this->repository->find($id);
@@ -89,35 +89,27 @@ class Requests_Model_Permission
 
         return $data;
     }
-    
-    
-    
-    
+
     public function getPermissionById($id)
     {
         $query = $this->entityManager->createQuery('Select p FROM Attendance\Entity\Permission  p WHERE p.id = ?1');
         $query->setParameter(1, $id);
         $result = $query->execute();
         foreach ($result as $key) {
-            $key->dateOfSubmission = date_format($key->dateOfSubmission ,'m/d/Y' );
-            $key->date = date_format($key->date ,'m/d/Y' );
+            $key->dateOfSubmission = date_format($key->dateOfSubmission, 'm/d/Y');
+            $key->date = date_format($key->date, 'm/d/Y');
             $key->fromTime = date_format($key->fromTime, 'm:s');
             $key->toTime = date_format($key->toTime, 'm:s');
             $key->user = $this->getUserNameById($key->user);
-            if($key->status == 1)
-            {
+            if ($key->status == 1) {
                 $key->status = "ON";
-            }
-            else
-            {
+            } else {
                 $key->status = "OFF";
             }
-            
         }
         return $result;
     }
-    
-    
+
     function getUserNameById($id)
     {
         $query = $this->entityManager->createQuery('Select u FROM Attendance\Entity\User  u WHERE u.id = ?1');
@@ -125,11 +117,7 @@ class Requests_Model_Permission
         $result = $query->execute();
         return $result[0]->name;
     }
-    
-    
-    
-    
-    
+
     function getCurrentUserRole()
     {
         $auth = Zend_Auth::getInstance();
@@ -139,9 +127,6 @@ class Requests_Model_Permission
         $query->setParameter(1, $id['id']);
         $result = $query->execute();
         return $result[0]->role;
-        
     }
-    
-    
-    
+
 }

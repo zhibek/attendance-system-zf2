@@ -18,7 +18,7 @@ class Requests_Model_Workfromhome
     {
         $auth = Zend_Auth::getInstance();
         $storage = $auth->getStorage();
-        
+
         $entity = new Attendance\Entity\WorkFromHome();
         $entity->startDate = new DateTime($requestInfo['startDate']);
         $entity->endDate = new DateTime($requestInfo['endDate']);
@@ -32,14 +32,14 @@ class Requests_Model_Workfromhome
         $this->_em->persist($entity);
         $this->_em->flush();
     }
-    
+
     public function listAll()
     {
         $repository = $this->_em->getRepository('Attendance\Entity\WorkFromHome');
         $data = $repository->findAll();
         return $this->prepareForDisplay($data);
     }
-    
+
     public function findById($id)
     {
         $repository = $this->_em->getRepository('Attendance\Entity\WorkFromHome');
@@ -75,8 +75,6 @@ class Requests_Model_Workfromhome
         }
         return $requests;
     }
-    
-    
 
     private function prepareForDisplay($data)
     {
@@ -102,32 +100,26 @@ class Requests_Model_Workfromhome
 
         return $data;
     }
-    
-    
-     public function getWorkFromHomeById($id)
+
+    public function getWorkFromHomeById($id)
     {
         $query = $this->_em->createQuery('Select w FROM Attendance\Entity\WorkFromHome  w WHERE w.id = ?1');
         $query->setParameter(1, $id);
         $result = $query->execute();
         foreach ($result as $key) {
-            $key->dateOfSubmission = date_format($key->dateOfSubmission ,'m/d/Y' );
-            $key->startDate = date_format($key->startDate ,'m/d/Y' );
-            $key->endDate = date_format($key->endDate ,'m/d/Y' );
+            $key->dateOfSubmission = date_format($key->dateOfSubmission, 'm/d/Y');
+            $key->startDate = date_format($key->startDate, 'm/d/Y');
+            $key->endDate = date_format($key->endDate, 'm/d/Y');
             $key->user = $this->getUserNameById($key->user);
-            if($key->status == 1)
-            {
+            if ($key->status == 1) {
                 $key->status = "ON";
-            }
-            else
-            {
+            } else {
                 $key->status = "OFF";
             }
-            
         }
         return $result;
     }
-    
-    
+
     function getUserNameById($id)
     {
         $query = $this->_em->createQuery('Select u FROM Attendance\Entity\User  u WHERE u.id = ?1');
@@ -135,11 +127,7 @@ class Requests_Model_Workfromhome
         $result = $query->execute();
         return $result[0]->name;
     }
-    
-    
-    
-    
-    
+
     function getCurrentUserRole()
     {
         $auth = Zend_Auth::getInstance();
@@ -149,10 +137,6 @@ class Requests_Model_Workfromhome
         $query->setParameter(1, $id['id']);
         $result = $query->execute();
         return $result[0]->role;
-        
     }
-   
-    
-    
-    
+
 }
