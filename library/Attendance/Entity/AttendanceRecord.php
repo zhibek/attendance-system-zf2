@@ -12,7 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 class AttendanceRecord
 {
-
     /**
      * @ORM\Id
      * @ORM\Column(type="integer");
