@@ -24,16 +24,16 @@ class Requests_Model_VacationRequest
         $auth = Zend_Auth::getInstance();
         $storage = $auth->getIdentity();
         $userRepository = $this->_em->getRepository('Attendance\Entity\User');
-        $vacationRepository = $this->_em->getRepository('Attendance\Entity\Vacation'); 
-        $userId = $storage['id'];
+        $vacationRepository = $this->_em->getRepository('Attendance\Entity\Vacation');
+        $userId = $storage->read('id');
         $vacationType = $vacationRequestInfo['type'];
         $entity->user = $userRepository->find($userId);
         $entity->fromDate = new DateTime($vacationRequestInfo['fromDate']);
         $entity->toDate = new DateTime($vacationRequestInfo['toDate']);
         $entity->vacationType = $vacationRepository->find($vacationType);
         $entity->attachment = $this->saveAttachement();
-        $entity->dateOfSubmission=new DateTime("now");
-        $entity->status=1;
+        $entity->dateOfSubmission = new DateTime("now");
+        $entity->status = 1;
         $this->_em->persist($entity);
         $this->_em->flush($entity);
     }
@@ -147,27 +147,23 @@ class Requests_Model_VacationRequest
         $query->setParameter(1, $id);
         $result = $query->execute();
         foreach ($result as $key) {
-            $key->dateOfSubmission = date_format($key->dateOfSubmission ,'m/d/Y' );
-            $key->fromDate = date_format($key->fromDate ,'m/d/Y' );
-            $key->toDate = date_format($key->toDate ,'m/d/Y' );
+            $key->dateOfSubmission = date_format($key->dateOfSubmission, 'm/d/Y');
+            $key->fromDate = date_format($key->fromDate, 'm/d/Y');
+            $key->toDate = date_format($key->toDate, 'm/d/Y' );
             $key->user = $this->getUserNameById($key->user);
             $key->vacationType = $this->getVacationTypeById($key->vacationType);
-            if($key->status == 1)
-            {
+            if ($key->status == 1) {
                 $key->status = "ON";
-            }
-            else
-            {
+            } else {
                 $key->status = "OFF";
             }
-            if($key->attachment == NULL)
-            {
+            if ($key->attachment == NULL) {
                 $key->attachment = "No Attachment Available";
             }
         }
         return $result;
     }
-    
+
     function getUserNameById($id)
     {
         $query = $this->_em->createQuery('Select u FROM Attendance\Entity\User  u WHERE u.id = ?1');
@@ -175,7 +171,7 @@ class Requests_Model_VacationRequest
         $result = $query->execute();
         return $result[0]->name;
     }
-    
+
     function getCurrentUserRole()
     {
         $auth = Zend_Auth::getInstance();
@@ -185,9 +181,8 @@ class Requests_Model_VacationRequest
         $query->setParameter(1, $id['id']);
         $result = $query->execute();
         return $result[0]->role;
-        
     }
-    
+
     function getVacationTypeById($id)
     {
         $query = $this->_em->createQuery('Select v FROM Attendance\Entity\Vacation  v WHERE v.id = ?1');
@@ -195,9 +190,5 @@ class Requests_Model_VacationRequest
         $result = $query->execute();
         return $result[0]->type;
     }
-    
-    
-    
-    
 
 }

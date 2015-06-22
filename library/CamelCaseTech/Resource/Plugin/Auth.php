@@ -22,7 +22,10 @@ class CamelCaseTech_Resource_Plugin_Auth extends Zend_Controller_Plugin_Abstract
             $view->visible = FALSE;
         } else {
             $view->visible = TRUE;
-        }
+            $storgae=  Zend_Auth::getInstance()->getIdentity();
+            $username = $storgae['name'];
+            $view->name=$username;
+            }
     }
 
 }
