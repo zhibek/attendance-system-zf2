@@ -29,9 +29,9 @@ class Requests_MyrequestsController extends Zend_Controller_Action
         $userRepository = $this->_em->getRepository('Attendance\Entity\User'); 
         
         $permissionModel = new Requests_Model_Permission($this->_em);
-        
+
         $vacationRequestsModel = new Requests_Model_VacationRequest($this->_em);
-        
+
         $workFromHomeModel = new Requests_Model_Workfromhome($this->_em);
         
         if($this->acl->isAllowed($role, $resource, 'viewall'))
@@ -39,15 +39,13 @@ class Requests_MyrequestsController extends Zend_Controller_Action
             $permissions = $permissionModel->listAll();
             $vacationRequests = $vacationRequestsModel->listAll();
             $workFromHomeRequests = $workFromHomeModel->listAll();
-        }
-        else
-        {
+        } else {
             $permissions = $permissionModel->permissionListing();
             $vacationRequests = $vacationRequestsModel->vacationRequestListing();
             $workFromHomeRequests = $workFromHomeModel->workFromHomeListing();
         }
-        
-        
+
+
         $commentActionAllowed = $this->acl->isAllowed($role, $resource, 'comment');
         $cancelActionAllowed = $this->acl->isAllowed($role, $resource, 'cancel');
         $approveActionAllowed = $this->acl->isAllowed($role, $resource, 'approve');
@@ -75,52 +73,50 @@ class Requests_MyrequestsController extends Zend_Controller_Action
             $request->approveActionAllowed = $approveActionAllowed && ($request->status != 'Approved') && ($request->status != 'Cancelled');
             $request->declineActionAllowed = $declineActionAllowed && ($request->status != 'Denied') && ($request->status != 'Cancelled');
         }
-        
+
         $this->view->permissions = $permissions;
         $this->view->vacationRequests = $vacationRequests;
         $this->view->workFromHomeRequests = $workFromHomeRequests;
-
     }
-    
+
     public function cancelAction()
     {
         $requestId = $this->getParam('id');
-        
+
         $request = $this->getRequestEntity($requestId);
-        
+
         $request->status = 2;
 
         $this->updateEntity($request);
     }
-    
+
     public function declineAction()
     {
         $requestId = $this->getParam('id');
-        
+
         $request = $this->getRequestEntity($requestId);
-        
+
         $request->status = 4;
 
         $this->updateEntity($request);
     }
-    
+
     public function approveAction()
     {
         $requestId = $this->getParam('id');
-        
+
         $request = $this->getRequestEntity($requestId);
-        
+
         $request = $this->getRequestEntity($requestId);
-        
+
         $request->status = 3;
 
         $this->updateEntity($request);
     }
-    
+
     private function getRequestEntity($requestId)
     {
-        switch ($this->getParam('requesttype')) 
-        {
+        switch ($this->getParam('requesttype')) {
             case "Permission" :
                 $model = new Requests_Model_Permission($this->_em);
                 break;
@@ -131,17 +127,17 @@ class Requests_MyrequestsController extends Zend_Controller_Action
                 $model = new Requests_Model_Workfromhome($this->_em);
                 break;
         }
-        
+
         return $model->findById($requestId);
     }
-    
+
     private function updateEntity($request)
     {
-        
+
         $this->_em->merge($request);
         $this->_em->flush();
-        
+
         $this->redirect('/requests/myrequests/index');
     }
-    
-    }
+
+}

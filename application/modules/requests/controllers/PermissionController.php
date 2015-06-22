@@ -7,7 +7,9 @@
  */
 class Requests_PermissionController extends Zend_Controller_Action
 {
-    public function init() {
+
+    public function init()
+    {
         $this->entityManager = $this->getInvokeArg('bootstrap')->getResource('entityManager');
         $this->permissionModel = new Requests_Model_Permission($this->entityManager);
     }
@@ -16,17 +18,15 @@ class Requests_PermissionController extends Zend_Controller_Action
     {
         
     }
-    
+
     public function newAction()
     {
-        $form = new Requests_Form_PermissionForm(null,$this->entityManager);
-        
+        $form = new Requests_Form_PermissionForm(null, $this->entityManager);
+
         $request = $this->getRequest();
-        
-        if ($request->isPost()) 
-        {
-            if ($form->isValid($request->getPost())) 
-            {
+
+        if ($request->isPost()) {
+            if ($form->isValid($request->getPost())) {
                 $permissionInfo = $this->_request->getParams();
                 $this->permissionModel->newPermission($permissionInfo);
                 $this->redirect('/requests/permission/index');
@@ -35,9 +35,7 @@ class Requests_PermissionController extends Zend_Controller_Action
 
         $this->view->form = $form;
     }
-    
-    
-    
+
     public function showAction()
     {
         $em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
@@ -46,8 +44,8 @@ class Requests_PermissionController extends Zend_Controller_Action
         $permissionRequestModel = new Requests_Model_Permission($em);
         $permission = $permissionRequestModel->getPermissionById($requestId);
         $currentUserRole = $permissionRequestModel->getCurrentUserRole();
-        
-        if($currentUserRole === 1){
+
+        if ($currentUserRole === 1) {
             $this->view->role = TRUE;
         }
         $this->view->permissionCreator = $permission[0]->user;
@@ -56,22 +54,20 @@ class Requests_PermissionController extends Zend_Controller_Action
         $this->view->toTime = $permission[0]->toTime;
         $this->view->dateOfSubmission = $permission[0]->dateOfSubmission;
         $this->view->status = $permission[0]->status;
-        
+
         $commentForm = new Requests_Form_CommentForm();
         $commentModel = new Requests_Model_Comment($em);
         $request = $this->getRequest();
-        $commentInfo =  $this->_request->getParams();
-//        
-//        if ($request->isPost()) {
-//            if ($commentForm->isValid($request->getPost())) {
-//                    $commentModel->addComment($commentInfo,$requestId);
-//                }
-//            }
-//        $comments = $commentModel->listAllComments();
+
+        if ($request->isPost()) {
+            if ($commentForm->isValid($request->getPost())) {
+                $commentInfo = $this->_request->getParams();
+                $commentModel->addComment($commentInfo, $requestId);
+            }
+        }
+        $comments = $commentModel->listRequestComments($requestId);
+        $this->view->requestComments = $comments;
         $this->view->commentForm = $commentForm;
-        
     }
-    
-    
 
 }

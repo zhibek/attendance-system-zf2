@@ -32,19 +32,21 @@ class Requests_WorkfromhomeController extends Zend_Controller_Action
 
         $this->view->newform = $form;
     }
-    
-    
-    
+
     public function showAction()
     {
+        //$acl = Zend_Registry::get('acl');
+        $storage = Zend_Auth::getInstance()->getIdentity();
+        $role = $storage['role'];
+
         $em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
         $request = $this->getRequest();
         $requestId = $request->id;
         $workFromHomeRequestModel = new Requests_Model_Workfromhome($em);
         $workFromHome = $workFromHomeRequestModel->getWorkFromHomeById($requestId);
         $currentUserRole = $workFromHomeRequestModel->getCurrentUserRole();
-        
-        if($currentUserRole === 1){
+
+        if ($currentUserRole === 1) {
             $this->view->role = TRUE;
         }
         $this->view->creator = $workFromHome[0]->user;
@@ -53,24 +55,21 @@ class Requests_WorkfromhomeController extends Zend_Controller_Action
         $this->view->reason = $workFromHome[0]->reason;
         $this->view->dateOfSubmission = $workFromHome[0]->dateOfSubmission;
         $this->view->status = $workFromHome[0]->status;
-        
-        
+
+
         $commentForm = new Requests_Form_CommentForm();
         $commentModel = new Requests_Model_Comment($em);
         $request = $this->getRequest();
-        $commentInfo =  $this->_request->getParams();
-//        
-//        if ($request->isPost()) {
-//            if ($commentForm->isValid($request->getPost())) {
-//                    $commentModel->addComment($commentInfo,$requestId);
-//                }
-//            }
-//        $comments = $commentModel->listAllComments();
+        if ($request->isPost()) {
+            if ($commentForm->isValid($request->getPost())) {
+                $commentInfo = $this->_request->getParams();
+                $commentModel->addComment($commentInfo, $requestId);
+            }
+        }
+        $comments = $commentModel->listRequestComments($requestId);
+        $this->view->requestComments = $comments;
         $this->view->commentForm = $commentForm;
-        
+        $this->view->commentForm = $commentForm;
     }
-    
-    
-    
 
 }

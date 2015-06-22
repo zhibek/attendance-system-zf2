@@ -25,7 +25,7 @@ class Requests_Model_VacationRequest
         $storage = $auth->getIdentity();
         $userRepository = $this->_em->getRepository('Attendance\Entity\User');
         $vacationRepository = $this->_em->getRepository('Attendance\Entity\Vacation');
-        $userId = $storage->read('id');
+        $userId = $storage['id'];
         $vacationType = $vacationRequestInfo['type'];
         $entity->user = $userRepository->find($userId);
         $entity->fromDate = new DateTime($vacationRequestInfo['fromDate']);
@@ -44,8 +44,8 @@ class Requests_Model_VacationRequest
         $upload = new Zend_File_Transfer_Adapter_Http();
         $upload->setOptions(array('ignoreNoFile' => true));
         $attachmentPath = APPLICATION_PATH . '/../public/upload/vacation_attachments/';
-        if(!file_exists($attachmentPath)){
-            mkdir($attachmentPath , 0777);
+        if (!file_exists($attachmentPath)) {
+            mkdir($attachmentPath, 0777);
         }
         $upload->setDestination($attachmentPath);
         try {
@@ -68,8 +68,8 @@ class Requests_Model_VacationRequest
     protected function getRandomName()
     {
         $seed = str_split('abcdefghijklmnopqrstuvwxyz'
-                . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-                . '0123456789');
+            . 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+            . '0123456789');
         shuffle($seed);
         $cid = substr(implode('', $seed), 1, 10) . uniqid();
         return $cid;
@@ -81,13 +81,13 @@ class Requests_Model_VacationRequest
         $data = $repository->findAll();
         return $this->prepareForDisplay($data);
     }
-    
+
     public function findById($id)
     {
         $repository = $this->_em->getRepository('Attendance\Entity\VacationRequest');
         return $repository->find($id);
     }
-    
+
     // Dont Delete
     public function vacationRequestListing()
     {
@@ -115,7 +115,7 @@ class Requests_Model_VacationRequest
         }
         return $requests;
     }
-    
+
     private function prepareForDisplay($data)
     {
         foreach ($data as $key) {
@@ -140,7 +140,7 @@ class Requests_Model_VacationRequest
 
         return $data;
     }
-    
+
     public function getVacationById($id)
     {
         $query = $this->_em->createQuery('Select v FROM Attendance\Entity\VacationRequest  v WHERE v.id = ?1');
@@ -149,7 +149,7 @@ class Requests_Model_VacationRequest
         foreach ($result as $key) {
             $key->dateOfSubmission = date_format($key->dateOfSubmission, 'm/d/Y');
             $key->fromDate = date_format($key->fromDate, 'm/d/Y');
-            $key->toDate = date_format($key->toDate, 'm/d/Y' );
+            $key->toDate = date_format($key->toDate, 'm/d/Y');
             $key->user = $this->getUserNameById($key->user);
             $key->vacationType = $this->getVacationTypeById($key->vacationType);
             if ($key->status == 1) {
