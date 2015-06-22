@@ -16,7 +16,7 @@ class Requests_Model_Workfromhome
 
     public function newRequest($requestInfo)
     {
-        $auth = Zend_Auth::getInstance()->getIdentity();
+        $auth = Zend_Auth::getInstance()->getIdentity();    
         $entity = new Attendance\Entity\WorkFromHome();
         $entity->startDate = new DateTime($requestInfo['startDate']);
         $entity->reason = $requestInfo['reason'];
