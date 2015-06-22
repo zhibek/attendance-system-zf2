@@ -1,0 +1,8 @@
+Attendance\Entity\AttendanceRecord:
+    
+    attendance {1..100}:
+        timeIn: <dateTimeThisDecade()>
+        timeOut: <dateTimeThisDecade()>
+        
+    
+        

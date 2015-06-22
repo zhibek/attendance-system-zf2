@@ -13,7 +13,7 @@ class Requests_VacationController extends Zend_Controller_Action
         
     }
 
-    public function createAction()
+    public function newAction()
     {
 
         $form = new Requests_Form_VacationRequestForm();
