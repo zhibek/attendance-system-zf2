@@ -6,7 +6,7 @@ Attendance\Entity\VacationRequest:
         user: <numberBetween(1, 7)>
         startDate: <date()>
         endDate: <date()>
-        reason: Sick
+        reason: Casual
         dateOfSubmission: <date()>
         status: <numberBetween(1, 4)>
     
