@@ -31,20 +31,17 @@
                         <td>{{toTime}}</td>
                         <td>{{status}}</td>
 
-                        <td><a href="delete/id/{{id}}" class="delete_row  btn btn-small btn-primary"> Deactivate</a>
-                            &nbsp;<a href="edit/id/{{id}}" class="btn btn-small btn-success" >Edit</a>
-                            <!--                </td>
-                                            <td>-->
+                        <td>
                             {{#approveActionAllowed}}
-                            <a href="approve/id/{{id}}/requesttype/Permission" class="btn btn-warning">Approve</a>
+                            <a href="approve/id/{{id}}/requesttype/Permission" class="btn btn-primary">Approve</a>
                             {{/approveActionAllowed}}
 
                             {{#declineActionAllowed}}
-                            <a href="decline/id/{{id}}/requesttype/Permission" class="btn btn-danger">Decline</a>
+                            <a href="decline/id/{{id}}/requesttype/Permission" class="btn btn-success">Decline</a>
                             {{/declineActionAllowed}}
 
                             {{#cancelActionAllowed}}
-                            <a href="cancel/id/{{id}}/requesttype/Permission" class="btn delete_row btn-info">Cancel</a>
+                            <a href="cancel/id/{{id}}/requesttype/Permission" class="btn delete_row btn-danger">Cancel</a>
                             {{/cancelActionAllowed}}
 
 
