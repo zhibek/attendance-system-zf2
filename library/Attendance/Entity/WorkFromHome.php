@@ -42,13 +42,6 @@ class WorkFromHome
 
     /**
      *
-     * @ORM\Column(type="date")
-     * @var date
-     */
-    public $endDate;
-
-    /**
-     *
      * @ORM\Column(type="string")
      * @var string
      */
