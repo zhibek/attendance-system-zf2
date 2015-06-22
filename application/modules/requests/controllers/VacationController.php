@@ -65,8 +65,28 @@ class Requests_VacationController extends Zend_Controller_Action
             }
         }
         $comments = $commentModel->listRequestComments($requestId);
+
+        $commentCreator = $commentModel->getCommentCreatorId($requestId);
+        $currentuser = $vacationRequestModel->getCurrentUserId();
+
+        if ($currentuser == $commentCreator) {
+
+            $this->view->iscreator = TRUE;
+        }
         $this->view->requestComments = $comments;
         $this->view->commentForm = $commentForm;
+    }
+
+    public function deletecommentAction()
+    {
+        $em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
+        $commentModel = new Requests_Model_Comment($em);
+        $request = $this->getRequest();
+        $commentId = $request->id;
+        $requestId = $commentModel->getcommentRequestId($commentId);
+        $commentModel->deleteComment($commentId);
+
+        $this->redirect("/requests/permission/show/id/$requestId");
     }
 
 }

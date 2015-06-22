@@ -139,4 +139,12 @@ class Requests_Model_Workfromhome
         return $result[0]->role;
     }
 
+    function getCurrentUserId()
+    {
+        $auth = Zend_Auth::getInstance();
+        $storage = $auth->getStorage();
+        $id = $storage->read('id');
+        return $id['id'];
+    }
+
 }

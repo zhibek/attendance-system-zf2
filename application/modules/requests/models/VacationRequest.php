@@ -191,4 +191,12 @@ class Requests_Model_VacationRequest
         return $result[0]->type;
     }
 
+    function getCurrentUserId()
+    {
+        $auth = Zend_Auth::getInstance();
+        $storage = $auth->getStorage();
+        $id = $storage->read('id');
+        return $id['id'];
+    }
+
 }
