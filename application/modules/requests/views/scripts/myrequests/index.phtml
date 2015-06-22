@@ -4,6 +4,7 @@
 {{/styles}}
 
 {{$content}}
+<br />
 <div class="panel panel-default">
 
     <div class="panel-heading">Permissions</div>
@@ -123,9 +124,7 @@
                     <tr>
                         <th>Date Of Submission</th>
                         <th>Requester</th>
-                        <th>From</th>
-                        <th>To</th>
-                        <th>Reason</th>
+                        <th>Date</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -136,8 +135,6 @@
                         <td><a href="/requests/workfromhome/show/id/{{id}}">{{dateOfSubmission}}</a></td>
                         <td>{{user.name}}</td>
                         <td>{{startDate}}</td>
-                        <td>{{endDate}}</td>
-                        <td>{{reason}}</td>
                         <td>{{status}}</td>
 
 <!--                <td><a href="delete/id/{{id}}" class="delete_row  btn btn-small btn-primary"> Deactivate</a>

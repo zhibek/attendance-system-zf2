@@ -129,4 +129,12 @@ class Requests_Model_Permission
         return $result[0]->role;
     }
 
+    function getCurrentUserId()
+    {
+        $auth = Zend_Auth::getInstance();
+        $storage = $auth->getStorage();
+        $id = $storage->read('id');
+        return $id['id'];
+    }
+
 }

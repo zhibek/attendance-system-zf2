@@ -26,7 +26,7 @@ class Requests_WorkfromhomeController extends Zend_Controller_Action
         if ($request->isPost()) {
             if ($form->isValid($request->getPost())) {
                 $workFromHomeModel->newRequest($requestInfo);
-                $this->redirect('/requests/workfromhome/index');
+                $this->redirect('/requests/myrequests/index');
             }
         }
 
@@ -67,9 +67,29 @@ class Requests_WorkfromhomeController extends Zend_Controller_Action
             }
         }
         $comments = $commentModel->listRequestComments($requestId);
+        $commentCreator = $commentModel->getCommentCreatorId($requestId);
+        $currentuser = $workFromHomeRequestModel->getCurrentUserId();
+
+        if ($currentuser == $commentCreator) {
+
+            $this->view->iscreator = TRUE;
+        }
+
         $this->view->requestComments = $comments;
         $this->view->commentForm = $commentForm;
         $this->view->commentForm = $commentForm;
+    }
+
+    public function deletecommentAction()
+    {
+        $em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
+        $commentModel = new Requests_Model_Comment($em);
+        $request = $this->getRequest();
+        $commentId = $request->id;
+        $requestId = $commentModel->getcommentRequestId($commentId);
+        $commentModel->deleteComment($commentId);
+
+        $this->redirect("/requests/workfromhome/show/id/$requestId");
     }
 
 }

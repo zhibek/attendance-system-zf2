@@ -51,6 +51,39 @@ class Requests_Model_Comment
         return $result;
     }
 
+    public function getCommentCreatorId($commentId)
+    {
+        $query = $this->_em->createQuery('Select c FROM Attendance\Entity\Comment  c WHERE c.id = ?1');
+        $query->setParameter(1, $commentId);
+        $result = $query->execute();
+        $commentCreator = $this->getcommentUserId($result[0]->user);
+        return $commentCreator;
+    }
+
+    public function getcommentUserId($usrId)
+    {
+        $query = $this->_em->createQuery('Select u FROM Attendance\Entity\User  u WHERE u.id = ?1');
+        $query->setParameter(1, $usrId);
+        $result = $query->execute();
+        return $result[0]->id;
+    }
+
+    public function getcommentRequestId($commentId)
+    {
+        $query = $this->_em->createQuery('Select c FROM Attendance\Entity\Comment  c WHERE c.id = ?1');
+        $query->setParameter(1, $commentId);
+        $result = $query->execute();
+
+        return $result[0]->request_id;
+    }
+
+    public function deleteComment($commentId)
+    {
+        $query = $this->_em->createQuery('Delete FROM Attendance\Entity\Comment  c WHERE c.id = ?1');
+        $query->setParameter(1, $commentId);
+        $query->execute();
+    }
+
     function getUserNameById($id)
     {
         $query = $this->_em->createQuery('Select u FROM Attendance\Entity\User  u WHERE u.id = ?1');
