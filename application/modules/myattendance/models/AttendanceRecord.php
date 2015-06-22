@@ -41,12 +41,13 @@ class Myattendance_Model_AttendanceRecord
         return $this->repository->findAll();
     }
     
-    public function filterByYear($dateFrom,$dateTo)
+    public function filterByYear($dateFrom,$dateTo,$id)
     {
 //       
-        $query = $this->entityManager->createQuery('Select v FROM Attendance\Entity\AttendanceRecord  v WHERE v.timeIn BETWEEN :dateFrom AND :dateTo');
-        $query->setParameter('dateFrom',$dateFrom );
-        $query->setParameter('dateTo',$dateTo);
+        $query = $this->entityManager->createQuery('Select v FROM Attendance\Entity\AttendanceRecord  v WHERE v.timeIn BETWEEN :dateFrom AND :dateTo AND v.user = :id ');
+        $query->setParameter('dateFrom',date("Y-m-d", strtotime($dateFrom)) );
+        $query->setParameter('dateTo',date("Y-m-d", strtotime($dateTo)));
+        $query->setParameter('id',$id);
         return $query->execute();
         
     }

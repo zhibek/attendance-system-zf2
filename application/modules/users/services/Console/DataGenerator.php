@@ -106,9 +106,10 @@ EOT
         
         foreach ($attendanceRecords as $key) {
             $key->branch = $branches['branch1'];
-            $key->user = $users['user23'];
-//            $key->timeIn = new \DateTime($key->timeIn);
-//            $key->timeOut = new \DateTime($key->timeOut);
+            $key->user = $users['user26'];
+            $key->timeOut =clone $key->timeIn;
+            $key->timeOut->modify('+' . rand(1, 8) . ' hour');
+            
         }
         
         $this->insertObjectsInDatabase($entityManager, $attendanceRecords);
