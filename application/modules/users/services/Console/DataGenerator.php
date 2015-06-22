@@ -42,9 +42,6 @@ EOT
 
         $loader = new \Nelmio\Alice\Fixtures\Loader();
 
-        $roles = $loader->load('application/data/fixtures/RoleFixtures.yml');
-        $this->insertObjectsInDatabase($entityManager, $roles);
-
         $branches = $loader->load('application/data/fixtures/BranchFixtures.yml');
         $this->insertObjectsInDatabase($entityManager, $branches);
 
