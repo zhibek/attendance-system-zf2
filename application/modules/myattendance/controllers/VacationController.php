@@ -7,11 +7,26 @@
  */
 class Myattendance_VacationController extends Zend_Controller_Action
 {
-    public function init(){
-        
+
+    public function init()
+    {
+        $em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
+        $this->_em = $em;
     }
-    
-    public function indexAction(){
-        
+
+    public function indexAction()
+    {
+        $em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
+        $vacationModel = new Myattendance_Model_VacationRecord($em);
+        $sickVacation = $vacationModel->listSickVacation();
+
+        $this->view->sick = $sickVacation;
+
+        $casualVacation = $vacationModel->listCasualVacation();
+        $this->view->casual = $casualVacation;
+
+        $annualVacation = $vacationModel->listAnnualVacation();
+        $this->view->annual = $annualVacation;
     }
+
 }
