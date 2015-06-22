@@ -16,14 +16,11 @@ class Requests_Model_Workfromhome
 
     public function newRequest($requestInfo)
     {
-        $auth = Zend_Auth::getInstance();
-        $storage = $auth->getStorage();
-
+        $auth = Zend_Auth::getInstance()->getIdentity();
         $entity = new Attendance\Entity\WorkFromHome();
         $entity->startDate = new DateTime($requestInfo['startDate']);
-        $entity->endDate = new DateTime($requestInfo['endDate']);
         $entity->reason = $requestInfo['reason'];
-        $entity->user = $storage->read('id');
+        $entity->user = $auth['id'];
         $entity->dateOfSubmission = new DateTime("now");
         $entity->status = 1;
 //      INSERT statements are not allowed in DQL, because entities and their
@@ -57,7 +54,6 @@ class Requests_Model_Workfromhome
         foreach ($requests as $key) {
             $key->dateOfSubmission = date_format($key->dateOfSubmission, 'm/d/Y');
             $key->startDate = date_format($key->startDate, 'm/d/Y');
-            $key->endDate = date_format($key->endDate, 'm/d/Y');
             switch ($key->status) {
                 case Attendance\Entity\WorkFromHome::STATUS_SUBMITTED :
                     $key->status = 'Submitted';
@@ -81,7 +77,6 @@ class Requests_Model_Workfromhome
         foreach ($data as $key) {
             $key->dateOfSubmission = date_format($key->dateOfSubmission, 'm/d/Y');
             $key->startDate = date_format($key->startDate, 'm/d/Y');
-            $key->endDate = date_format($key->endDate, 'm/d/Y');
             switch ($key->status) {
                 case Attendance\Entity\Permission::STATUS_SUBMITTED :
                     $key->status = 'Submitted';
@@ -109,7 +104,6 @@ class Requests_Model_Workfromhome
         foreach ($result as $key) {
             $key->dateOfSubmission = date_format($key->dateOfSubmission, 'm/d/Y');
             $key->startDate = date_format($key->startDate, 'm/d/Y');
-            $key->endDate = date_format($key->endDate, 'm/d/Y');
             $key->user = $this->getUserNameById($key->user);
             if ($key->status == 1) {
                 $key->status = "ON";

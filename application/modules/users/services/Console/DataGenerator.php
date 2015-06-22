@@ -54,7 +54,6 @@ EOT
         $workFromHome = $loader->load('application/data/fixtures/WorkFromHomeFixtures.yml');
         foreach ($workFromHome as $key) {
             $key->startDate = new \DateTime("now");
-            $key->endDate = new \DateTime("now");
             $key->dateOfSubmission= new \DateTime('now');
         }
         $this->insertObjectsInDatabase($entityManager, $workFromHome);

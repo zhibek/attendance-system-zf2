@@ -26,7 +26,7 @@ class Requests_WorkfromhomeController extends Zend_Controller_Action
         if ($request->isPost()) {
             if ($form->isValid($request->getPost())) {
                 $workFromHomeModel->newRequest($requestInfo);
-                $this->redirect('/requests/workfromhome/index');
+                $this->redirect('/requests/myrequests/index');
             }
         }
 
