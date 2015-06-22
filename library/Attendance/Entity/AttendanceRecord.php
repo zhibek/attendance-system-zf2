@@ -30,14 +30,14 @@ class AttendanceRecord
    
     /**
      *
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="datetime")
      * @var time
      */
     public $timeIn;
     
     /**
      *
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="datetime")
      * @var time
      */
     public $timeOut;

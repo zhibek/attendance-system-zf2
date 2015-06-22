@@ -68,7 +68,7 @@ EOT
             $key->endTime = new \DateTime("now");
         }
         $this->insertObjectsInDatabase($entityManager, $attendance);
-
+        
         $departments = $loader->load('application/data/fixtures/DepartmentFixtures.yml');
         $this->insertObjectsInDatabase($entityManager, $departments);
 
@@ -104,6 +104,17 @@ EOT
             $key->dateOfSubmission = new \DateTime($key->dateOfSubmission);
         }
         $this->insertObjectsInDatabase($entityManager, $permissions);
+        
+        $attendanceRecords = $loader->load('application/data/fixtures/AttendanceRecordFixtures.yml');
+        
+        foreach ($attendanceRecords as $key) {
+            $key->branch = $branches['branch1'];
+            $key->user = $users['user23'];
+//            $key->timeIn = new \DateTime($key->timeIn);
+//            $key->timeOut = new \DateTime($key->timeOut);
+        }
+        
+        $this->insertObjectsInDatabase($entityManager, $attendanceRecords);
         
         $entityManager->flush();
 
