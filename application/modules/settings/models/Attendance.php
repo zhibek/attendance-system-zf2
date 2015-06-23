@@ -22,7 +22,7 @@ class Settings_Model_Attendance
     public function listAttendances()
     {
         $repository = $this->_em->getRepository('Attendance\Entity\Attendance');
-        $attendances = $repository->findAll();
+        $attendances = $repository->findBy(array('active' => 1));
         foreach ($attendances as $key) {
             $query = $this->_em->createQuery('Select v FROM Attendance\Entity\Branch  v WHERE v.id = ?1')->setParameter(1, $key->branch);
             $result = $query->execute();
@@ -53,9 +53,11 @@ class Settings_Model_Attendance
     public function deactivateVacation()
     {
         $id = $this->_request->getParam('id');
-        $query = $this->_em->createQuery('DELETE FROM Attendance\Entity\Attendance  v WHERE v.id = ?1');
-        $query->setParameter(1, $id);
-        $query->execute();
+        $repository = $this->_em->getRepository('Attendance\Entity\Attendance');
+        $entity = $repository->find($id);
+        $entity->active = 0;
+        $this->_em->merge($entity);
+        $this->_em->flush();
     }
 
     public function populateForm($form)

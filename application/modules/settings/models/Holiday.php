@@ -32,13 +32,14 @@ class Settings_Model_Holiday
     public function deactivateHoilday($id)
     {
         $result = $this->repository->find($id);
-        $this->entityManager->remove($result);
+        $result->active = 0;
+        $this->entityManager->merge($result);
         $this->entityManager->flush();
     }
 
     public function listAll()
     {
-        return $this->repository->findAll();
+        return $this->repository->findBy(array('active' => 1));
     }
     
     public function filterByYear($year)
