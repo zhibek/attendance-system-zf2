@@ -37,7 +37,9 @@ class Default_Model_UserAuth
             'name' => $entities[0]->name,
             'username' => $entities[0]->username,
             'photo' => $entities[0]->photo,
-            'role' => $entities[0]->role
+            'role' => $entities[0]->role,
+            'rolename' => $entities[0]->role->name
+                
         ));
     }
 
