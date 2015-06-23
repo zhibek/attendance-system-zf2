@@ -30,15 +30,16 @@ class Requests_Form_VacationRequestForm extends Zend_Form
                 'class' => 'form-control date',
                 'placeholder' => 'Example: 10/22/2010',
                 'id' => 'toDate'
-            ))->setRequired()
-            ->setLabel('To Date: ');
+            ))->setLabel('To Date: ');
 
         // Type of Vacation
         $type = new Zend_Form_Element_Select('type');
         $type->setLabel('VacationType: ')->
             setAttrib('class', 'form-control')->
             setAttrib('id', 'type')->
-            addMultiOption('', '');
+            addMultiOption('2', 'Casual')->
+            addMultiOption('3','Annual')->
+            addMultiOption('1','Sick');
         $type->setRegisterInArrayValidator(false);
 
 
@@ -49,7 +50,7 @@ class Requests_Form_VacationRequestForm extends Zend_Form
         ));
 
         $attachment = new Zend_Form_Element_File('attachment', array(
-            'label' => 'Attachment',
+            'label' => 'Attachment:',
             'MaxFileSize' => 2097152, // 2097152 BYTES = 2 MEGABYTES
             'validators' => array(
                 array('Count', false, 1),

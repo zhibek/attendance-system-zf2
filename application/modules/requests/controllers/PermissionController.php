@@ -29,7 +29,7 @@ class Requests_PermissionController extends Zend_Controller_Action
             if ($form->isValid($request->getPost())) {
                 $permissionInfo = $this->_request->getParams();
                 $this->permissionModel->newPermission($permissionInfo);
-                $this->redirect('/requests/permission/index');
+                $this->redirect('/requests/myrequests/index');
             }
         }
 
