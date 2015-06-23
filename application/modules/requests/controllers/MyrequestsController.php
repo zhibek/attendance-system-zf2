@@ -85,7 +85,7 @@ class Requests_MyrequestsController extends Zend_Controller_Action
 
         $request = $this->getRequestEntity($requestId);
 
-        $request->status = 2;
+        $request->status = Attendance\Entity\Permission::STATUS_CANCELLED;
 
         $this->updateEntity($request);
     }
@@ -96,7 +96,7 @@ class Requests_MyrequestsController extends Zend_Controller_Action
 
         $request = $this->getRequestEntity($requestId);
 
-        $request->status = 4;
+        $request->status = Attendance\Entity\Permission::STATUS_DENIED;
 
         $this->updateEntity($request);
     }
@@ -108,10 +108,39 @@ class Requests_MyrequestsController extends Zend_Controller_Action
         $request = $this->getRequestEntity($requestId);
 
         $request = $this->getRequestEntity($requestId);
+        
+        $previousRequestState = $request->status;
+        
+        $request->status = Attendance\Entity\Permission::STATUS_APPROVED;
 
-        $request->status = 3;
-
+        // affecting user's vacation balance
+        
+        $user = $request->user;
+        
+        switch ($this->getParam('requesttype')) {
+            case "Permission" :
+                break;
+            case "VacationRequest" :
+                if($request->vacationType->description == 'Casual' || $request->vacationType->description == 'Annual' )
+                {
+                    //to make sure its not approved twice
+                    $vacationPeriod = $request->fromDate->diff($request->toDate);
+                    if($previousRequestState == Attendance\Entity\Permission::STATUS_SUBMITTED)
+                    {
+                        $user->vacationBalance = $user->vacationBalance - $vacationPeriod->days;
+                    }
+                }
+                break;
+            case "Workfromhome" :
+                break;
+        }
+        
+        $this->_em->merge($user);
+        $this->_em->flush();
+        
         $this->updateEntity($request);
+        
+        
     }
 
     private function getRequestEntity($requestId)
