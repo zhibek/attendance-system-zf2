@@ -32,7 +32,7 @@ class Requests_Model_VacationRequest
         
         if($vacationRequestInfo['toDate'] == NULL)
         {
-            $entity->toDate = $vacationRequestInfo['toDate'] ;
+            $entity->toDate = NULL;
         }
         else{
             $entity->toDate = new DateTime($vacationRequestInfo['toDate']);
@@ -129,7 +129,14 @@ class Requests_Model_VacationRequest
         foreach ($data as $key) {
             $key->dateOfSubmission = date_format($key->dateOfSubmission, 'm/d/Y');
             $key->fromDate = date_format($key->fromDate, 'm/d/Y');
-            $key->toDate = date_format($key->toDate, 'm/d/Y');
+            if($key->toDate == Null)
+            {
+                $key->toDate =Null;
+            }
+            else{
+                $key->toDate = date_format($key->toDate, 'm/d/Y');
+            }
+            
             switch ($key->status) {
                 case Attendance\Entity\Permission::STATUS_SUBMITTED :
                     $key->status = 'Submitted';
@@ -157,7 +164,14 @@ class Requests_Model_VacationRequest
         foreach ($result as $key) {
             $key->dateOfSubmission = date_format($key->dateOfSubmission, 'm/d/Y');
             $key->fromDate = date_format($key->fromDate, 'm/d/Y');
-            $key->toDate = date_format($key->toDate, 'm/d/Y');
+            if($key->toDate == Null)
+            {
+                $key->toDate = Null;
+            }
+            else{
+                $key->toDate = date_format($key->toDate, 'm/d/Y');
+            }
+            
             $key->user = $this->getUserNameById($key->user);
             $key->vacationType = $this->getVacationTypeById($key->vacationType);
             if ($key->status == 1) {
