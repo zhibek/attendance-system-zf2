@@ -54,7 +54,7 @@ class Users_Model_SaveUser
         $entity->vacationBalance = \Attendance\Entity\User::DEFAULT_VACATION_BALANCE;
         $entity->totalWorkingHoursThisMonth = 0;
         
-        $entity->role = 1;
+        $entity->role = $em->getRepository('\Attendance\Entity\Role')->find(1);
         
         if(is_null($userObj)){
             $entity->photo = $this->savePhoto();
