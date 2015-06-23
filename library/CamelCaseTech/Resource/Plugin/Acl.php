@@ -12,7 +12,8 @@ class CamelCaseTech_Resource_Plugin_Acl extends Zend_Controller_Plugin_Abstract
     public function preDispatch(\Zend_Controller_Request_Abstract $request)
     {
         parent::preDispatch($request);
-        $auth = Zend_Auth::getInstance();
+        $storage = Zend_Auth::getInstance()->getIdentity();
+        $this->role = $storage['rolename'];
         $view = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->view;
 
         $acl = new Zend_Acl();
@@ -35,12 +36,26 @@ class CamelCaseTech_Resource_Plugin_Acl extends Zend_Controller_Plugin_Abstract
         // creating resources
         $resources = 'requests-myrequests';
         $acl->addResource('requests-myrequests');
+        $acl->addResource('users-module');
+        $acl->addResource('settings-module');
         // giving roles thier privileges in /requests/myrequests
         $acl->allow($base, $resources, 'comment');
         $acl->allow($employee, $resources, 'cancel');
         $acl->allow($hr, $resources, array('approve','decline','viewall'));
         $acl->allow($manager, $resources,  array('approve','decline','viewall'));
-
+        
+        
+        // hide modules that are not allowed
+        if ($acl->isAllowed($this->role, 'users-module')) {
+            $view->visibleUserModule = TRUE;
+        } else {
+            $view->visibleUserModule = FALSE;
+        }
+        if ($acl->isAllowed($this->role, 'settings-module')) {
+            $view->visibleSettingsModule = TRUE;
+        } else {
+            $view->visibleSettingsModule = FALSE;
+        }
     }
 
 }
