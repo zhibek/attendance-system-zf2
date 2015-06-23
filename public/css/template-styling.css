@@ -51,7 +51,11 @@ nav li a {
     width: 20%;
     height:20%;
 }
-
+#calendar{
+    margin: 20px auto !important;
+    width: 800px;
+    margin: 0 auto;
+}
 
 
 
