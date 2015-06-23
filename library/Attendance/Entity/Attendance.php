@@ -41,5 +41,12 @@ class Attendance
      * @var time
      */
     public $endTime;
+    
+    /**
+     *
+     * @ORM\Column(type="integer")
+     * @var integer
+     */
+    public $active  = 1;
 
 }

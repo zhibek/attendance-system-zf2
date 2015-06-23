@@ -41,5 +41,12 @@ class Vacation
      * @var integer
      */
     public $balance;
+    
+    /**
+     *
+     * @ORM\Column(type="integer")
+     * @var integer
+     */
+    public $active  = 1;
 
 }
