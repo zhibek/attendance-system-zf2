@@ -1,8 +1,14 @@
 $(document).ready(function () {
-
+    
+    
+     $('#attachment-label').attr("class","attach_hide");
+    
+    
+    
+    
+    
     // onToDateChangEvent
     $('#toDate').datepicker().on('changeDate', function () {
-
         /**
          * myDateParser
          * @param {date} date object
@@ -25,8 +31,8 @@ $(document).ready(function () {
 
 
         var nomOfVacationDays = myDateSubstractor(myDateParser($('#fromDate').val()), myDateParser($('#toDate').val()));
-
-        if (nomOfVacationDays == 1)
+        
+        if (nomOfVacationDays == 0)
         {
             $('#type').empty();
             $('#type').append($('<option>', {
@@ -59,16 +65,37 @@ $(document).ready(function () {
 
     });
 
+    // onFromDateChange
+    $('#fromDate').datepicker().on('changeDate', function () {
+         $('#type').empty();
+            $('#type').append($('<option>', {
+                value: '2',
+                text: 'Casual'
+            }));
+            $('#type').append($('<option>', {
+                value: '3',
+                text: 'Annual'
+            }));
+            $('#type').append($('<option>', {
+                value: '1',
+                text: 'Sick'
+            }));
+        
+    });
+    
+    // onVacationTypeChange
     $('#type').on('change', function () {
+        
         if ($('#type').val() == 1)
         {
 
             $('#attachment').attr("class", "attach_display");
-
+            $('#attachment-label').attr("class","attach_display");
         }
         else
         {
             $('#attachment').attr("class", "attach_hide");
+            $('#attachment-label').attr("class","attach_hide");
         }
     });
 

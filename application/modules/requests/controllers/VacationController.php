@@ -23,6 +23,10 @@ class Requests_VacationController extends Zend_Controller_Action
         $vacationModel = new Requests_Model_VacationRequest($em);
         if ($request->isPost()) {
             if ($form->isValid($request->getPost())) {
+                if($vacationRequestInfo['toDate']==NULL){
+                    $vacationRequestInfo['toDate'] = $vacationRequestInfo['fromDate'];
+                }
+                
                 $vacationModel->newVacationRequest($vacationRequestInfo);
                 $this->redirect('/requests/vacation/index');
             }
