@@ -26,7 +26,7 @@
             {{#userList}}
                 <tr>
                     <th scope="row">{{id}}</th>
-                    <td><img src="{{photo}}" class="user-photos" style="height: 70px !important;width: 70px !important;"></td>
+                    <td><img src="{{photo}}" data-toggle="tooltip" data-placement="left" title="{{name}}" class="user-photos" style="height: 70px !important;width: 70px !important;"></td>
                     <td>{{name}}</td>
                     <td>{{username}}</td>
                     <td>{{position.name}}</td>
@@ -35,7 +35,7 @@
                     <td>{{manager.name}}</td>
                     <td>
                         <a data-toggle="tooltip" data-placement="left" title="Edit" href="/users/index/edit/id/{{id}}"><span class="glyphicon glyphicon-edit"></span></a>
-                        &nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <a data-toggle="tooltip" data-placement="left" title="Delete" href="/users/index/delete/id/{{id}}"><span class="glyphicon glyphicon-remove"></span></a>
                         
                     </td>
