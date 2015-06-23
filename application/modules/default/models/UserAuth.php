@@ -38,8 +38,8 @@ class Default_Model_UserAuth
             'username' => $entities[0]->username,
             'photo' => $entities[0]->photo,
             'role' => $entities[0]->role,
-            'rolename' => $entities[0]->role->name
-                
+            'rolename' => $entities[0]->role->name,
+            'active' => $entities[0]->active
         ));
     }
 

@@ -6,6 +6,10 @@ class Default_ErrorController extends Zend_Controller_Action
     {
     
     }
+    public function deactivatedAction(){
+
+    }
+
     public function errorAction()
     {
         $errors = $this->_getParam('error_handler');
