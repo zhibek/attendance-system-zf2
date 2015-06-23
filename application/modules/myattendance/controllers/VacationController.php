@@ -29,7 +29,7 @@ class Myattendance_VacationController extends Zend_Controller_Action
     
         $sicks = $vacationModel->getSicksNumber();
         $this->view->sicks = $sicks;
-    
+//    
         $casuals = $vacationModel->getCasualsNumber();
         $this->view->casuals = $casuals;
     
