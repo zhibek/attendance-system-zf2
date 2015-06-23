@@ -12,10 +12,10 @@ class Requests_Model_Comment
     {
         $this->_em = $em;
         $this->_request = $request;
-        $this->repository = $em->getRepository('Attendance\Entity\Permission');
+        $this->repository = $em->getRepository('Attendance\Entity\Comment');
     }
 
-    public function addComment($commentInfo, $requestId)
+    public function addComment($commentInfo, $requestId, $requestType)
     {
         $entity = new Attendance\Entity\Comment();
 
@@ -31,19 +31,21 @@ class Requests_Model_Comment
 
         $entity->body = $commentInfo['comment'];
         $entity->request_id = $requestId;
-        $entity->request_type = 2;
+        $entity->request_type = $requestType;
         $entity->created = new DateTime("now");
 
         $this->_em->persist($entity);
         $this->_em->flush($entity);
     }
 
-    public function listRequestComments($requestId)
+    public function listRequestComments($requestId , $requestType)
     {
-        $query = $this->_em->createQuery('Select c FROM Attendance\Entity\Comment  c WHERE c.request_id = ?1');
+       
+        $query = $this->_em->createQuery('Select c FROM Attendance\Entity\Comment  c WHERE c.request_id = ?1 AND c.request_type = ?2');
         $query->setParameter(1, $requestId);
+        $query->setParameter(2, $requestType);
         $result = $query->execute();
-
+        
         foreach ($result as $rslt) {
             $rslt->created = date_format($rslt->created, 'Y-M-D H:i:s');
             $rslt->user = $this->getUserNameById($rslt->user);
@@ -53,13 +55,10 @@ class Requests_Model_Comment
 
     public function getCommentCreatorId($commentId)
     {
-        $query = $this->_em->createQuery('Select c FROM Attendance\Entity\Comment  c WHERE c.id = ?1');
-        $query->setParameter(1, $commentId);
-        $result = $query->execute();
-        $commentCreator = $this->getcommentUserId($result[0]->user);
-        return $commentCreator;
+        $data = $this->repository->find($commentId);   
+        return $data;
     }
-
+    
     public function getcommentUserId($usrId)
     {
         $query = $this->_em->createQuery('Select u FROM Attendance\Entity\User  u WHERE u.id = ?1');

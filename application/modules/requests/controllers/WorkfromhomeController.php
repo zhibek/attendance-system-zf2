@@ -51,22 +51,22 @@ class Requests_WorkfromhomeController extends Zend_Controller_Action
         }
         $this->view->creator = $workFromHome[0]->user;
         $this->view->startDate = $workFromHome[0]->startDate;
-        $this->view->endDate = $workFromHome[0]->endDate;
+        //$this->view->endDate = $workFromHome[0]->endDate;
         $this->view->reason = $workFromHome[0]->reason;
         $this->view->dateOfSubmission = $workFromHome[0]->dateOfSubmission;
         $this->view->status = $workFromHome[0]->status;
 
-
+       
         $commentForm = new Requests_Form_CommentForm();
         $commentModel = new Requests_Model_Comment($em);
         $request = $this->getRequest();
         if ($request->isPost()) {
             if ($commentForm->isValid($request->getPost())) {
                 $commentInfo = $this->_request->getParams();
-                $commentModel->addComment($commentInfo, $requestId);
+                $commentModel->addComment($commentInfo, $requestId, $requestType =3);
             }
         }
-        $comments = $commentModel->listRequestComments($requestId);
+        $comments = $commentModel->listRequestComments($requestId, $requestType = 3);
         $commentCreator = $commentModel->getCommentCreatorId($requestId);
         $currentuser = $workFromHomeRequestModel->getCurrentUserId();
 
