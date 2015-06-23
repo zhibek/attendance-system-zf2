@@ -23,6 +23,17 @@ class Requests_Form_WorkfromhomeForm extends Zend_Form
             'class' => 'date form-control'
             ));
         
+        
+        $this->addElement('text', 'endDate', array(
+            'label' => 'End Date',
+            'class'=>'form-control',
+
+        ));
+        $this->getElement('endDate')->setAttribs(array(
+            'class' => 'date form-control'
+            ));
+        $this->getElement('endDate')->addValidator(new Attendance_Validate_CustomDateValidator(array('token' =>  'startDate'))) ;
+        
 
         $this->addElement('textarea', 'reason', array(
             'label' => 'Reason',

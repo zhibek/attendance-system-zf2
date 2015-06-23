@@ -5,6 +5,7 @@ Attendance\Entity\WorkFromHome:
         
         user: <numberBetween(1, 7)>
         startDate: <date()>
+        endDate : <date()>
         reason: Sick
         dateOfSubmission: <date()>
         status: <numberBetween(1, 4)>

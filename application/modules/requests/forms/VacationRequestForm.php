@@ -19,7 +19,7 @@ class Requests_Form_VacationRequestForm extends Zend_Form
         $fromDate = new Zend_Form_Element_Text('fromDate');
         $fromDate->setAttribs(array(
                 'class' => 'form-control date',
-                'placeholder' => 'MM/DD/YYYY Example: 10/10/2010',
+                'placeholder' => 'Example: 10/22/2010',
                 'id' => 'fromDate'
             ))->setRequired()
             ->setLabel('From Date: ');
@@ -28,7 +28,7 @@ class Requests_Form_VacationRequestForm extends Zend_Form
         $toDate = new Zend_Form_Element_Text('toDate');
         $toDate->setAttribs(array(
                 'class' => 'form-control date',
-                'placeholder' => 'MM/DD/YYYY Example: 10/10/2010',
+                'placeholder' => 'Example: 10/22/2010',
                 'id' => 'toDate'
             ))->setRequired()
             ->setLabel('To Date: ');

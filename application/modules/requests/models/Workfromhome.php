@@ -16,9 +16,14 @@ class Requests_Model_Workfromhome
 
     public function newRequest($requestInfo)
     {
-        $auth = Zend_Auth::getInstance()->getIdentity();    
+        $auth = Zend_Auth::getInstance()->getIdentity();
         $entity = new Attendance\Entity\WorkFromHome();
         $entity->startDate = new DateTime($requestInfo['startDate']);
+        if($requestInfo['endDate']!= NULL){
+            $entity->endDate = new DateTime($requestInfo['endDate']);
+        }else{
+            $entity->endDate = NULL  ;    
+        }
         $entity->reason = $requestInfo['reason'];
         $entity->user = $auth['id'];
         $entity->dateOfSubmission = new DateTime("now");
@@ -54,6 +59,7 @@ class Requests_Model_Workfromhome
         foreach ($requests as $key) {
             $key->dateOfSubmission = date_format($key->dateOfSubmission, 'm/d/Y');
             $key->startDate = date_format($key->startDate, 'm/d/Y');
+            $key->endDate = date_format($key->endDate, 'm/d/Y');
             switch ($key->status) {
                 case Attendance\Entity\WorkFromHome::STATUS_SUBMITTED :
                     $key->status = 'Submitted';
@@ -77,6 +83,7 @@ class Requests_Model_Workfromhome
         foreach ($data as $key) {
             $key->dateOfSubmission = date_format($key->dateOfSubmission, 'm/d/Y');
             $key->startDate = date_format($key->startDate, 'm/d/Y');
+            $key->endDate = date_format($key->endDate, 'm/d/Y');
             switch ($key->status) {
                 case Attendance\Entity\Permission::STATUS_SUBMITTED :
                     $key->status = 'Submitted';
@@ -104,6 +111,7 @@ class Requests_Model_Workfromhome
         foreach ($result as $key) {
             $key->dateOfSubmission = date_format($key->dateOfSubmission, 'm/d/Y');
             $key->startDate = date_format($key->startDate, 'm/d/Y');
+            $key->endDate = date_format($key->endDate, 'm/d/Y');
             $key->user = $this->getUserNameById($key->user);
             if ($key->status == 1) {
                 $key->status = "ON";
