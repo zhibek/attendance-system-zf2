@@ -148,4 +148,11 @@ class User
         return password_hash($password, PASSWORD_BCRYPT);
     }
 
+    /**
+     *
+     * @ORM\Column(type="integer")
+     * @var integer
+     */
+    public $active  = 1;
+
 }

@@ -113,8 +113,8 @@ class Users_Model_SaveUser
 
         $user = (array) $userObj;
 
-        $user['dateOfBirth'] = $userObj->dateOfBirth->format('Y/m/d');
-        $user['startDate'] = $userObj->startDate->format('Y/m/d');
+        $user['dateOfBirth'] = $userObj->dateOfBirth->format('m/d/Y');
+        $user['startDate'] = $userObj->startDate->format('m/d/Y');
         $user['branch'] = $userObj->branch->id;
         $user['department'] = $userObj->department->id;
         $user['position'] = $userObj->position->id;
@@ -128,9 +128,11 @@ class Users_Model_SaveUser
     public function deleteUser()
     {
         $id = $this->request->getParam('id');
-        $query = $this->em->createQuery('DELETE FROM Attendance\Entity\User  u WHERE u.id = ?1');
-        $query->setParameter(1, $id);
-        $query->execute();
+        $user = $this->em->getRepository('\Attendance\Entity\User')->find($id);
+        $user->active = 0;
+        $this->em->merge($user);
+
+        $this->em->flush();
     }
     
 }
