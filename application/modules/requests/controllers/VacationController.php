@@ -61,10 +61,10 @@ class Requests_VacationController extends Zend_Controller_Action
         if ($request->isPost()) {
             if ($commentForm->isValid($request->getPost())) {
                 $commentInfo = $this->_request->getParams();
-                $commentModel->addComment($commentInfo, $requestId);
+                $commentModel->addComment($commentInfo, $requestId, $requestType = 2);
             }
         }
-        $comments = $commentModel->listRequestComments($requestId);
+        $comments = $commentModel->listRequestComments($requestId,$requestType = 2 );
 
         $commentCreator = $commentModel->getCommentCreatorId($requestId);
         $currentuser = $vacationRequestModel->getCurrentUserId();
