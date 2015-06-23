@@ -50,12 +50,13 @@ EOT
 
         $vacations = $loader->load('application/data/fixtures/VacationFixtures.yml');
         $this->insertObjectsInDatabase($entityManager, $vacations);
-        
-       
+
+
         $workFromHome = $loader->load('application/data/fixtures/WorkFromHomeFixtures.yml');
         foreach ($workFromHome as $key) {
             $key->startDate = new \DateTime("now");
-            $key->dateOfSubmission= new \DateTime('now');
+            $key->endDate = new \DateTime("now");
+            $key->dateOfSubmission = new \DateTime('now');
         }
         $this->insertObjectsInDatabase($entityManager, $workFromHome);
 
@@ -65,14 +66,15 @@ EOT
             $key->endTime = new \DateTime("now");
         }
         $this->insertObjectsInDatabase($entityManager, $attendance);
-        
+
         $departments = $loader->load('application/data/fixtures/DepartmentFixtures.yml');
         $this->insertObjectsInDatabase($entityManager, $departments);
 
         $users = $loader->load('application/data/fixtures/UserFixtures.yml');
         // append a date object for every user object
         foreach ($users as $object) {
-            if(isset($object->password))$object->password = \Attendance\Entity\User::hashPassword($object->password);
+            if (isset($object->password))
+                $object->password = \Attendance\Entity\User::hashPassword($object->password);
             $object->manager = $users['user26'];
             $object->dateOfBirth = new \DateTime("now");
             $object->startDate = new \DateTime("now");
@@ -97,22 +99,32 @@ EOT
             $key->user = $users['user23'];
             $key->date = new \DateTime($key->date);
             $key->fromTime = new \DateTime($key->fromTime);
-            $key->toTime = new \DateTime($key->toTime);
+            $key->toTime =clone $key->fromTime;
+            $key->toTime->modify('+' . rand(1, 8) . ' hour');
             $key->dateOfSubmission = new \DateTime($key->dateOfSubmission);
         }
         $this->insertObjectsInDatabase($entityManager, $permissions);
-        
+
         $attendanceRecords = $loader->load('application/data/fixtures/AttendanceRecordFixtures.yml');
-        
+
         foreach ($attendanceRecords as $key) {
             $key->branch = $branches['branch1'];
             $key->user = $users['user26'];
-            $key->timeOut =clone $key->timeIn;
+            $key->timeOut = clone $key->timeIn;
             $key->timeOut->modify('+' . rand(1, 8) . ' hour');
-            
+        }
+
+        $this->insertObjectsInDatabase($entityManager, $attendanceRecords);
+        
+        $comments = $loader->load('application/data/fixtures/CommentFixtures.yml');
+        
+        foreach ($comments as $key) {
+            $key->branch = $branches['branch1'];
+            $key->user = $users['user'.$key->user];
+            $key->created = new \DateTime($key->created);
         }
         
-        $this->insertObjectsInDatabase($entityManager, $attendanceRecords);
+        $this->insertObjectsInDatabase($entityManager, $comments);
         
         $entityManager->flush();
 

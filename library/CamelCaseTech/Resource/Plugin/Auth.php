@@ -8,17 +8,29 @@ class CamelCaseTech_Resource_Plugin_Auth extends Zend_Controller_Plugin_Abstract
 
         parent::preDispatch($request);
         $auth = Zend_Auth::getInstance();
+        $storage = $auth->getIdentity();
+//        var_dump($storage['rolename']);exit();
         $view = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->view;
-        
+
         // anonymous user can not move to any page but Sign/in 
         if (!$auth->hasIdentity() && $this->getRequest()->getControllerName() != 'sign') {
 //            redirect to sign/in
             $this->getResponse()->setRedirect('/sign/in')->sendResponse();
-            
         } else if ($auth->hasIdentity() && $this->getRequest()->getControllerName() == 'sign' &&
                 $this->getRequest()->getActionName() == 'in') {
 
             $this->getResponse()->setRedirect('/index')->sendResponse();
+        }
+
+        if ($auth->hasIdentity() && $storage['rolename'] != "Admin" && $this->getRequest()->getModuleName() == 'users' &&
+                $this->getRequest()->getControllerName() == 'index' && $this->getRequest()->getActionName() == 'index') 
+            {
+            $this->getResponse()->setRedirect('error')->sendResponse();
+        }
+        
+         if ($auth->hasIdentity() && $storage['rolename'] != "Admin" && $this->getRequest()->getModuleName() == 'settings') 
+            {
+            $this->getResponse()->setRedirect('/google')->sendResponse();
         }
 
         if (!$auth->hasIdentity()) {

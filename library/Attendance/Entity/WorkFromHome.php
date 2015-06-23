@@ -18,6 +18,7 @@ class WorkFromHome
     const STATUS_APPROVED = 3;
     const STATUS_DENIED = 4;
 
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer");
@@ -42,9 +43,17 @@ class WorkFromHome
 
     /**
      *
+     * @ORM\Column(type="date", nullable=true)
+     * @var date
+     */
+    public $endDate;
+
+    /**
+     *
      * @ORM\Column(type="string")
      * @var string
      */
+    
     public $reason;
 
     /**
