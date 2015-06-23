@@ -40,7 +40,17 @@ nav li a {
 .sick-panel{
     margin-top: 60px;
 }
-
+.redirect-error{
+    margin-top:12%;
+}
+.redirect-error center{
+    color: red;
+    font-size: 1em;
+}
+.error-panel{
+    width: 20%;
+    height:20%;
+}
 
 
 
