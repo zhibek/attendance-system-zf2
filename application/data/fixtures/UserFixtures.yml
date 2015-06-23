@@ -31,7 +31,7 @@ Attendance\Entity\User:
         username: admin
         password: admin
         mobile: 0101010
-        photo: http://i.imgur.com/vg7csLP.jpg 
+        photo: http://beazing.com/themes/sexymetro/img/no_user.jpg 
         maritalStatus: exe  
         dateOfBirth: <date()>
         description: human                        
@@ -43,7 +43,7 @@ Attendance\Entity\User:
         username: HR
         password: HR
         mobile: 0101010
-        photo: http://i.imgur.com/vg7csLP.jpg 
+        photo: http://beazing.com/themes/sexymetro/img/no_user.jpg 
         maritalStatus: exe  
         dateOfBirth: <date()>
         description: human                        
@@ -55,21 +55,10 @@ Attendance\Entity\User:
         username: Manager
         password: manager
         mobile: 0101010
-        photo: http://i.imgur.com/vg7csLP.jpg 
+        photo: http://beazing.com/themes/sexymetro/img/no_user.jpg 
         maritalStatus: exe  
         dateOfBirth: <date()>
         description: human                        
         vacationBalance: 31       
         totalWorkingHoursThisMonth: 31 
         role: @role3
-
-#    user1:
-#        name: 'bob2'
-#        username: bob2
-#        password: 123456
-#        mobile: 0101010
-#        photo: http://i.imgur.com/vg7csLP.jpg
-#        maritalStatus: exe        
-#        description: human                        
-#        vacationBalance: 31       
-#        totalWorkingHoursThisMonth: 31 
