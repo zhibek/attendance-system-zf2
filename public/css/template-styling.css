@@ -25,15 +25,24 @@ nav li a {
     background-color: white; 
 }
 .panel{
-    margin-bottom: 230px;
+    margin-bottom: -12px !important;
     margin-top: 20px;
 }
-.myrow{
+/*.myrow{
     margin-right: 0px !important ; 
-    margin-left: -7px !important ; 
-
-}
+    margin-left: -7px !important ; */
+/*
+}*/
 .logo-pic{
     width: 83%;
     margin-left: 70px;
 }
+.sick-panel{
+    margin-top: 60px;
+}
+
+
+
+
+
+

@@ -104,4 +104,41 @@ class Myattendance_Model_VacationRecord
         return $result;
     }
 
+    public function getSicksNumber()
+    {
+        $auth = Zend_Auth::getInstance()->getIdentity();
+        $query = $this->_em->createQuery('SELECT COUNT(u.id) FROM Attendance\Entity\VacationRequest u where u.user =?1 AND u.vacationType = 1');
+        $query->setParameter(1, $auth['id']);
+        $result = $query->execute();
+        return $result[0]['1'];
+    }
+
+    public function getCasualsNumber()
+    {
+        $auth = Zend_Auth::getInstance()->getIdentity();
+        $query = $this->_em->createQuery('SELECT COUNT(u.id) FROM Attendance\Entity\VacationRequest u where u.user =?1 AND u.vacationType = 2');
+        $query->setParameter(1, $auth['id']);
+        $result = $query->execute();
+        return $result[0]['1'];
+    }
+
+    public function getAnnualsNumber()
+    {
+        $auth = Zend_Auth::getInstance()->getIdentity();
+        $query = $this->_em->createQuery('SELECT COUNT(u.id) FROM Attendance\Entity\VacationRequest u where u.user =?1 AND u.vacationType = 3');
+        $query->setParameter(1, $auth['id']);
+        $result = $query->execute();
+//        var_dump($result);exit();
+        return $result[0]['1'];
+    }
+
+    public function getVacationBalance()
+    {
+        $auth = Zend_Auth::getInstance()->getIdentity();
+        $query = $this->_em->createQuery('Select v FROM Attendance\Entity\User  v WHERE v.id = ?1');
+        $query->setParameter(1, $auth['id']);
+        $result = $query->execute();
+        return $result[0]->vacationBalance;
+    }
+
 }

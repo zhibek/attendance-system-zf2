@@ -4,9 +4,66 @@
 {{/styles}}
 
 {{$content}}
-<div class="panel panel-default">
 
-    <div class="panel-heading">Sick</div>
+
+<div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-2">
+        <div class="panel panel-default"><center>
+                <div class="panel-heading">Sick leaves </div>
+                <div class="panel-body"><h1>{{sicks}}</h1></div>
+            </center></div><!--panel default-->
+    </div>
+    <div class="col-sm-2">
+        <div class="panel panel-default"><center>
+                <div class="panel-heading">Casual vacations </div>
+                <div class="panel-body"><h1>{{casuals}}</h1></div>
+            </center></div><!--panel default-->
+    </div>
+    <div class="col-sm-2">
+        <div class="panel panel-default"><center>
+                <div class="panel-heading">Annual vacation </div>
+                <div class="panel-body"><h1>{{annuals}}</h1></div>
+            </center></div><!--panel default-->
+    </div>
+
+
+</div><!--row-->
+<div class="row">
+    <div class="col-sm-2"></div>
+    <center>
+        <div class="col-sm-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    you're current Vacation Balance is
+                </div><!--panel heading-->
+                <div class="panel-body">
+                    <h1>{{balance}}</h1>
+                    <hr />
+                    **Note : Sick leaves are not considered from the Vacation Balance 
+                </div><!--panel body-->
+            </div><!--panel default-->
+        </div></center>
+    <div class="col-sm-2"></div>
+</div><!--row-->
+<!--    <div class="col-lg-3"><center>you've got Sick leaves : <h1>{{sicks}}</h1></center></div>
+
+<div class="col-lg-3"><center>you've got Casual vacations: <h1>{{casuals}}</h1></center></div>
+<div class="col-lg-3"><center>you've got Annual vacations : <h1>{{annuals}}</h1></center></div>
+<div class="col-lg-2"></div>
+</div>
+<div class="row">
+<div class="col-lg-3"></div>
+<div class="col-lg-6"><center>you're current Vacation Balance is :<h1>{{balance}}</h1></center></div>
+<div class="col-lg-3"></div>
+</div>
+<div class="row">
+**Note : Sick leaves are not considered from the Vacation Balance 
+</div>-->
+
+<div class="panel panel-default ">
+
+    <div class="panel-heading">Sick leave</div>
 
     <div class="panel-body">
         <div class="dataTable_wrapper">
@@ -38,7 +95,7 @@
 <br>
 <div class="panel panel-default">
 
-    <div class="panel-heading">Casual</div>
+    <div class="panel-heading">Casual vacation</div>
 
     <div class="panel-body">
         <div class="dataTable_wrapper">
@@ -72,7 +129,7 @@
 <br>
 <div class="panel panel-default">
 
-    <div class="panel-heading">Work from home Requests</div>
+    <div class="panel-heading">Annual vacations</div>
 
     <div class="panel-body">
         <div class="dataTable_wrapper">
@@ -86,7 +143,7 @@
 
                     </tr>
                 </thead>
-                 <tbody>
+                <tbody>
                     {{#annual}}
                     <tr>
                         <td>{{dateOfSubmission}}</td>
