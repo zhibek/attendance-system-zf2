@@ -24,7 +24,7 @@ class Requests_VacationController extends Zend_Controller_Action
         if ($request->isPost()) {
             if ($form->isValid($request->getPost())) {
                 $vacationModel->newVacationRequest($vacationRequestInfo);
-                $this->redirect('/requests/vacation/index');
+                $this->redirect('/requests/myrequests/index');
             }
         }
 

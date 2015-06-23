@@ -50,8 +50,10 @@ class Myattendance_AttendanceController extends Zend_Controller_Action {
     {
         $result = array();
         //create a list of these dates
-        $start    = (new DateTime($dateFrom))->modify('first day of this month');
-        $end      = (new DateTime($dateTo))->modify('first day of this month');
+        $start    = new DateTime($dateFrom);
+        $start->modify('first day of this month');
+        $end      = new DateTime($dateTo);
+        $end->modify('first day of next month');
         $interval = DateInterval::createFromDateString('1 month');
         $period   = new DatePeriod($start, $interval, $end);
 
