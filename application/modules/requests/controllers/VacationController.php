@@ -110,7 +110,7 @@ class Requests_VacationController extends Zend_Controller_Action
         $requestId = $commentModel->getcommentRequestId($commentId);
         $commentModel->deleteComment($commentId);
 
-        $this->redirect("/requests/permission/show/id/$requestId");
+        $this->redirect("/requests/vacation/show/id/$requestId");
     }
 
 }
