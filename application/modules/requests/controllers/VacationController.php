@@ -66,13 +66,24 @@ class Requests_VacationController extends Zend_Controller_Action
         }
         $comments = $commentModel->listRequestComments($requestId,$requestType = 2 );
 
-        $commentCreator = $commentModel->getCommentCreatorId($requestId);
+        
         $currentuser = $vacationRequestModel->getCurrentUserId();
+        
+        foreach ($comments as $comment)
+        {
+            $commentCreator = $commentModel->getCommentCreatorId($comment->id);
+            if ($currentuser === $commentCreator) {
+            
+                $comment->iscreator = TRUE;
+            }
+            else {
 
-        if ($currentuser == $commentCreator) {
-
-            $this->view->iscreator = TRUE;
+                $comment->iscreator = FALSE;
+            }
+            
         }
+        
+        
         $this->view->requestComments = $comments;
         $this->view->commentForm = $commentForm;
     }

@@ -55,8 +55,17 @@ class Requests_Model_Comment
 
     public function getCommentCreatorId($commentId)
     {
-        $data = $this->repository->find($commentId);   
-        return $data;
+        $data = $this->repository->find($commentId);
+        $creatorId = $this->getUserIdByUserName($data->user);
+        return $creatorId;
+    }
+    
+    function getUserIdByUserName($userName)
+    {
+        $query = $this->_em->createQuery('Select u FROM Attendance\Entity\User  u WHERE u.name = ?1');
+        $query->setParameter(1, $userName);
+        $result = $query->execute();
+        return $result[0]->id;
     }
     
     public function getcommentUserId($usrId)
