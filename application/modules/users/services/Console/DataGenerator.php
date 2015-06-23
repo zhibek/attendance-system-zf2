@@ -97,7 +97,8 @@ EOT
             $key->user = $users['user23'];
             $key->date = new \DateTime($key->date);
             $key->fromTime = new \DateTime($key->fromTime);
-            $key->toTime = new \DateTime($key->toTime);
+            $key->toTime =clone $key->fromTime;
+            $key->toTime->modify('+' . rand(1, 8) . ' hour');
             $key->dateOfSubmission = new \DateTime($key->dateOfSubmission);
         }
         $this->insertObjectsInDatabase($entityManager, $permissions);
@@ -113,6 +114,16 @@ EOT
         }
         
         $this->insertObjectsInDatabase($entityManager, $attendanceRecords);
+        
+        $comments = $loader->load('application/data/fixtures/CommentFixtures.yml');
+        
+        foreach ($comments as $key) {
+            $key->branch = $branches['branch1'];
+            $key->user = $users['user'.$key->user];
+            $key->created = new \DateTime($key->created);
+        }
+        
+        $this->insertObjectsInDatabase($entityManager, $comments);
         
         $entityManager->flush();
 
