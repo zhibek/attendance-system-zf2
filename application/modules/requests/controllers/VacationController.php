@@ -58,7 +58,16 @@ class Requests_VacationController extends Zend_Controller_Action
         $this->view->dateOfSubmission = $vacation[0]->dateOfSubmission;
         $this->view->attachment = $vacation[0]->attachment;
         $this->view->status = $vacation[0]->status;
-
+        if($vacation[0]->attachment == NULL)
+        {
+            $this->view->attchNullFlag = TRUE;
+        }
+        else
+        {
+            $this->view->attachImgFlag = TRUE;
+        }
+        $this->view->attachment = $vacation[0]->attachment;
+        
         $commentForm = new Requests_Form_CommentForm();
         $commentModel = new Requests_Model_Comment($em);
         $request = $this->getRequest();

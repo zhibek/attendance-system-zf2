@@ -59,7 +59,12 @@
                 <strong> Attachment: </strong>
             </div>
             <div class="col-sm-10">
-                {{attachment}}
+                {{#attchNullFlag}}
+                    No Attachment Available
+                {{/attchNullFlag}}
+                {{#attachImgFlag}}
+                <img src="{{attachment}}" style="width:200px;height: 80px;" class="img img-thumbnail" >
+                {{/attachImgFlag}}
             </div>
         </div><!-- row -->
         {{#role}}

@@ -153,12 +153,18 @@ class Requests_Model_VacationRequest
             $key->user = $this->getUserNameById($key->user);
             $key->vacationType = $this->getVacationTypeById($key->vacationType);
             if ($key->status == 1) {
-                $key->status = "ON";
-            } else {
-                $key->status = "OFF";
+                $key->status = "Submitted";
+            } elseif($key->status == 2){
+                $key->status = "Cancelled";
+            }
+            elseif ($key->status == 3) {
+                $key->status = "Approved";
+            }
+            elseif ($key->status == 4) {
+                $key->status = "Denied";
             }
             if ($key->attachment == NULL) {
-                $key->attachment = "No Attachment Available";
+                $key->attachment = Null;
             }
         }
         return $result;
