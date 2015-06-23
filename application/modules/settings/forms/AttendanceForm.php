@@ -24,7 +24,7 @@ class Settings_Form_AttendanceForm extends Zend_Form
         $this->addElement('text', 'startTime', array(
             'label' => 'Start Time',
             'required' => true,
-            'class' => 'time',
+            'class' => 'time form-control',
             'id' => 'timeformat',
             'validators' => array(
                 array('regex', false, array(
@@ -36,7 +36,7 @@ class Settings_Form_AttendanceForm extends Zend_Form
         $this->addElement('text', 'endTime', array(
             'label' => 'End Time',
             'required' => true,
-            'class' => 'time',
+            'class' => 'time form-control',
             'id' => 'timeformat',
             'validators' => array(
                 array('regex', false, array(
@@ -76,6 +76,7 @@ class Settings_Form_AttendanceForm extends Zend_Form
         $this->addElement('submit', 'vacationCreate', array(
             'ignore' => true,
             'label' => 'Create',
+            'class' => 'btn btn-success'
         ));
     }
 
