@@ -35,15 +35,17 @@ class Settings_Model_Vacation
     public function deactivateVacation()
     {
         $id = $this->_request->getParam('id');
-        $query = $this->_em->createQuery('DELETE FROM Attendance\Entity\Vacation  v WHERE v.id = ?1');
-        $query->setParameter(1, $id);
-        $query->execute();
+        $repository = $this->_em->getRepository('Attendance\Entity\Vacation');
+        $entity = $repository->find($id);
+        $entity->active = 0;
+        $this->_em->merge($entity);
+        $this->_em->flush();
     }
 
     public function listAllVacations()
     {
         $repository = $this->_em->getRepository('Attendance\Entity\Vacation');
-        $vacations = $repository->findAll();
+        $vacations = $repository->findBy(array('active' => 1));
         return $vacations;
     }
 
