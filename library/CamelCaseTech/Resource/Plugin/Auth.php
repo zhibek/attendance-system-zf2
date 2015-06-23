@@ -10,8 +10,6 @@ class CamelCaseTech_Resource_Plugin_Auth extends Zend_Controller_Plugin_Abstract
         $auth = Zend_Auth::getInstance();
         $view = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->view;
         
-        $flashmessenger = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger');
-        $flashmessenger->addMessage( 'Username and password are invalid !');
         // anonymous user can not move to any page but Sign/in 
         if (!$auth->hasIdentity() && $this->getRequest()->getControllerName() != 'sign') {
 //            redirect to sign/in
