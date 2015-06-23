@@ -21,6 +21,7 @@
             
             <th>From</th>
             <th>To</th>
+            <th colspan="2">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -31,11 +32,14 @@
                     <td>{{dateFrom}}</td>
                     <td>{{dateTo}}</td>
                     <td>
-                        <a href="/settings/holiday/delete/id/{{id}}"  class="btn btn-danger delete_row">
-                            Deactivate
+                       
+                       
+                        <a href="/settings/holiday/edit/id/{{id}}" data-toggle="tooltip" data-placement="left" title="Edit" >
+                            <span class="glyphicon glyphicon-edit"></span>
                         </a>
-                        <a href="/settings/holiday/edit/id/{{id}}" class="btn btn-default">
-                            Edit
+                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                         <a href="/settings/holiday/delete/id/{{id}}" data-toggle="tooltip" data-placement="left" title="Delete" class="delete_row">
+                            <span class="glyphicon glyphicon-remove"></span>
                         </a>
                     </td>
                 </tr>

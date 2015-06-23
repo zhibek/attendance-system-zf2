@@ -14,7 +14,7 @@
                 <th>Branch</th>
                 <th>Start Time</th>
                 <th>End Time</th>
-                <th>Actions</th>
+                <th colspan="2">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -23,8 +23,11 @@
                 <td>{{branch}}</td>
                 <td>{{startTime}}</td>
                 <td>{{endTime}}</td>
-                <td><a href="delete/id/{{id}}" class="btn btn-small btn-primary delete_row">Deactivate</a>
-                    &nbsp;<a href="edit/id/{{id}}" class="btn btn-small btn-warning ">Edit</a>
+                <td>
+                <a href="edit/id/{{id}}" data-toggle="tooltip" data-placement="left" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="delete/id/{{id}}" class="delete_row" data-toggle="tooltip" data-placement="left" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+                </td>
             </tr>
             {{/attendances}}
         </td>
