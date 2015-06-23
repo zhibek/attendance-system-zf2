@@ -66,15 +66,22 @@ class Requests_PermissionController extends Zend_Controller_Action
             }
         }
         
-        $commentCreator = $commentModel->getCommentCreatorId($requestId);
+        
         $currentuser = $permissionRequestModel->getCurrentUserId();
         $comments = $commentModel->listRequestComments($requestId,$requestType = 1);
         
-        
+        foreach ($comments as $comment)
+        {
+            $commentCreator = $commentModel->getCommentCreatorId($comment->id);
+            if ($currentuser === $commentCreator) {
+            
+                $comment->iscreator = TRUE;
+            }
+            else {
 
-        if ($currentuser == $commentCreator) {
-
-            $this->view->iscreator = TRUE;
+                $comment->iscreator = FALSE;
+            }
+            
         }
         $this->view->requestComments = $comments;
         $this->view->commentForm = $commentForm;

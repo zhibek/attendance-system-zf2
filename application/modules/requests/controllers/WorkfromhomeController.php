@@ -67,17 +67,26 @@ class Requests_WorkfromhomeController extends Zend_Controller_Action
             }
         }
         $comments = $commentModel->listRequestComments($requestId, $requestType = 3);
-        $commentCreator = $commentModel->getCommentCreatorId($requestId);
+       
         $currentuser = $workFromHomeRequestModel->getCurrentUserId();
 
-        if ($currentuser == $commentCreator) {
+        foreach ($comments as $comment)
+        {
+            $commentCreator = $commentModel->getCommentCreatorId($comment->id);
+            if ($currentuser === $commentCreator) {
+            
+                $comment->iscreator = TRUE;
+            }
+            else {
 
-            $this->view->iscreator = TRUE;
+                $comment->iscreator = FALSE;
+            }
+            
         }
 
         $this->view->requestComments = $comments;
         $this->view->commentForm = $commentForm;
-        $this->view->commentForm = $commentForm;
+        
     }
 
     public function deletecommentAction()
