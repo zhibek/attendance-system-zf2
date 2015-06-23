@@ -39,7 +39,7 @@
                             {{#visibleUserModule}}
                             <!--Users Module-->
                             <li>
-                                <a href="/users">Users Module &nbsp;&nbsp;<i class="fa fa-user fa-fw"></i><span class="fa arrow"></span></a>
+                                <a href="/users">Users Module &nbsp;&nbsp;<i class="fa fa-user fa-fw"></i></a>
                             </li>
                             <!--Users Module-->
                             {{/visibleUserModule}}
@@ -101,6 +101,12 @@
                                 </ul>
                             </li>
                             <!--my attendance--> 
+                            
+                            <li>
+                                {{#visible}}
+                                <a href="/calendar">Holiday Calendar &nbsp;&nbsp;<i class="fa fa-calendar fa-fw " ></i></a>
+                                {{/visible}} 
+                            </li>
                             <!--log out-->
                             <li>
                                 {{#visible}}
