@@ -46,25 +46,25 @@ class Requests_MyrequestsController extends Zend_Controller_Action
         foreach ($permissions as $request)
         {
             //$request->commentActionAllowed = $commentActionAllowed;
-            $request->cancelActionAllowed = ($cancelActionAllowed && ($request->status != 'Cancelled'));
-            $request->approveActionAllowed = $approveActionAllowed && ($request->status != 'Approved') && ($request->status != 'Cancelled');
-            $request->declineActionAllowed = $declineActionAllowed && ($request->status != 'Denied') && ($request->status != 'Cancelled');
+            $request->cancelActionAllowed = ($cancelActionAllowed && ($request->status == 'Submitted'));
+            $request->approveActionAllowed = $approveActionAllowed && ($request->status == 'Submitted');
+            $request->declineActionAllowed = $declineActionAllowed && ($request->status == 'Submitted');
         }
         
         foreach ($workFromHomeRequests as $request)
         {
             $request->user = $userRepository->find($request->user);
-            $request->cancelActionAllowed = $cancelActionAllowed && ($request->status != 'Cancelled');
-            $request->approveActionAllowed = $approveActionAllowed && ($request->status != 'Approved') && ($request->status != 'Cancelled');
-            $request->declineActionAllowed = $declineActionAllowed && ($request->status != 'Denied') && ($request->status != 'Cancelled');
+            $request->cancelActionAllowed = $cancelActionAllowed && ($request->status == 'Submitted');
+            $request->approveActionAllowed = $approveActionAllowed && ($request->status == 'Submitted');
+            $request->declineActionAllowed = $declineActionAllowed && ($request->status == 'Submitted');
         }
         
         foreach ($vacationRequests as $request)
         {
             //$request->commentActionAllowed = $commentActionAllowed;
-            $request->cancelActionAllowed = $cancelActionAllowed && ($request->status != 'Cancelled');
-            $request->approveActionAllowed = $approveActionAllowed && ($request->status != 'Approved') && ($request->status != 'Cancelled');
-            $request->declineActionAllowed = $declineActionAllowed && ($request->status != 'Denied') && ($request->status != 'Cancelled');
+            $request->cancelActionAllowed = $cancelActionAllowed && ($request->status == 'Submitted');
+            $request->approveActionAllowed = $approveActionAllowed && ($request->status == 'Submitted');
+            $request->declineActionAllowed = $declineActionAllowed && ($request->status == 'Submitted');
         }
 
         $this->view->permissions = $permissions;

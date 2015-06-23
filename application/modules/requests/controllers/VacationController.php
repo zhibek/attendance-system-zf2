@@ -28,7 +28,7 @@ class Requests_VacationController extends Zend_Controller_Action
                 }
                 
                 $vacationModel->newVacationRequest($vacationRequestInfo);
-                $this->redirect('/requests/vacation/index');
+                $this->redirect('/requests/myrequests/index');
             }
         }
 
