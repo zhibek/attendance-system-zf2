@@ -32,28 +32,13 @@ class Default_Model_UserAuth
         ));
         $auth = Zend_Auth::getInstance();
         $storage = $auth->getStorage();
-        switch ($entities[0]->role){
-            case 1:
-                $roleName="Employee";
-                break;
-            case 2:
-                $roleName="HR";
-                break;
-            case 3:
-                $roleName="Manager";
-                break;
-            case 4:
-                $roleName="Admin";
-                break;
-            
-        }
         $storage->write(array(
             'id' => $entities[0]->id,
             'name' => $entities[0]->name,
             'username' => $entities[0]->username,
             'photo' => $entities[0]->photo,
             'role' => $entities[0]->role,
-            'rolename' => $roleName
+            'rolename' => $entities[0]->role->name
                 
         ));
     }
