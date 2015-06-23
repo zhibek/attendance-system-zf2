@@ -29,7 +29,15 @@ class Requests_Model_VacationRequest
         $vacationType = $vacationRequestInfo['type'];
         $entity->user = $userRepository->find($userId);
         $entity->fromDate = new DateTime($vacationRequestInfo['fromDate']);
-        $entity->toDate = new DateTime($vacationRequestInfo['toDate']);
+        
+        if($vacationRequestInfo['toDate'] == NULL)
+        {
+            $entity->toDate = $vacationRequestInfo['toDate'] ;
+        }
+        else{
+            $entity->toDate = new DateTime($vacationRequestInfo['toDate']);
+        }
+        
         $entity->vacationType = $vacationRepository->find($vacationType);
         $entity->attachment = $this->saveAttachement();
         $entity->dateOfSubmission = new DateTime("now");
