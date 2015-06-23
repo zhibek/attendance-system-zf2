@@ -1,11 +1,25 @@
 
 Attendance\Entity\Permission:
     
-    permission{1..3}:
+    permission1:
         user: <numberBetween(1, 25)>
         date: <date()>
-        fromTime: <time($format = 'H:i:s', $max = 'now')>
-        toTime: <time($format = 'H:i:s', $max = 'now')>
+        fromTime: '9:30:00'
+        toTime: '14:30:00'
+        dateOfSubmission: <date()>
+        status: <numberBetween(1, 4)>
+    permission2:
+        user: <numberBetween(1, 25)>
+        date: <date()>
+        fromTime: '10:00:00'
+        toTime: '12:30:00'
+        dateOfSubmission: <date()>
+        status: <numberBetween(1, 4)>
+    permission3:
+        user: <numberBetween(1, 25)>
+        date: <date()>
+        fromTime: '12:30:00'
+        toTime: '16:30:00'
         dateOfSubmission: <date()>
         status: <numberBetween(1, 4)>
     
