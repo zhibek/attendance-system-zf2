@@ -120,7 +120,7 @@ class Requests_MyrequestsController extends Zend_Controller_Action
                     $vacationPeriod = $request->fromDate->diff($request->toDate);
                     if($previousRequestState == Attendance\Entity\Permission::STATUS_SUBMITTED)
                     {
-                        $user->vacationBalance = $user->vacationBalance - $vacationPeriod->days;
+                        $user->vacationBalance = $user->vacationBalance - ($vacationPeriod->days + 1);
                     }
                 }
                 break;
