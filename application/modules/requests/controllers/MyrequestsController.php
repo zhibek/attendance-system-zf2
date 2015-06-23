@@ -12,20 +12,13 @@ class Requests_MyrequestsController extends Zend_Controller_Action
     {
         $this->_em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
         $this->acl = Zend_Registry::get('acl');
+        $this->resource = 'requests-myrequests';
+        $storage = Zend_Auth::getInstance()->getIdentity();
+        $this->role = $storage['rolename'];
     }
 
     public function indexAction()
     {
-        $storage = Zend_Auth::getInstance()->getIdentity();
-        $role = $storage['role'];
-        $resource = 'requests-myrequests';
-        // convert incomplete object into array
-        $userRole = get_object_vars($role);
-        $query = $this->_em->createQuery('Select v FROM Attendance\Entity\Role  v WHERE v.id = ?1');
-        $query->setParameter(1, $userRole['id']);
-        $result = $query->execute();
-        $role = $result[0]->name;
-
         $userRepository = $this->_em->getRepository('Attendance\Entity\User'); 
         
         $permissionModel = new Requests_Model_Permission($this->_em);
@@ -34,7 +27,7 @@ class Requests_MyrequestsController extends Zend_Controller_Action
 
         $workFromHomeModel = new Requests_Model_Workfromhome($this->_em);
         
-        if($this->acl->isAllowed($role, $resource, 'viewall'))
+        if($this->acl->isAllowed($this->role, $this->resource, 'viewall'))
         {
             $permissions = $permissionModel->listAll();
             $vacationRequests = $vacationRequestsModel->listAll();
@@ -46,10 +39,10 @@ class Requests_MyrequestsController extends Zend_Controller_Action
         }
 
 
-        $commentActionAllowed = $this->acl->isAllowed($role, $resource, 'comment');
-        $cancelActionAllowed = $this->acl->isAllowed($role, $resource, 'cancel');
-        $approveActionAllowed = $this->acl->isAllowed($role, $resource, 'approve');
-        $declineActionAllowed = $this->acl->isAllowed($role, $resource, 'decline');
+        $commentActionAllowed = $this->acl->isAllowed($this->role, $this->resource, 'comment');
+        $cancelActionAllowed = $this->acl->isAllowed($this->role, $this->resource, 'cancel');
+        $approveActionAllowed = $this->acl->isAllowed($this->role, $this->resource, 'approve');
+        $declineActionAllowed = $this->acl->isAllowed($this->role, $this->resource, 'decline');
         foreach ($permissions as $request)
         {
             //$request->commentActionAllowed = $commentActionAllowed;

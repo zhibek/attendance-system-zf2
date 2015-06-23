@@ -36,12 +36,15 @@
                             <li>
                                 <h3><i class="fa fa-dashboard fa-fw"></i> Dashboard</h3>
                             </li>
+                            {{#visibleUserModule}}
                             <!--Users Module-->
                             <li>
                                 <a href="/users">Users Module &nbsp;&nbsp;<i class="fa fa-user fa-fw"></i><span class="fa arrow"></span></a>
                             </li>
-                            <!--Users Module-->   
+                            <!--Users Module-->
+                            {{/visibleUserModule}}
                             <!--Settings Module-->
+                            {{#visibleSettingsModule}}
                             <li>
                                 <a href="#" >Settings Module&nbsp;&nbsp;<i class="glyphicon  glyphicon-wrench fa-fw " ></i><span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse">
@@ -58,7 +61,7 @@
                                 <!-- /.nav-second-level -->
                             </li>
                             <!--Settings Module-->
-
+                            {{/visibleSettingsModule}}
                             <!--Requests Module-->
                             <li>
                                 <a href="#">Requests Module &nbsp;&nbsp;<i class="glyphicon  glyphicon-send fa-fw " ></i><span class="fa  arrow  "></span></a>
