@@ -56,7 +56,13 @@ class Myattendance_Model_VacationRecord
         foreach ($result as $key) {
             $key->dateOfSubmission = date_format($key->dateOfSubmission, 'm/d/Y');
             $key->fromDate = date_format($key->fromDate, 'm/d/Y');
-            $key->toDate = date_format($key->toDate, 'm/d/Y');
+            if($key->toDate == Null){
+                $key->toDate = Null;
+            }
+            else{
+                $key->toDate = date_format($key->toDate, 'm/d/Y');
+            }
+            
             switch ($key->status) {
                 case Attendance\Entity\VacationRequest::STATUS_SUBMITTED :
                     $key->status = 'Submitted';
