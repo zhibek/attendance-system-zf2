@@ -23,7 +23,7 @@ Attendance\Entity\User:
         maritalStatus: exe  
         dateOfBirth: <date()>
         description: human                        
-        vacationBalance: 31       
+        vacationBalance: 21       
         totalWorkingHoursThisMonth: 31   
         role: @role1
     user26:
@@ -35,7 +35,7 @@ Attendance\Entity\User:
         maritalStatus: exe  
         dateOfBirth: <date()>
         description: human                        
-        vacationBalance: 31       
+        vacationBalance: 21       
         totalWorkingHoursThisMonth: 31 
         role: @role4
     user27:
@@ -47,7 +47,7 @@ Attendance\Entity\User:
         maritalStatus: exe  
         dateOfBirth: <date()>
         description: human                        
-        vacationBalance: 31       
+        vacationBalance: 21       
         totalWorkingHoursThisMonth: 31 
         role: @role2
     user28:
@@ -59,6 +59,18 @@ Attendance\Entity\User:
         maritalStatus: exe  
         dateOfBirth: <date()>
         description: human                        
-        vacationBalance: 31       
+        vacationBalance: 21       
         totalWorkingHoursThisMonth: 31 
         role: @role3
+    user29:
+        name: Normal user 
+        username: user
+        password: 12345678
+        mobile: 01066313459
+        photo: http://beazing.com/themes/sexymetro/img/no_user.jpg 
+        maritalStatus: exe 
+        dateOfBirth: <date()>
+        description: human                        
+        vacationBalance: 21       
+        totalWorkingHoursThisMonth: 31 
+        role: @role1
