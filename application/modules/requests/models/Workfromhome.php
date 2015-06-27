@@ -114,9 +114,15 @@ class Requests_Model_Workfromhome
             $key->endDate = date_format($key->endDate, 'm/d/Y');
             $key->user = $this->getUserNameById($key->user);
             if ($key->status == 1) {
-                $key->status = "ON";
-            } else {
-                $key->status = "OFF";
+                $key->status = "Submitted";
+            } elseif($key->status == 2){
+                $key->status = "Cancelled";
+            }
+            elseif ($key->status == 3) {
+                $key->status = "Approved";
+            }
+            elseif ($key->status == 4) {
+                $key->status = "Denied";
             }
         }
         return $result;
