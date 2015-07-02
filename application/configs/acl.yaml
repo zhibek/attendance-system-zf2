@@ -1,0 +1,59 @@
+roles: 
+    - Admin
+    - HR
+    - Manager
+    - Employee
+
+resources:
+  - requests-myrequests
+  - users-module
+  - settings-module
+  
+whitelist:
+    - Admin:
+         roles:
+            - Admin  
+    - Employee:
+         roles:
+            - Employee
+         resources:
+            - requests-myrequests
+         privileges:
+            - comment
+            - cancel
+
+    - HR:
+         roles:
+            - HR
+         resources:
+            - requests-myrequests
+         privileges:
+            - comment
+            - approve
+            - decline
+            - viewall
+    - Manager:
+         roles:
+            - Manager
+         resources:
+            - requests-myrequests
+         privileges:
+            - comment
+            - approve
+            - decline
+            - viewall
+  
+blacklist:
+   roles:
+    - Employee
+    - HR
+    - Manager
+    
+   resources:
+    - users-module
+    - settings-module
+
+  
+  
+  
+  
