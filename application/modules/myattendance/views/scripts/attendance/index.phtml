@@ -7,11 +7,14 @@
 {{/styles}}
 
 {{$content}}
-
-{{filterForm}}
-
-
-
+ <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>Filter Attendance</h3>
+    </div>
+    <div class="panel-body">
+       {{filterForm}}
+    </div>
+</div>
 <div id="accordion">
   {{#list}}
     <h3><span class="badge">{{counter}}</span> {{date}} </h3>
