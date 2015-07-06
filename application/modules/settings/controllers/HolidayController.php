@@ -78,5 +78,12 @@ class Settings_HolidayController extends Zend_Controller_Action {
 
         $this->view->form = $form;
     }
+ 
+    public function fetchallholidayAction() {
+
+        $holidayList = $this->holidayModel->listAll();
+        $allholiday  = $this->holidayModel->allHoliday($holidayList); 
+        $this->_helper->json($allholiday);
+    }
 
 }

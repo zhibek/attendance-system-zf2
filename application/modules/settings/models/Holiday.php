@@ -80,4 +80,17 @@ class Settings_Model_Holiday
         return $entity;
     }
 
+    public function allHoliday($holidayList) {
+        $allevents = array();
+        foreach ($holidayList as $holiday) {
+            $events['id']     = $holiday->id;
+            $events['title']  = $holiday->name;
+            $events['start']  = date_format($holiday->dateFrom, 'Y-m-d');
+            $events['end']    = date_format($holiday->dateFrom, 'Y-m-d');
+            $events['allDay'] = FALSE;
+            array_push($allevents, $events);
+        }
+        return $allevents;
+    }
+
 }
