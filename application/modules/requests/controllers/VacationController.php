@@ -26,7 +26,6 @@ class Requests_VacationController extends Zend_Controller_Action
                 if($vacationRequestInfo['toDate']==NULL){
                     $vacationRequestInfo['toDate'] = NULL;
                 }
-                
                 $vacationModel->newVacationRequest($vacationRequestInfo);
                 $this->redirect('/requests/myrequests/index');
             }

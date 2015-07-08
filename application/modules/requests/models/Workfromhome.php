@@ -19,10 +19,10 @@ class Requests_Model_Workfromhome
         $auth = Zend_Auth::getInstance()->getIdentity();
         $entity = new Attendance\Entity\WorkFromHome();
         $entity->startDate = new DateTime($requestInfo['startDate']);
-        if($requestInfo['endDate']!= NULL){
+        if ($requestInfo['endDate'] != NULL) {
             $entity->endDate = new DateTime($requestInfo['endDate']);
-        }else{
-            $entity->endDate = NULL  ;    
+        } else {
+            $entity->endDate = NULL;
         }
         $entity->reason = $requestInfo['reason'];
         $entity->user = $auth['id'];
@@ -83,7 +83,11 @@ class Requests_Model_Workfromhome
         foreach ($data as $key) {
             $key->dateOfSubmission = date_format($key->dateOfSubmission, 'm/d/Y');
             $key->startDate = date_format($key->startDate, 'm/d/Y');
-            $key->endDate = date_format($key->endDate, 'm/d/Y');
+            if (!$key->endDate) {
+                $key->endDate = NULL;
+            } else {
+                $key->endDate = date_format($key->endDate, 'm/d/Y');
+            }
             switch ($key->status) {
                 case Attendance\Entity\Permission::STATUS_SUBMITTED :
                     $key->status = 'Submitted';
@@ -115,13 +119,11 @@ class Requests_Model_Workfromhome
             $key->user = $this->getUserNameById($key->user);
             if ($key->status == 1) {
                 $key->status = "Submitted";
-            } elseif($key->status == 2){
+            } elseif ($key->status == 2) {
                 $key->status = "Cancelled";
-            }
-            elseif ($key->status == 3) {
+            } elseif ($key->status == 3) {
                 $key->status = "Approved";
-            }
-            elseif ($key->status == 4) {
+            } elseif ($key->status == 4) {
                 $key->status = "Denied";
             }
         }

@@ -107,7 +107,6 @@ class Requests_MyrequestsController extends Zend_Controller_Action
         $request->status = Attendance\Entity\Permission::STATUS_APPROVED;
 
         // affecting user's vacation balance
-        
         $user = $request->user;
         
         switch ($this->getParam('requesttype')) {
@@ -128,9 +127,9 @@ class Requests_MyrequestsController extends Zend_Controller_Action
                 break;
         }
         
-        $this->_em->merge($user);
-        $this->_em->flush();
-        
+//        $this->_em->merge($user);
+//        $this->_em->flush();
+//        
         $this->updateEntity($request);
         
         
