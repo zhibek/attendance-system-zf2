@@ -53,14 +53,14 @@ service "redis-server" do
   action [:enable, :start]
 end
 
-execute "deploy" do
-  command "#{node.site.root_path}/deploy.sh"
-  cwd "#{node.site.root_path}"
-  only_if do ::File.exists?("#{node.site.root_path}/deploy.sh") end
-end
 
 execute "create database #{node.db.dbname}" do
     command "mysql -uroot -p#{node.db.dbpassword} -e 'create database if not exists #{node.db.dbname}'"
     user "vagrant"
 end
 
+execute "deploy" do
+  command "#{node.site.root_path}/deploy.sh"
+  cwd "#{node.site.root_path}"
+  only_if do ::File.exists?("#{node.site.root_path}/deploy.sh") end
+end

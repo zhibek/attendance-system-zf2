@@ -1,5 +1,9 @@
 #!/bin/bash
 
-composer install --prefer-dist
+cd /vagrangt;
 
-vendor/bin/doctrine orm:schema-tool:update --force
+composer install --prefer-dist;
+
+./bin/cli orm:schema-tool:update --force;
+
+./bin/cli schema:data-generate ;
