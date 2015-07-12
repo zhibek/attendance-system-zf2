@@ -1,6 +1,6 @@
 {{<layout}}
 {{$styles}}
-<link href="/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
 {{/styles}}
 
 {{$content}}
@@ -10,13 +10,13 @@
         <h3>New Work From Home Request</h3>
     </div>
     <div class="panel-body">
-{{newform}}
- </div><!-- panel body -->
+        {{newform}}
+    </div><!-- panel body -->
 </div><!-- panel default -->
 {{/content}}
 
 {{$scripts}}
-<script src="/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
-<script src="/js/date-pick.js" type="text/javascript"></script>
+    <script src="/bower_components/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="/js/date-pick.js" type="text/javascript"></script>
 {{/scripts}}
 {{/layout}}
