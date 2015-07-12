@@ -17,6 +17,11 @@ end
   end
 end
 
+directory "#{node.site.public_path}/upload/images" do
+  mode "0777"
+  action :create
+end
+
 directory "/etc/nginx/ssl" do
   owner "root"
   group "root"
