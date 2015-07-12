@@ -2,61 +2,82 @@
 {{$content}}
 <br />
 <a href="/users/index/new"><button class="btn btn-small btn-success">Create new User</button></a>
-<br />
+<br/>
+<br/>
+{{%IMPLICIT-ITERATOR}}
+<div class="pagination-bar">
+    <ul>
+        <li style="display: inline"> Pages :  </li>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {{#pageNumbers}}
+            <li style="display: inline">
+                <a href="?page={{.}}">{{.}}</a>
+            </li>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {{/pageNumbers}}
+    </ul>
+</div>
 <div class="panel panel-default">
-      
       <div class="panel-heading">Users</div>
 
       <!-- Table -->
       <table class="table">
         <thead>
           <tr>
-            <th>ID</th>
             <th>Photo</th>
+            <th>ID</th>
             <th>Name</th>
             <th>Username</th>
             <th>Position</th>
             <th>Branch</th>
             <th>Department</th>
             <th>Manager</th>
+            <th>Status</th>
             <th colspan="2">Actions</th>
           </tr>
         </thead>
         <tbody>
             {{#userList}}
                 <tr>
-                    <th scope="row">{{id}}</th>
-                    <td><img src="{{photo}}" data-toggle="tooltip" data-placement="left" title="{{name}}" class="user-photos" style="height: 70px !important;width: 70px !important;"></td>
+                    <th scope="row"><img src="{{photo}}" data-toggle="tooltip" data-placement="left" title="{{name}}" class="user-photos" style="height: 70px !important;width: 70px !important;"></th>
+                    <td>{{id}}</td>
                     <td>{{name}}</td>
                     <td>{{username}}</td>
                     <td>{{position.name}}</td>
                     <td>{{branch.name}}</td>
                     <td>{{department.name}}</td>
                     <td>{{manager.name}}</td>
+                    <td>{{status}}</td>
                     <td>
-                        <a data-toggle="tooltip" data-placement="left" title="Edit" href="/users/index/edit/id/{{id}}"><span class="glyphicon glyphicon-edit"></span></a>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a data-toggle="tooltip" data-placement="left" title="Delete" href="/users/index/delete/id/{{id}}"><span class="glyphicon glyphicon-remove"></span></a>
-                        
+                        {{#active}}
+                            <a data-toggle="tooltip" data-placement="left" title="Edit" href="/users/index/edit/id/{{id}}"><span class="glyphicon glyphicon-edit"></span></a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a data-toggle="tooltip" data-placement="left" title="Delete" href="/users/index/delete/id/{{id}}"><span class="glyphicon glyphicon-remove"></span></a>
+                        {{/active}}
                     </td>
                 </tr>
-                
-            {{/userList}}  
-            
-          
-          
+            {{/userList}}
         </tbody>
       </table>
     </div>
+<br>
 {{%IMPLICIT-ITERATOR}}
 <div class="pagination-bar">
-    <ul class="pagination">
-
+    <ul>
+        <li style="display: inline"> Pages :  </li>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         {{#pageNumbers}}
-        <li><a href="?page={{.}}">{{.}}</a></li>
+            <li style="display: inline">
+                <a href="?page={{.}}">{{.}}</a>
+            </li>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         {{/pageNumbers}}
-
     </ul>
 </div>
+<br>
 {{/content}}
+{{$styles}}
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="/js/currentpage.js" type="text/javascript"></script>
+{{/styles}}
 {{/layout}}

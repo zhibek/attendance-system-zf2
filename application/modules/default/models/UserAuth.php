@@ -20,7 +20,6 @@ class Default_Model_UserAuth
         $adapter->setIdentity($username);
         $adapter->setCredential($password);
         $result = $adapter->authenticate();
-
         return $result;
     }
 
@@ -39,7 +38,7 @@ class Default_Model_UserAuth
             'photo' => $entities[0]->photo,
             'role' => $entities[0]->role,
             'rolename' => $entities[0]->role->name,
-            'active' => $entities[0]->active
+            'status' =>  $entities[0]->status
         ));
     }
 

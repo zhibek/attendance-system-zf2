@@ -15,8 +15,10 @@ use Attendance\Entity\Position;
  */
 class User
 {
-    
+
     const DEFAULT_VACATION_BALANCE = 21;
+    const STATUS_ACTIVE  = 1;
+    const STATUS_DELETED = 2;
 
     /**
      * @ORM\Id
@@ -153,6 +155,6 @@ class User
      * @ORM\Column(type="integer")
      * @var integer
      */
-    public $active  = 1;
+    public $status;
 
 }

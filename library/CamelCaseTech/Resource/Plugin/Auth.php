@@ -28,7 +28,7 @@ class CamelCaseTech_Resource_Plugin_Auth extends Zend_Controller_Plugin_Abstract
         if ($auth->hasIdentity() && $storage['rolename'] != "Admin" && $this->getRequest()->getModuleName() == 'settings') {
             $this->getResponse()->setRedirect('error')->sendResponse();
         }
-        if( $auth->hasIdentity() && $storage['active'] == 0){
+        if( $auth->hasIdentity() && $storage['status'] == 2){
             $auth->clearIdentity();
             $this->getResponse()->setRedirect('/sign/out')->sendResponse();
         }

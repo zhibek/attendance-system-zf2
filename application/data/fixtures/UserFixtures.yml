@@ -10,67 +10,70 @@ Attendance\Entity\Role:
 
     role4:
         name: 'Admin'
-        
+
 Attendance\Entity\User:
-    
     user{1..25}:
-    
         name: <firstName()> <lastName()>
         username: <username()>
         password: 123456
-        mobile: 0101010
-        photo: http://beazing.com/themes/sexymetro/img/no_user.jpg 
-        maritalStatus: exe  
+        mobile: 010123456789
+        photo: http://beazing.com/themes/sexymetro/img/no_user.jpg
+        maritalStatus: exe
         dateOfBirth: <date()>
-        description: human                        
-        vacationBalance: 21       
-        totalWorkingHoursThisMonth: 31   
+        description: human
+        vacationBalance: 21
+        totalWorkingHoursThisMonth: 31
         role: @role1
+        status: <numberBetween(1, 2)>
     user26:
         name: Admin Admin
         username: admin
         password: admin
-        mobile: 0101010
-        photo: http://beazing.com/themes/sexymetro/img/no_user.jpg 
-        maritalStatus: exe  
+        mobile: 010123456789
+        photo: http://beazing.com/themes/sexymetro/img/no_user.jpg
+        maritalStatus: exe
         dateOfBirth: <date()>
-        description: human                        
-        vacationBalance: 21       
-        totalWorkingHoursThisMonth: 31 
+        description: human
+        vacationBalance: 21
+        totalWorkingHoursThisMonth: 31
         role: @role4
+        status: <numberBetween(1, 2)>
     user27:
         name: HR HR
         username: HR
         password: HR
-        mobile: 0101010
-        photo: http://beazing.com/themes/sexymetro/img/no_user.jpg 
-        maritalStatus: exe  
+        mobile: 010123456789
+        photo: http://beazing.com/themes/sexymetro/img/no_user.jpg
+        maritalStatus: exe
         dateOfBirth: <date()>
-        description: human                        
-        vacationBalance: 21       
-        totalWorkingHoursThisMonth: 31 
+        description: human
+        vacationBalance: 21
+        totalWorkingHoursThisMonth: 31
         role: @role2
+        status: <numberBetween(1, 2)>
     user28:
-        name: Manager Manager 
+        name: Manager Manager
         username: Manager
         password: manager
-        mobile: 0101010
-        photo: http://beazing.com/themes/sexymetro/img/no_user.jpg 
-        maritalStatus: exe  
+        mobile: 010123456789
+        photo: http://beazing.com/themes/sexymetro/img/no_user.jpg
+        maritalStatus: exe
         dateOfBirth: <date()>
-        description: human                        
-        vacationBalance: 21       
-        totalWorkingHoursThisMonth: 31 
+        description: human
+        vacationBalance: 21
+        totalWorkingHoursThisMonth: 31
         role: @role3
+        status: <numberBetween(1, 2)>
     user29:
-        name: Normal user 
+        name: Normal user
         username: user
         password: 12345678
         mobile: 01066313459
-        photo: http://beazing.com/themes/sexymetro/img/no_user.jpg 
-        maritalStatus: exe 
+        photo: http://beazing.com/themes/sexymetro/img/no_user.jpg
+        maritalStatus: exe
         dateOfBirth: <date()>
-        description: human                        
-        vacationBalance: 21       
-        totalWorkingHoursThisMonth: 31 
+        description: human
+        vacationBalance: 21
+        totalWorkingHoursThisMonth: 31
         role: @role1
+        status: <numberBetween(1, 2)>

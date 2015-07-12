@@ -19,7 +19,7 @@ class Attendance_Paginator_Doctrine implements Zend_Paginator_Adapter_Interface
     }
 
     public function getItems($offset, $itemCountPerPage) {
-        return  $this->repository->findBy(array('active' => 1),null,$itemCountPerPage, $offset);//($pageNumber-1) for zero based count
+        return  $this->repository->findBy(array(),null,$itemCountPerPage, $offset);//($pageNumber-1) for zero based count
     }
 
 }

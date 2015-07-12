@@ -8,38 +8,38 @@ class Users_Model_SaveUser
 
     public function __construct($em, $request = null)
     {
-        $this->em = $em;
+        $this->em      = $em;
         $this->request = $request;
     }
 
     public function saveUser($request , $userObj = null)
     {
         $userInfo = $request->getParams();
-        $em = $this->em;
-        
-        if(is_null($userObj)){
+        $em       = $this->em;
+
+        if (is_null($userObj)) {
             $entity = new Attendance\Entity\User();
         } else {
             $entity = $userObj;
         }
-        
+
         $entity->username = $userInfo['username'];
-        $entity->name = $userInfo['name'];
-        if(is_null($userObj)){
+        $entity->name     = $userInfo['name'];
+        if (is_null($userObj)) {
             $entity->password = Attendance\Entity\User::hashPassword($userInfo['password']);
         }
         $dateString = $userInfo['dateOfBirth'];
-        $date = new DateTime($dateString);
+        $date       = new DateTime($dateString);
         $entity->dateOfBirth = $date;
-        $entity->mobile = $userInfo['mobile'];
+        $entity->mobile      = $userInfo['mobile'];
         $entity->description = $userInfo['description'];
 
         $thisPosition = $em->getRepository('\Attendance\Entity\Position')->find($userInfo['position']);
         $entity->position = $thisPosition;
 
         $startDateString = $userInfo['startDate'];
-        $startDateObj = new DateTime($startDateString);
-        $entity->startDate = $startDateObj;
+        $startDateObj    = new DateTime($startDateString);
+        $entity->startDate     = $startDateObj;
         $entity->maritalStatus = $userInfo['maritalStatus'];
 
         $thisBranch = $em->getRepository("\Attendance\Entity\Branch")->find($userInfo["branch"]);
@@ -53,12 +53,13 @@ class Users_Model_SaveUser
 
         $entity->vacationBalance = \Attendance\Entity\User::DEFAULT_VACATION_BALANCE;
         $entity->totalWorkingHoursThisMonth = 0;
-        
+
         $entity->role = $em->getRepository('\Attendance\Entity\Role')->find(1);
-        
-        if(is_null($userObj)){
+
+        if (is_null($userObj)) {
             $entity->photo = $this->savePhoto();
         }
+        $entity->status = Attendance\Entity\User::STATUS_ACTIVE;
 
         $em->persist($entity);
 
@@ -68,11 +69,8 @@ class Users_Model_SaveUser
     protected function savePhoto()
     {
         $uploadResult = null;
-        
-        $upload = new Zend_File_Transfer_Adapter_Http();
-
-        $imagesPath = APPLICATION_PATH . '/../public/upload/images/';
-
+        $upload       = new Zend_File_Transfer_Adapter_Http();
+        $imagesPath   = APPLICATION_PATH . '/../public/upload/images/';
         $upload->setDestination($imagesPath);
 
         try {
@@ -80,13 +78,10 @@ class Users_Model_SaveUser
             $upload->receive();
         } catch (Zend_File_Transfer_Exception $e) {
             $uploadResult = '/upload/images/defaultpic.png';
-            
         }
 
-        $name = $upload->getFileName('photo');
-
+        $name      = $upload->getFileName('photo');
         $extention = pathinfo($name, PATHINFO_EXTENSION);
-
         //get random new namez
         $newName = $this->getRandomName();
 
@@ -111,28 +106,24 @@ class Users_Model_SaveUser
     public function populateForm($userObj, $form)
     {
 
-        $user = (array) $userObj;
-
+        $user                = (array) $userObj;
         $user['dateOfBirth'] = $userObj->dateOfBirth->format('m/d/Y');
-        $user['startDate'] = $userObj->startDate->format('m/d/Y');
-        $user['branch'] = $userObj->branch->id;
-        $user['department'] = $userObj->department->id;
-        $user['position'] = $userObj->position->id;
-        $user['manager'] = $userObj->manager->id;
-
+        $user['startDate']   = $userObj->startDate->format('m/d/Y');
+        $user['branch']      = $userObj->branch->id;
+        $user['department']  = $userObj->department->id;
+        $user['position']    = $userObj->position->id;
+        $user['manager']     = $userObj->manager->id;
+        $user['image']       = $userObj->photo;
         $form->populate($user);
     }
 
-    
-    
     public function deleteUser()
     {
-        $id = $this->request->getParam('id');
-        $user = $this->em->getRepository('\Attendance\Entity\User')->find($id);
-        $user->active = 0;
+        $id           = $this->request->getParam('id');
+        $user         = $this->em->getRepository('\Attendance\Entity\User')->find($id);
+        $user->status = Attendance\Entity\User::STATUS_DELETED;
         $this->em->merge($user);
-
         $this->em->flush();
     }
-    
+
 }

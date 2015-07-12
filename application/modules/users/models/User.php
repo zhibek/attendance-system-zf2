@@ -8,21 +8,28 @@
 
 class Users_Model_User
 {
-
+    protected $_em;
     protected $paginator = NULL;
     protected $numberPerPage = 10.0;
 
     public function __construct($em)
     {
-        $this->repository = $em->getRepository('Attendance\Entity\User');
-        $this->paginator = new Zend_Paginator(new Attendance_Paginator_Doctrine($this->repository));
+        $this->_em        = $em;
+        $this->repository = $this->_em->getRepository('Attendance\Entity\User');
+        $this->paginator  = new Zend_Paginator(new Attendance_Paginator_Doctrine($this->repository));
     }
+    public function userStatus()
+    {
 
+        $repository = $this->_em->getRepository('Attendance\Entity\User');
+        $data       = $repository->findAll();
+        return $this->prepareForDisplay($data);
+    }
     public function listAll()
     {
-        return $this->repository->findBy(array(), array('name'=>'asc'));;
+        return $this->repository->findBy(array(), array('name'=>'asc'));
     }
-    
+
     public function setPage($currentPage)
     {
         $this->paginator->setCurrentPageNumber($currentPage);
@@ -101,4 +108,18 @@ class Users_Model_User
         $updatequery->execute();
     }
 
+    private function prepareForDisplay($data)
+    {
+        foreach ($data as $key) {
+            switch ($key->status) {
+                case Attendance\Entity\User::STATUS_ACTIVE :
+                    $key->status = 'Active';
+                    break;
+                case Attendance\Entity\User::STATUS_DELETED :
+                    $key->status = 'Deleted';
+                    break;
+            }
+        }
+        return $data;
+    }
 }
