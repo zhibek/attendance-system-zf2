@@ -27,5 +27,11 @@ class Position
      * @var string
      */
     public $name;
-
+    
+     /**
+     *
+     * @ORM\Column(type="string")
+     * @var string
+     */
+    public $description;
 }

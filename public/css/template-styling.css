@@ -26,7 +26,7 @@ nav li a {
 }
 .panel{
     margin-bottom: -12px !important;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 /*.myrow{
     margin-right: 0px !important ; 
@@ -56,6 +56,8 @@ nav li a {
     width: 800px;
     margin: 0 auto;
 }
-
+.create-new{
+    margin-top: 10px;
+}
 
 

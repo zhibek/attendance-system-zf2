@@ -50,7 +50,7 @@ class Settings_Model_Attendance
         $this->_em->flush();
     }
 
-    public function deactivateVacation()
+    public function deactivateAttendance()
     {
         $id = $this->_request->getParam('id');
         $repository = $this->_em->getRepository('Attendance\Entity\Attendance');

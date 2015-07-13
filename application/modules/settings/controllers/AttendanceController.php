@@ -43,7 +43,7 @@ class Settings_AttendanceController extends Zend_Controller_Action
         $request = $this->getRequest();
         $em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
         $attendanceModel = new Settings_Model_Attendance($em, $request);
-        $attendanceModel->deactivateVacation();
+        $attendanceModel->deactivateAttendance();
         $this->redirect('/settings/attendance/index');
     }
 

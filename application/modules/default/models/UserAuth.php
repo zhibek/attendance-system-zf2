@@ -20,6 +20,8 @@ class Default_Model_UserAuth
         $adapter->setIdentity($username);
         $adapter->setCredential($password);
         $result = $adapter->authenticate();
+        // check on result there's any problem in login
+        // if not check on auth plugin
         return $result;
     }
 
@@ -31,6 +33,7 @@ class Default_Model_UserAuth
         ));
         $auth = Zend_Auth::getInstance();
         $storage = $auth->getStorage();
+        // here to add new entries to the session
         $storage->write(array(
             'id' => $entities[0]->id,
             'name' => $entities[0]->name,

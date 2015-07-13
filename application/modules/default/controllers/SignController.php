@@ -25,7 +25,6 @@ class Default_SignController extends Zend_Controller_Action
             if ($form->isValid($request->getPost())) {
                 $auth = new Default_Model_UserAuth($request, $em);
                 $result = $auth->authenticateMe();
-
                 if ($result->isValid()) {
                     $auth->newSession();
                     $this->redirect('/index');

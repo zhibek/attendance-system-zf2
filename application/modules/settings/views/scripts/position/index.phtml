@@ -1,0 +1,36 @@
+{{<layout}}
+{{$content}}
+<a href="/settings/position/new"class="btn btn-small btn-success create-new">Create new Position</a>
+<br><br>
+<div class="panel panel-default">
+
+    <div class="panel-heading">Positions</div>
+
+    <!-- Table -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th colspan="2">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#positions}}
+            <tr>
+                <td>{{name}}</td>
+                <td>{{description}}</td>
+                <td>
+                    <a href="edit/id/{{id}}" data-toggle="tooltip" data-placement="left" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="delete/id/{{id}}" class="delete_row" data-toggle="tooltip" data-placement="left" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+                </td>
+            </tr>
+            {{/positions}}
+            </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{{/content}}
+{{/layout}}

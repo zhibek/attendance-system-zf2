@@ -1,3 +1,29 @@
 Attendance\Entity\Position:
     position1:
-        name: 'Software Developer'
+        name: CEO
+        description: Chief Executive Officer
+    position2:
+        name: Manager
+        description: Manager
+    position3:
+        name: HR
+        description: Human Resources
+    position4:
+        name: Team Leader
+        description: Team Leader
+    position5:
+        name: Senior Software Developer
+        description: Senior (Developer for 3 years or more)
+    position6:
+        name: Junior Software Developer
+        description: Junior (Developer for less than 3 year)
+    position7:
+        name: Admin
+        description: Website Admin
+    position8:
+        name: Accountant
+        description: Accountant
+    position9:
+        name: Office Boy        
+        description: Office Boy
+        
