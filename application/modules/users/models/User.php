@@ -8,26 +8,29 @@
 
 class Users_Model_User
 {
+
     protected $_em;
     protected $paginator = NULL;
     protected $numberPerPage = 10.0;
 
     public function __construct($em)
     {
-        $this->_em        = $em;
+        $this->_em = $em;
         $this->repository = $this->_em->getRepository('Attendance\Entity\User');
-        $this->paginator  = new Zend_Paginator(new Attendance_Paginator_Doctrine($this->repository));
+        $this->paginator = new Zend_Paginator(new Attendance_Paginator_Doctrine($this->repository));
     }
+
     public function userStatus()
     {
 
         $repository = $this->_em->getRepository('Attendance\Entity\User');
-        $data       = $repository->findAll();
+        $data = $repository->findAll();
         return $this->prepareForDisplay($data);
     }
+
     public function listAll()
     {
-        return $this->repository->findBy(array(), array('name'=>'asc'));
+        return $this->repository->findBy(array(), array('name' => 'asc'));
     }
 
     public function setPage($currentPage)
@@ -85,11 +88,11 @@ class Users_Model_User
 
 
         $updatequery = $this->_em->createQuery('UPDATE Attendance\Entity\User u SET '
-            . ' u.name = ?1, u.username = ?2  , u.password = ?3 , u.mobile = ?4 , u.manager = ?5, '
-            . ' u.dateOfBirth = ?6 , u.startDate = ?7 , u.maritalStatus = ?8 ,'
-            . ' u.description = ?9 , u.position = ?10 , u.branch = ?11 , u.department = ?12,'
-            . ' u.photo =?13'
-            . ' WHERE v.id = ?14');
+                . ' u.name = ?1, u.username = ?2  , u.password = ?3 , u.mobile = ?4 , u.manager = ?5, '
+                . ' u.dateOfBirth = ?6 , u.startDate = ?7 , u.maritalStatus = ?8 ,'
+                . ' u.description = ?9 , u.position = ?10 , u.branch = ?11 , u.department = ?12,'
+                . ' u.photo =?13'
+                . ' WHERE v.id = ?14');
 
         $updatequery->setParameter(1, $entity->name);
         $updatequery->setParameter(2, $entity->username);
@@ -122,4 +125,5 @@ class Users_Model_User
         }
         return $data;
     }
+
 }

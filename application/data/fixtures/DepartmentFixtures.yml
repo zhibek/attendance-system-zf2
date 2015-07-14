@@ -1,3 +1,37 @@
 Attendance\Entity\Department:
     department1:
+        name: 'CSI Departement'
+        description: CSI
+        address: Africa
+#        manager: 1
+        status : 2
+    department2:
+        name: 'CSII Departement'
+        description: CSII
+        address: Europe
+#        manager: 2
+        status : 1
+    department3:
         name: 'CSIII Departement'
+        description: CSIII
+        address: North-America
+#        manager: 3
+        status : 1
+    department4:
+        name: 'CSIV Departement'
+        description: CSIV
+        address: South-America
+#        manager: 4
+        status : 1
+    department5:
+        name: 'CSV Departement'
+        description: CSV
+        address: Asia
+#        manager: 5
+        status : 2
+    department6:
+        name: 'CSVI Departement'
+        description: CSVI
+        address: Australia
+#        manager: 6
+        status : 1

@@ -1,0 +1,45 @@
+{{<layout}}
+{{$content}}
+<a href="/settings/departments/new"class="btn btn-small btn-success create-new">Create new Department</a>
+<br><br>
+<div class="panel panel-default">
+
+    <div class="panel-heading">Departments</div>
+
+    <!-- Table -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Manager</th>
+                <th>Address</th>
+                <th>Status</th>
+
+                <th colspan="2">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#departments}}
+            <tr>
+                <td>{{name}}</td>
+                <td>{{description}}</td>
+                <td>{{manager}}</td>
+                <td>{{address}}</td>
+                <td>{{status}}</td>
+                <td>
+                    {{#active}}
+                    <a href="edit/id/{{id}}" data-toggle="tooltip" data-placement="left" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="delete/id/{{id}}" class="delete_row" data-toggle="tooltip" data-placement="left" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+                    {{/active}}
+                </td>
+            </tr>
+            {{/departments}}
+            </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{{/content}}
+{{/layout}}

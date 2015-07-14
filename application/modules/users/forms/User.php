@@ -184,11 +184,11 @@ class Users_Form_User extends Zend_Form
                     " " => " "
                 ))->
                 setAttrib('class', 'form-control');
-        $positionRepository = $this->em->getRepository('Attendance\Entity\Position');
-        $allPositions = $positionRepository->findAll();
-        foreach ($allPositions as $p) {
-            $position->addMultiOption($p->id, $p->name);
-        }
+            $positionRepository = $this->em->getRepository('Attendance\Entity\Position');
+            $allPositions = $positionRepository->findAll();
+            foreach ($allPositions as $p) {
+                $position->addMultiOption($p->id, $p->name);
+            }
 
         // User Manager  Element
         $manager = new Zend_Form_Element_Select('manager');

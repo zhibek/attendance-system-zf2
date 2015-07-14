@@ -37,7 +37,7 @@ Attendance\Entity\User:
         vacationBalance: 21
         totalWorkingHoursThisMonth: 31
         role: @role4
-        status: <numberBetween(1, 2)>
+        status: 1
     user27:
         name: HR HR
         username: HR
@@ -50,7 +50,7 @@ Attendance\Entity\User:
         vacationBalance: 21
         totalWorkingHoursThisMonth: 31
         role: @role2
-        status: <numberBetween(1, 2)>
+        status: 1
     user28:
         name: Manager Manager
         username: Manager
@@ -63,7 +63,7 @@ Attendance\Entity\User:
         vacationBalance: 21
         totalWorkingHoursThisMonth: 31
         role: @role3
-        status: <numberBetween(1, 2)>
+        status: 1
     user29:
         name: Normal user
         username: user
@@ -76,4 +76,4 @@ Attendance\Entity\User:
         vacationBalance: 21
         totalWorkingHoursThisMonth: 31
         role: @role1
-        status: <numberBetween(1, 2)>
+        status: 1

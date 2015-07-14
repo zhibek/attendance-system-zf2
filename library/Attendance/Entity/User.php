@@ -3,9 +3,6 @@
 namespace Attendance\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Attendance\Entity\Branch;
-use Attendance\Entity\Department;
-use Attendance\Entity\Position;
 
 /**
  * Class User
