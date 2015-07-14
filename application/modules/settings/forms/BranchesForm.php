@@ -38,20 +38,16 @@ class Settings_Form_BranchesForm extends Zend_Form
             'class' => 'time form-control',
         ));
          // User Manager  Element
-        $manager = new Zend_Form_Element_Select('manager');
-        $manager->
-                setLabel('Manager: ')->
-                setOptions(array(
-                    " " => " "
-                ))->
-                setAttrib('class', 'form-control');
-
-        $managerRepository = $this->em->getRepository('Attendance\Entity\User');
-        $allManagers = $managerRepository->findAll();
-        foreach ($allManagers as $m) {
-            $manager->addMultiOption($m->id, $m->name);
+        $this->addElement('select', 'manager', array(
+            'label' => 'Manager',
+            'required' => true,
+            'class' => 'time form-control',
+        ));
+        $query = $this->em->createQuery('Select v FROM Attendance\Entity\User  v WHERE v.position = 2');
+        $managers = $query->execute();
+        foreach ($managers as $p) {
+            $this->getElement('manager')->addMultiOption($p->id, $p->name);
         }
-        $this->addElement($manager);
         $this->addElement('hidden', 'id', array(
         ));
 
