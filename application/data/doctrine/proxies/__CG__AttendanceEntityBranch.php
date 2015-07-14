@@ -36,7 +36,7 @@ class Branch extends \Attendance\Entity\Branch implements \Doctrine\ORM\Proxy\Pr
      *
      * @see \Doctrine\Common\Persistence\Proxy::__getLazyProperties
      */
-    public static $lazyPropertiesDefaults = array('name' => NULL);
+    public static $lazyPropertiesDefaults = array('name' => NULL,'description' => Null,'address' => Null,'manager' =>Null);
 
 
 
@@ -46,7 +46,7 @@ class Branch extends \Attendance\Entity\Branch implements \Doctrine\ORM\Proxy\Pr
      */
     public function __construct($initializer = null, $cloner = null)
     {
-        unset($this->name);
+        unset($this->name,$this->description,$this->address,$this->manager);
 
         $this->__initializer__ = $initializer;
         $this->__cloner__      = $cloner;
@@ -108,7 +108,7 @@ class Branch extends \Attendance\Entity\Branch implements \Doctrine\ORM\Proxy\Pr
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'id', 'name');
+            return array('__isInitialized__', 'id', 'name','description','address','manager');
         }
 
         return array('__isInitialized__', 'id');
@@ -133,7 +133,7 @@ class Branch extends \Attendance\Entity\Branch implements \Doctrine\ORM\Proxy\Pr
                 }
             };
 
-            unset($this->name);
+            unset($this->name,$this->description,$this->address,$this->manager);
         }
     }
 

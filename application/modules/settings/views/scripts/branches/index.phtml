@@ -1,0 +1,44 @@
+{{<layout}}
+{{$content}}
+<a href="/settings/branches/new"class="btn btn-small btn-success create-new">Create new Branch</a>
+<br><br>
+<div class="panel panel-default">
+
+    <div class="panel-heading">Branches</div>
+
+    <!-- Table -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>address</th>
+                <th>Manager</th>
+                <th>Status</th>
+                <th colspan="2">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#branches}}
+            <tr>
+                <td>{{name}}</td>
+                <td>{{description}}</td>
+                <td>{{address}}</td>
+                <td>{{manager}}</td>
+                <td>{{status}}</td>
+                <td>
+                    {{#active}}
+                    <a href="edit/id/{{id}}" data-toggle="tooltip" data-placement="left" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="delete/id/{{id}}" class="delete_row" data-toggle="tooltip" data-placement="left" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+                    {{/active}}
+                </td>
+            </tr>
+            {{/branches}}
+            </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{{/content}}
+{{/layout}}
