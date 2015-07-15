@@ -5,7 +5,8 @@
         "zendframework/zendframework1": "1.*",
         "phly/mustache": "dev-master",
         "doctrine/orm": "2.*",
-        "nelmio/alice": "^2.0@dev"
+        "nelmio/alice": "^2.0@dev",
+        "behat/behat": "^3.0@dev"
     },
     "authors": [
         {
