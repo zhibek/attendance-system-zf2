@@ -40,7 +40,7 @@ class Settings_HolidayController extends Zend_Controller_Action {
     }
 
     public function editAction() {
-        $form = new Settings_Form_HolidayForm();
+        $form    = new Settings_Form_HolidayForm();
         $request = $this->getRequest();
         $this->holidayModel->populateForm($form, $this->_getParam('id'));
         $this->view->editForm = $form;
@@ -48,6 +48,9 @@ class Settings_HolidayController extends Zend_Controller_Action {
         if ($request->isPost()) {
             if ($form->isValid($request->getPost())) {
                 $holidayInfo = $this->_request->getParams();
+                 if (empty($holidayInfo['dateTo'])) {
+                    $holidayInfo['dateTo']= $holidayInfo['dateFrom'];
+                }
                 $this->holidayModel->updateHoliday($holidayInfo);
                 $this->redirect('/settings/holiday/index');
             }
@@ -55,18 +58,18 @@ class Settings_HolidayController extends Zend_Controller_Action {
     }
 
     public function newAction() {
-        $form = new Settings_Form_HolidayForm();
+        $form    = new Settings_Form_HolidayForm();
         $request = $this->getRequest();
-
 
         if ($request->isPost()) {
             if ($form->isValid($request->getPost())) {
-
                 $holidayInfo = $this->_request->getParams();
-
+                if (empty($holidayInfo['dateTo'])) {
+                    $holidayInfo['dateTo']= $holidayInfo['dateFrom'];
+                }
                 //validate dates
                 $dateFrom = new DateTime($holidayInfo['dateFrom']);
-                $dateTo = new DateTime($holidayInfo['dateTo']);
+                $dateTo   = new DateTime($holidayInfo['dateTo']);
                 if ($dateFrom > $dateTo) {
                     $form->getElement('dateTo')->addErrors(array('To Date: should be more than From Date:'));
                 } else {
