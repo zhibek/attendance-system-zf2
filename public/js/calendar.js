@@ -6,7 +6,6 @@ $(document).ready(function () {
             center: 'title',
             right: 'month,agendaWeek,agendaDay'
         },
-        defaultDate: '2015-06-24',
         defaultView: 'month',
         editable: true,
         eventSources:
