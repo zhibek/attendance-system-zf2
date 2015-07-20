@@ -16,7 +16,7 @@ Attendance\Entity\User:
         name: <firstName()> <lastName()>
         username: <username()>
         password: 123456
-        mobile: 010123456789
+        mobile: "010123456789"
         photo: http://beazing.com/themes/sexymetro/img/no_user.jpg
         maritalStatus: exe
         dateOfBirth: <date()>
@@ -29,7 +29,7 @@ Attendance\Entity\User:
         name: Admin Admin
         username: admin
         password: admin
-        mobile: 010123456789
+        mobile: "010123456789"
         photo: http://beazing.com/themes/sexymetro/img/no_user.jpg
         maritalStatus: exe
         dateOfBirth: <date()>
@@ -42,7 +42,7 @@ Attendance\Entity\User:
         name: HR HR
         username: HR
         password: HR
-        mobile: 010123456789
+        mobile: "010123456789"
         photo: http://beazing.com/themes/sexymetro/img/no_user.jpg
         maritalStatus: exe
         dateOfBirth: <date()>
@@ -55,7 +55,7 @@ Attendance\Entity\User:
         name: Manager Manager
         username: Manager
         password: manager
-        mobile: 010123456789
+        mobile: "010123456789"
         photo: http://beazing.com/themes/sexymetro/img/no_user.jpg
         maritalStatus: exe
         dateOfBirth: <date()>
@@ -68,7 +68,7 @@ Attendance\Entity\User:
         name: Normal user
         username: user
         password: 12345678
-        mobile: 01066313459
+        mobile: "01066313459"
         photo: http://beazing.com/themes/sexymetro/img/no_user.jpg
         maritalStatus: exe
         dateOfBirth: <date()>
