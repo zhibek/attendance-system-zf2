@@ -89,8 +89,8 @@ EOT
         foreach ($holidays as $object) {
             $randomDate = new \DateTime($object->dateFrom);
             $object->dateFrom = clone $randomDate;
-            $randomDate->modify('+' . rand(1, 30) . ' day');
-            $object->dateTo = $randomDate;
+            $randomDate1 = new \DateTime($object->dateTo);
+            $object->dateTo = clone $randomDate1;
         }
         $this->insertObjectsInDatabase($entityManager, $holidays);
 
