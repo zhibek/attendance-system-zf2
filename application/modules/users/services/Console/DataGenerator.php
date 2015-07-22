@@ -51,6 +51,8 @@ EOT
         $vacations = $loader->load('application/data/fixtures/VacationFixtures.yml');
         $this->insertObjectsInDatabase($entityManager, $vacations);
 
+        $notification = $loader->load('application/data/fixtures/NotificationFixtures.yml');
+        $this->insertObjectsInDatabase($entityManager, $notification); 
 
         $workFromHome = $loader->load('application/data/fixtures/WorkFromHomeFixtures.yml');
         foreach ($workFromHome as $key) {

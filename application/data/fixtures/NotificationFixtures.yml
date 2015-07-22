@@ -1,0 +1,17 @@
+Attendance\Entity\Notification:
+    notification1:
+        text: 'request approve'
+        url : 'http://www.google.com'
+        status : 1
+    notification2:
+        text: 'request approve'
+        url : 'http://www.google.com'
+        status : 1
+    notification3:
+        text: 'request approve'
+        url : 'http://www.google.com'
+        status : 1
+    notification4:
+        text: 'request approve'
+        url : 'http://www.google.com'
+        status : 1
