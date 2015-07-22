@@ -3,7 +3,7 @@ window.onload = clearCurrentLink;
 function clearCurrentLink(){
     var a = document.getElementsByTagName("A");
     for(var i=0; i<a.length; i++)
-        if (a[i].href == window.location.href.split("#")[0])
+        if (a[i].href == window.location.href.split("#")[0] && a[i].href !="http://attendance.local/users" )
             removeNode(a[i]);
 }
 
