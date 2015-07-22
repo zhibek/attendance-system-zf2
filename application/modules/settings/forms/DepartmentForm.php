@@ -47,7 +47,7 @@ class Settings_Form_DepartmentForm extends Zend_Form
             'required' => true,
             'class' => 'time form-control',
         ));
-        $query = $this->em->createQuery('Select v FROM Attendance\Entity\User  v WHERE v.position = 2');
+        $query = $this->em->createQuery('Select v FROM Attendance\Entity\User  v WHERE v.role = 3');
         $managers = $query->execute();
         foreach ($managers as $p) {
             $this->getElement('manager')->addMultiOption($p->id, $p->name);
