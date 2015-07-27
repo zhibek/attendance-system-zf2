@@ -8,6 +8,7 @@ $(document).ready(function () {
         },
         defaultView: 'month',
         editable: true,
+        timeFormat: '(:)',
         eventSources:
         [
             {
