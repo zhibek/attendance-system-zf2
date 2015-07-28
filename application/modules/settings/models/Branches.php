@@ -29,9 +29,11 @@ class Settings_Model_Branches
         foreach ($branches as $bran) {
             switch ($bran->manager) {
                 case Null:
-                    $bran->manager->name = "Manager Manager" ;
+                    $bran->manager       =(object)$bran->manager;
+                    $bran->manager->name = "Manager manager" ;
                     break;
             }
+            $bran->manager =(object)$bran->manager;
             $bran->manager = $bran->manager->name;
             if ($bran->status == 'Active') {
                  $bran->active = TRUE;
