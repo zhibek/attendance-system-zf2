@@ -21,7 +21,14 @@ class Settings_Model_Department
     {
         $departments = $this->repository->findAll();
         foreach ($departments as $dep) {
-            $dep->manager = $dep->manager->name;
+            switch ($dep->manager) {
+                case Null:
+                    $bran->manager      = (object)$bran->manager;
+                    $dep->manager->name = "Manager Manager" ;
+                    break;
+            }
+            $bran->manager = (object)$bran->manager;
+            $dep->manager  = $dep->manager->name;
             switch ($dep->status) {
                 case Attendance\Entity\Department::STATUS_ACTIVE :
                     $dep->status = 'Active';
