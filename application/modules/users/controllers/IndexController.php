@@ -33,17 +33,16 @@ class Users_IndexController extends Zend_Controller_Action
 
     public function editAction()
     {
-        $em = $this->getInvokeArg('bootstrap')->getResource('entityManager');
-        $form = new Users_Form_User(array('em' => $em));
-        $id = $this->getRequest()->getParam('id');
-        $saveUser = new Users_Model_SaveUser($em);
+        $em        = $this->getInvokeArg('bootstrap')->getResource('entityManager');
+        $form      = new Users_Form_User(array('em' => $em));
+        $id        = $this->getRequest()->getParam('id');
+        $saveUser  = new Users_Model_SaveUser($em);
         $userModel = $em->getRepository('Attendance\Entity\User');
-        $userObj = $userModel->find($id);
-        $photo = $userObj->photo;
-        $request = $this->getRequest();
-        $user = array('username', 'password', "confirmPassword", 'name', 'mobile', 'dateOfBirth', 'startDate', 'description');
+        $userObj   = $userModel->find($id);
+        $photo     = $userObj->photo;
+        $request   = $this->getRequest();
+        $user      = array('username', 'password', "confirmPassword", 'name', 'mobile', 'dateOfBirth', 'startDate', 'description');
         $saveUser->populateForm($userObj, $form);
-
         if ($request->isPost()) {
             $data = $request->getParams();
             if (empty($data['password'])) {
@@ -70,7 +69,7 @@ class Users_IndexController extends Zend_Controller_Action
                 }
             }
         }
-        $this->view->photo = $photo;
+        $this->view->photo    = $photo;
         $this->view->userForm = $form;
     }
 

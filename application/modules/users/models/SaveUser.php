@@ -56,7 +56,7 @@ class Users_Model_SaveUser
 
         $entity->role = $em->getRepository('\Attendance\Entity\Role')->find(1);
 
-        if (is_null($userObj)) {
+        if (!is_null($userObj)) {
             $entity->photo = $this->savePhoto();
         }
         $entity->status = Attendance\Entity\User::STATUS_ACTIVE;
