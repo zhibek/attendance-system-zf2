@@ -3,20 +3,19 @@ Attendance\Entity\Branch:
         name: 'Cairo Branch'
         description: Cairo Branch
         address: Cairo
-        status: <numberBetween(1, 2)>
+        status: 1
     branch2:
         name: 'Alex Branch'
         description: Alex Branch
-        address: Alex 
-        status: <numberBetween(1, 2)>
+        address: Alex
+        status: 1
     branch3:
         name: 'Aswan Branch'
         description: Aswan Branch
         address: Aswan
-        status: <numberBetween(1, 2)>
+        status: 1
     branch4:
         name: 'Post-Saeed Branch'
         description: Post-Saeed Branch
         address: Post-Saeed
-        status: <numberBetween(1, 2)>
-        
+        status: 1
