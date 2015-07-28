@@ -4,7 +4,7 @@ Attendance\Entity\Department:
         description: CSI
         address: Africa
 #        manager: 1
-        status : 2
+        status : 1
     department2:
         name: 'CSII Departement'
         description: CSII
@@ -28,7 +28,7 @@ Attendance\Entity\Department:
         description: CSV
         address: Asia
 #        manager: 5
-        status : 2
+        status : 1
     department6:
         name: 'CSVI Departement'
         description: CSVI
