@@ -27,6 +27,11 @@ class Settings_Model_Branches
     {
         $branches= $this->repository->findAll();
         foreach ($branches as $bran) {
+            switch ($bran->manager) {
+                case Null:
+                    $bran->manager->name = "Manager Manager" ;
+                    break;
+            }
             $bran->manager = $bran->manager->name;
             if ($bran->status == 'Active') {
                  $bran->active = TRUE;
