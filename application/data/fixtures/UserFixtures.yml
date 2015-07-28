@@ -24,7 +24,7 @@ Attendance\Entity\User:
         vacationBalance: 21
         totalWorkingHoursThisMonth: 31
         role: @role1
-        status: <numberBetween(1, 2)>
+        status: 1
     user26:
         name: Admin Admin
         username: admin
