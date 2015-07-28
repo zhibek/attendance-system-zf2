@@ -23,11 +23,11 @@ class Settings_Model_Department
         foreach ($departments as $dep) {
             switch ($dep->manager) {
                 case Null:
-                    $bran->manager      = (object)$bran->manager;
+                    $dep->manager      = (object)$dep->manager;
                     $dep->manager->name = "Manager Manager" ;
                     break;
             }
-            $bran->manager = (object)$bran->manager;
+            $dep->manager = (object)$dep->manager;
             $dep->manager  = $dep->manager->name;
             switch ($dep->status) {
                 case Attendance\Entity\Department::STATUS_ACTIVE :
