@@ -6,10 +6,8 @@
         "phly/mustache": "dev-master",
         "doctrine/orm": "2.*",
         "nelmio/alice": "^2.0@dev",
-        "behat/behat": "^3.0@dev",
-        "behat/mink": "1.5.*@stable",
-        "behat/mink-goutte-driver": "*",
-        "behat/mink-extension": "*"
+        "behat/behat": "2.5.x",
+        "phpunit/phpunit": "4.7.x"
     },
     "authors": [
         {
