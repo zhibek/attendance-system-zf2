@@ -7,6 +7,10 @@
         "doctrine/orm": "2.*",
         "nelmio/alice": "^2.0@dev",
         "behat/behat": "2.5.x",
+        "behat/mink": "1.4.*@stable",
+        "behat/mink-extension": "*",
+        "behat/mink-goutte-driver": "*",
+        "behat/mink-selenium2-driver": "*",
         "phpunit/phpunit": "4.7.x"
     },
     "authors": [

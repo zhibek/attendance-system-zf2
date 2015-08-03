@@ -1,0 +1,13 @@
+##
+##  Configuration file for running acceptance tests
+## 
+
+default:
+    paths:
+        features: application/features
+        bootstrap: application/features/bootstrap
+    extensions:
+        Behat\MinkExtension\Extension:
+            base_url: http://attendance.local
+            goutte: ~
+            selenium2: ~
