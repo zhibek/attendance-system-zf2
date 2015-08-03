@@ -1,10 +1,8 @@
 Feature: Homepage
-  In order to know ZF works with Behat
-  I need to see that the page loads.
+  In order to moke the login session
+  I need to see the home page 
 
-Scenario: Check the homepage
-  Given I load the URL "/index"
-  Then the module should be "default"
-  And the controller should be "index"
-  And the action should be "index"
-  And the action should redirect to "/sign/in"
+    Scenario: Check the homepage
+      Given I moke the login session
+      And I am on "/index"
+      Then I should be on "/index"

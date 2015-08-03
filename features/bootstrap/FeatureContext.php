@@ -79,13 +79,24 @@ class FeatureContext extends MinkContext
     {
         $this->app->assertNotRedirect();
     }
-    
+
     /**
      * @Given /^the action should redirect to "([^"]*)"$/
      */
     public function theActionShouldRedirectTo($newUrl)
     {
         $this->app->assertRedirectTo($newUrl);
-    } 
-    
-   }
+    }
+
+    /**
+     * @Given /^I moke the login session$/
+     */
+    public function iMokeTheLoginSession() {
+
+        $this->iAmOnHomepage();
+        $this->fillField('username', 'admin');
+        $this->fillField('password', 'admin');
+        $this->pressButton('login');
+    }
+
+}
