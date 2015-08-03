@@ -89,9 +89,9 @@ class FeatureContext extends MinkContext
     }
 
     /**
-     * @Given /^I moke the login session$/
+     * @Given /^I mock the login session$/
      */
-    public function iMokeTheLoginSession() {
+    public function iMockTheLoginSession() {
 
         $this->iAmOnHomepage();
         $this->fillField('username', 'admin');
