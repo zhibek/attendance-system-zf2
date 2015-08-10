@@ -22,7 +22,7 @@
         <div id="wrapper">
 
             <!-- Navigation -->
-            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <nav class="navbar navbar-default navbar-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="sr-only">Toggle navigation</span>
@@ -31,6 +31,15 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="/index">Attendance HUB</a>
+                    <ul class="nav navbar-top-links navbar-left ">
+                        <li class="dropdown"><a class="dropdown-toggle notify" data-toggle="dropdown" href="#"><i class="fa fa-globe fa-2x fa-fw"></i> </a>
+                            <ul class="dropdown-menu pull-left">
+                                <li>Your vacation balance left is 17 Days <a data-toggle="tooltip" data-placement="left" title="Delete" style="float: right;" href="/notification/seen"> <span class="fa fa-check" ></span></a></li>
+                                <li role="separator" class="divider"></li>
+                                <li>Your vacation request had been accepted <a data-toggle="tooltip" data-placement="left" title="Delete" style="float: right;" href="/notification/seen"> <span class="fa fa-check" ></span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
                 <div class="navbar-default sidebar" role="navigation">
                     <div class="sidebar-nav navbar-collapse">
@@ -91,7 +100,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            
+
                             <!--my attendance-->
                             <!--Requests Module-->
                             <li>
@@ -112,10 +121,15 @@
                                 </ul>
                             </li>
                             <!--my attendance--> 
-                            
+
                             <li>
                                 {{#visible}}
                                 <a href="/calendar">Holiday Calendar &nbsp;&nbsp;<i class="fa fa-calendar fa-fw " ></i></a>
+                                {{/visible}} 
+                            </li>
+                            <li>
+                                {{#visible}}
+                                <a href="/notifications">Notifications &nbsp;&nbsp;<i class="fa fa-globe fa-fw " ></i></a>
                                 {{/visible}} 
                             </li>
                             <!--log out-->
