@@ -83,3 +83,7 @@ li{
 .notification{
     font-size: 1.5em;
 }
+.middle-panel{
+    margin-top: 17px;
+    margin-bottom: 30px;
+}
