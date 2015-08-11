@@ -7,6 +7,7 @@
 {{/styles}}
 
 {{$content}}
+
 <table class="table table-hover">
     <thead>
         <tr>
@@ -14,17 +15,22 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>Your vacation balance left is 17 Days</td>
+        {{#unseenNotification}}
+        <tr id="{{id}}">
+            <td class="danger clickable-raw" onclick="document.location = '{{url}}';">{{text}}</td>
         </tr>
+        {{/unseenNotification}}
+        {{#seenNotification}}
         <tr>
-            <td>Your vacation request had been accepted</td>
+            <td class="info clickable-raw"onclick="document.location = '{{url}}';">{{text}}</td>
         </tr>
+        {{/seenNotification}}
         <tr>
-            <td>Your Permission had been rejected</td>
-        </tr>
     </tbody>
 </table>
+
+
+
 {{/content}}
 
 

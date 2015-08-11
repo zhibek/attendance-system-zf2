@@ -1,17 +1,13 @@
 Attendance\Entity\Notification:
     notification1:
-        text: 'request approve'
-        url : 'http://www.google.com'
-        status : 1
+        text: 'Your vacation request had been approved'
+        url : '/myattendance/vacation'
+        status : 2
     notification2:
-        text: 'request approve'
-        url : 'http://www.google.com'
-        status : 1
+        text: "Your've reached your vacation balance limit , there's no days off left for you"
+        url : '/myattendance/vacation'
+        status : 2
     notification3:
-        text: 'request approve'
-        url : 'http://www.google.com'
-        status : 1
-    notification4:
-        text: 'request approve'
-        url : 'http://www.google.com'
-        status : 1
+        text: 'Your Permission had been rejected'
+        url : '/myattendance/vacation'
+        status : 2

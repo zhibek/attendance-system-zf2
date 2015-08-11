@@ -19,14 +19,24 @@ class Requests_Model_Permission
     {
         $this->entityManager = $em;
         $this->repository = $em->getRepository('Attendance\Entity\Permission');
+        $this->userRepository = $em->getRepository('Attendance\Entity\User');
     }
 
-    public function newPermission($permissionInfo)
+    public function newPermission($permissionInfo, $userId)
     {
         $entity = $this->createEntity($permissionInfo);
-
         $this->entityManager->persist($entity);
         $this->entityManager->flush();
+
+        $user = $this->userRepository->find(array('id' => $userId));
+        // send the request to the Manager
+        $reciver = $this->userRepository->find(array('id' => 28));
+        $notificationData = array(
+            'text' => $user->name . ' is Asking for a permission on ' . $permissionInfo['date'] . ' from ' . $permissionInfo['fromTime'] . ' to ' . $permissionInfo['toTime']
+            , 'url' => '/requests/myrequests'
+            , 'user' => $reciver);
+        $notificationModel = new Notifications_Model_Notifications($this->entityManager);
+        $notificationModel->newNotification($notificationData);
     }
 
     public function listAll()
@@ -103,13 +113,11 @@ class Requests_Model_Permission
             $key->user = $this->getUserNameById($key->user);
             if ($key->status == 1) {
                 $key->status = "Submitted";
-            } elseif($key->status == 2){
+            } elseif ($key->status == 2) {
                 $key->status = "Cancelled";
-            }
-            elseif ($key->status == 3) {
+            } elseif ($key->status == 3) {
                 $key->status = "Approved";
-            }
-            elseif ($key->status == 4) {
+            } elseif ($key->status == 4) {
                 $key->status = "Denied";
             }
         }

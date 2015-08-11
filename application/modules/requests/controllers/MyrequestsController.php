@@ -158,7 +158,7 @@ class Requests_MyrequestsController extends Zend_Controller_Action
         $this->_em->merge($request);
         $this->_em->flush();
 
-        $this->redirect('/requests/myrequests/index');
+        $this->redirect('requests/myrequests/index');
     }
 
 }

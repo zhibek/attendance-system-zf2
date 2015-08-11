@@ -22,13 +22,13 @@ class Requests_PermissionController extends Zend_Controller_Action
     public function newAction()
     {
         $form = new Requests_Form_PermissionForm(null, $this->entityManager);
-
+        
         $request = $this->getRequest();
-
+        $storage = Zend_Auth::getInstance()->getIdentity();
         if ($request->isPost()) {
             if ($form->isValid($request->getPost())) {
                 $permissionInfo = $this->_request->getParams();
-                $this->permissionModel->newPermission($permissionInfo);
+                $this->permissionModel->newPermission($permissionInfo,$storage['id']);
                 $this->redirect('/requests/myrequests/index');
             }
         }
