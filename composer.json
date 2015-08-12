@@ -2,10 +2,13 @@
     "name": "camelcasetech/attendance",
     "description": "attendance system application",
     "require": {
-        "zendframework/zendframework1": "1.*",
-        "phly/mustache": "dev-master",
-        "doctrine/orm": "2.*",
-        "nelmio/alice": "^2.0@dev",
+        "zendframework/zendframework": "2.3.*",
+        "zendframework/zftool": "0.1.*",
+        "doctrine/doctrine-orm-module": "0.8.0",
+        "nelmio/alice": "1.7.2",
+        "phly/mustache": "1.2.*"
+    },
+    "require-dev": {
         "behat/behat": "2.5.x",
         "behat/mink": "1.4.*@stable",
         "behat/mink-extension": "*",
