@@ -4,6 +4,6 @@ cd /vagrangt;
 
 composer install --prefer-dist;
 
-./bin/cli orm:schema-tool:drop --force;
-./bin/cli orm:schema-tool:update --force;
-./bin/cli schema:data-generate ;
+./vendor/bin/doctrine-module orm:schema-tool:drop --force;
+./vendor/bin/doctrine-module orm:schema-tool:update --force;
+#./bin/cli schema:data-generate ;
