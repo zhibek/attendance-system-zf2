@@ -1,20 +1,12 @@
 <?php
+// This makes our life easier when dealing with paths. Everything is relative to the application root now.
+chdir(dirname(__DIR__));
 
-// Define path to application directory
-defined('APPLICATION_PATH')
-    || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));
+error_reporting(E_ALL);
+ini_set('display_errors', true);
 
-// Define application environment
-defined('APPLICATION_ENV')
-    || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
+// Setup autoloading
+require 'vendor/autoload.php';
 
-// Ensure library/ is on include_path
-require_once '../vendor/autoload.php';
-
-// Create application, bootstrap, and run
-$application = new Zend_Application(
-    APPLICATION_ENV,
-    APPLICATION_PATH . '/configs/application.yaml'
-);
-$application->bootstrap()
-            ->run();
+// Run the application!
+Zend\Mvc\Application::init(require 'config/application.config.php')->run();
